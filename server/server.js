@@ -13,6 +13,7 @@ const s = "Hello world from food app! <br>"+
         "<li>Food orders' ingredients may be customized, and a list of ingredients is related to each item</li>"+
         "<li>Food orders may be customized with several options</li>"+
         "</ol>";
+require("./config/db.js");        
 app.get('/', (req, res) => {
         console.log(req.headers.host);
         console.log(req.headers["user-agent"]);
