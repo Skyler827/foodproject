@@ -28,9 +28,7 @@ router.get("/:id", function(req, res){
 router.delete("/:id", function(req, res){
     Category.deleteOne({_id:req.params.id}, function(err){
         if (err) res.json(err);
-        else res.status(204).json({
-            "message":"category id "+req.params.id+" deleted succesfully"
-        });
+        else res.status(204).send();
     });
 });
 module.exports = router;
