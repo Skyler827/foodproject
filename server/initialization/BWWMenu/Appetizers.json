@@ -1,0 +1,29 @@
+[
+    {
+        "name":"Trad Sampler",
+        "quantity": 100,
+        "price":1249
+    }, {
+        "name":"Bonless Sampler",
+        "quantity": 70,
+        "price":1199
+    }, {
+        "name":"Spinach Artichoke Dip",
+        "quantity":20,
+        "price":799
+    }, {
+        "name":"Basket French Fries",
+        "quantity": 1000,
+        "price": 549
+    }, {
+        "name":"Chicken Quesadilla",
+        "quantity":50,
+        "price":849
+    }, {
+        "name":"Basket Cheese Curds", 
+        "quantity":30,
+        "price":899
+    }, {
+        
+    }
+]
