@@ -1,6 +1,10 @@
 const express = require("express")
 const app = express()
 const port = 3000
+const bodyParser = require("body-parser");
+require("./config/db.js");        
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 const s = "Hello world from food app! <br>"+
     "Future home our state of the art food ordering service!<br>"+
     "Planned Features:<br>"+
@@ -13,7 +17,7 @@ const s = "Hello world from food app! <br>"+
     "<li>Food orders' ingredients may be customized, and a list of ingredients is related to each item</li>"+
     "<li>Food orders may be customized with several options</li>"+
     "</ol>";
-require("./config/db.js");        
+
 app.get('/', (req, res) => {
     console.log(req.headers.host);
     console.log(req.headers["user-agent"]);
@@ -30,5 +34,6 @@ const controllers = {
 for (key in controllers) {
     app.use("/api/"+key, controllers[key]);
 }
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
+app.listen(port, function() {
+    console.log(`Example app listening on port ${port}!`)
+});
