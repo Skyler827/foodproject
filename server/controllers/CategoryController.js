@@ -9,5 +9,6 @@ router.get("/", function(req, res) {
         else res.json(data);
     });
 });
+router.post("/", function() {});
 
 module.exports = router;
