@@ -21,7 +21,7 @@ const s = "Hello world from food app! <br>"+
     "<li>Food orders may be customized with several options</li>"+
     "</ol>";
 
-
+app.get("/*", (_, res) => res.redirect("/"));
 app.listen(port, function() {
     console.log(`Example app listening on port ${port}!`)
 });

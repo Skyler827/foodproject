@@ -3,8 +3,7 @@ module.exports = function(app) {
         'categories':require("../controllers/CategoryController"),
         'items':require("../controllers/ItemController"),
         'orders':require("../controllers/OrderController"),
-        'tables':require("../controllers/TableController"),
-        'users': require("../controllers/UserController"),
+        'tables':require("../controllers/TableController")
     };
     
     for (key in controllers) {
