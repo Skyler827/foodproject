@@ -1,0 +1,23 @@
+[
+    {
+        "name":"Water",
+        "quantity": -1,
+        "price":0
+    }, {
+        "name":"20 Oz Drink",
+        "quantity": -1,
+        "price": 299
+    }, {
+        "name":"Strawberry Lemonade",
+        "quantity": 50,
+        "price": 350
+    }, {
+        "name":"Blueberry Mint Lemonade",
+        "quantity": 30,
+        "price": 350
+    }, {
+        "name":"Black Cherry Limade",
+        "quantity": 35,
+        "price": 350
+    }
+]

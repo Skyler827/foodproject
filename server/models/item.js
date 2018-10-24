@@ -6,19 +6,20 @@ let item = new Schema({
     name:{
         type:String,
         required:true
-        
     },
-
     price:{
         type:Number,
         required:true
     },
-
     inventory:{
         type:Number,
         required:true
     },
-
+    category: {
+        type: ForeignKey,
+        refPath: 'category',
+        required: true
+    },
     ingredients:{
         type:[String],
         required:true
