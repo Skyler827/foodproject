@@ -4,13 +4,13 @@ let ForeignKey = Schema.Types.ObjectId;
 
 let order = new Schema({
     table:{
-        type:Number,
-        required:true
-        
+        type: ForeignKey,
+        ref: 'table',
+        required: true
     },
     itemids:{
-        type:[String],
-        required:true
+        type: [String],
+        required: true
         
     }
 })
