@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 require("./config/db.js");        
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+require("./config/urls")(app);
+
 const s = "Hello world from food app! <br>"+
     "Future home our state of the art food ordering service!<br>"+
     "Planned Features:<br>"+
@@ -18,22 +21,13 @@ const s = "Hello world from food app! <br>"+
     "<li>Food orders may be customized with several options</li>"+
     "</ol>";
 
+
 app.get('/', (req, res) => {
     console.log(req.headers.host);
     console.log(req.headers["user-agent"]);
     res.send(s);
 });
-const controllers = {
-    'categories':require("./controllers/CategoryController"),
-    'items':require("./controllers/ItemController"),
-    'orders':require("./controllers/OrderController"),
-    'tables':require("./controllers/TableController"),
-    'users': require("./controllers/UserController"),
-};
 
-for (key in controllers) {
-    app.use("/api/"+key, controllers[key]);
-}
 app.listen(port, function() {
     console.log(`Example app listening on port ${port}!`)
 });
