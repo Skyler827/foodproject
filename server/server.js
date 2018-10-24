@@ -7,8 +7,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('../client/dist/client/'))
 require("./config/urls")(app);
-
-app.get(/^(?!\/api).*$/, (_, res) => res.redirect("/"));
+app.get(/^api\//, (req, res)=> res.status(404).json(
+    {"error":req.url+" not found"}));
+app.get('*', (_, res) => res.redirect("/"));
 app.listen(port, function() {
     console.log(`Example app listening on port ${port}!`)
 });
