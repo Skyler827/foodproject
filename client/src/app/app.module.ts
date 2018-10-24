@@ -9,18 +9,20 @@ import { TakeoutComponent } from './components/takeout/takeout.component';
 import { OrderComponent } from './components/order/order.component';
 import { FunctionsComponent } from './components/functions/functions.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { RoadmapComponent } from './components/roadmap/roadmap.component';
 
 const appRoutes: Routes = [
-  { path: 'login',    component: LoginComponent },
-  { path: 'dining-1', component: DiningRoomOneComponent },
-  { path: 'dining-2', component: DiningRoomTwoComponent },
-  { path: 'order',    component: OrderComponent         },
-  { path: 'functions',component: FunctionsComponent},
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'login',    component: LoginComponent         },
+  { path: 'dining-1', component: DiningRoomOneComponent },
+  { path: 'dining-2', component: DiningRoomTwoComponent },
+  { path: 'order',    component: OrderComponent         },
+  { path: 'functions',component: FunctionsComponent     },
+  { path: 'roadmap',  component: RoadmapComponent       },  
+  { path: '**',       component: PageNotFoundComponent  }
 ];
 
 
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     TakeoutComponent,
     OrderComponent,
     FunctionsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RoadmapComponent
   ],
   imports: [
     BrowserModule,
