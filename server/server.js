@@ -10,7 +10,7 @@ app.use(express.static('../client/dist/client/', {redirect: false}));
 urls(app);
 app.get(/^api\//, (req, res)=> res.status(404).json(
     {"error":req.url+" not found"}));
-app.get('*', (_, res) => res.redirect("/"));
+//app.get('*', (_, res) => res.redirect("/"));
 app.listen(port, function() {
     console.log(`Example app listening on port ${port}!`)
 });
