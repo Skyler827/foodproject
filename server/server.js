@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 require("./config/db.js");        
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
+app.use(express.static('../client/dist/client/'))
 require("./config/urls")(app);
 
 const s = "Hello world from food app! <br>"+
@@ -21,12 +21,6 @@ const s = "Hello world from food app! <br>"+
     "<li>Food orders may be customized with several options</li>"+
     "</ol>";
 
-
-app.get('/', (req, res) => {
-    console.log(req.headers.host);
-    console.log(req.headers["user-agent"]);
-    res.send(s);
-});
 
 app.listen(port, function() {
     console.log(`Example app listening on port ${port}!`)
