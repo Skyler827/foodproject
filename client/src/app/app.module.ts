@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -10,7 +11,6 @@ import { OrderComponent } from './components/order/order.component';
 import { FunctionsComponent } from './components/functions/functions.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RoadmapComponent } from './components/roadmap/roadmap.component';
-
 const appRoutes: Routes = [
   { path: '',
     redirectTo: '/login',
@@ -43,7 +43,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    FormsModule
     // other imports here
   
   ],

@@ -1,11 +1,11 @@
 <form>
   <p>
     <label for="login-username">Username:</label>
-    <input type="text" id="login-username" name="username"/>
+    <input type="text" id="login-username" [(ngModel)]="username" name="username"/>
   </p>
   <p>
     <label for="login-password">Password:</label>
-    <input type="password" id="login-password" name="password"/>
+    <input type="password" id="login-password" [(ngModel)]="password" name="password"/>
   </p>
-  <input type="submit" value="login" onclick="loginButtonClick($event)"/>
+  <input type="submit" value="login" (click)="loginButtonClick()"/>
 </form>
