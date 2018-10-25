@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
 const urls = require("./config/urls");
+const env = process.env.NODE_ENV || 'dev'; // either 'dev' or 'production'
 
 // initialize database
 require("./config/db.js");
@@ -17,12 +18,28 @@ app.use(express.static(parentDir+'/client/dist/client/', {redirect: false}));
 
 // set http handlers
 urls(app);
-app.get(/^api\//, (req, res)=> res.status(404).json(
-    {"error":req.url+" not found"}));
-app.get("/", (_, res) => res.status(500).send("could not load static files"));
-app.get('*', (_, res) => res.redirect("/"));
 
-// start server
-app.listen(port, function() {
-    console.log(`Example app listening on port ${port}!`)
-});
+if (env == 'dev') {
+    // start server
+    app.listen(port, function() {
+        console.log(`Example app listening on port ${port}!`)
+    });
+} else if (env == 'production') {
+    // serve over https only
+    const https = require("https");
+    const http = require("http");
+    const fs = require("fs");
+
+    const key = fs.readFileSync('/etc/letsencrypt/live/dojo-food.xyz/privkey.pem');
+    const cert = fs.readFileSync( '/etc/letsencrypt/live/dojo-food.xyz/fullchain.pem' );
+    const https_options = {key: key, cert: cert};
+
+    app.use((req, res, next) => {
+        if (req.secure && req.headers.host == 'dojo-food.xyz')
+            next();
+        else res.redirect('https://dojo-food.xyz' + req.url);
+    });
+
+    https.createServer(https_options, app).listen(port + 443);
+    http.createServer(app).listen(port);
+}
