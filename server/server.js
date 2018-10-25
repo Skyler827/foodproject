@@ -5,16 +5,19 @@ const port = 3000;
 const bodyParser = require("body-parser");
 const urls = require("./config/urls");
 const env = process.env.NODE_ENV || 'dev'; // either 'dev' or 'production'
-
+const path = require ("path");
 // initialize database
 require("./config/db.js");
 
 //set application settings
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const dirnameLength = __dirname.split("/").length;
-const parentDir = __dirname.split("/").slice(0,dirnameLength-1).join("/");
-app.use(express.static(parentDir+'/client/dist/client/', {redirect: false}));
+console.log(__dirname);
+const dirnameLength = __dirname.split(path.sep).length;
+const parentDir = __dirname.split(path.sep).slice(0,dirnameLength-1).join(path.sep);
+const staticDir = parentDir + path.sep + ['client','dist','client'].join(path.sep);
+console.log(staticDir)
+app.use(express.static(staticDir, {redirect: false}));
 
 // set http handlers
 urls(app);
