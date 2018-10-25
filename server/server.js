@@ -3,13 +3,13 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
-const urls = require("./config/urls");
 const env = process.env.NODE_ENV || 'dev'; // either 'dev' or 'production'
 
 // initialize database
-require("./config/db.js");
+const db = require("./config/db.js").register();
 
 //set application settings
+const urls = require("./config/urls");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const dirnameLength = __dirname.split("/").length;
@@ -18,7 +18,6 @@ app.use(express.static(parentDir+'/client/dist/client/', {redirect: false}));
 
 // set http handlers
 urls(app);
-
 if (env == 'dev') {
     // start server
     app.listen(port, function() {

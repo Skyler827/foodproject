@@ -9,9 +9,8 @@ let order = new Schema({
         required: true
     },
     itemids:{
-        type: [String],
+        type: [ForeignKey],
         required: true
-        
     }
 })
 
