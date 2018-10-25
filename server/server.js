@@ -11,7 +11,9 @@ require("./config/db.js");
 //set application settings
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('../client/dist/client/', {redirect: false}));
+const dirnameLength = __dirname.split("/").length;
+const parentDir = __dirname.split("/").slice(0,dirnameLength-1).join("/");
+app.use(express.static(parentDir+'/client/dist/client/', {redirect: false}));
 
 // set http handlers
 urls(app);
