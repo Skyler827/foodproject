@@ -26,5 +26,6 @@ module.exports.static = errorHTML("500", "Could Not Find Static Files",
 module.exports.methodNotAllowed = function(prohibitedVerb) {
     return errorJSON("405", "Method Not Allowed",
     `${prohibitedVerb} is not allowed at that URL.`);
-
 }
+module.exports.forbidden = errorJSON("403","Forbidden",
+    `You do not have the necessary permission to do that.`);

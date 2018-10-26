@@ -1,10 +1,14 @@
-let mongoose   = require("mongoose");
-let Schema     = mongoose.Schema;
-
+const mongoose   = require("mongoose");
+const bcrypt     = require("bcryptjs"); 
+const Schema     = mongoose.Schema;
 let user = new Schema({
-    name: {
+    username: {
         type: String,
         required: true
+    },
+    password: {
+        type: String,
+        required: false
     },
     hashpassword: {
         type: String,
@@ -16,4 +20,13 @@ let user = new Schema({
         required: true
     }
 })
+user.pre('validate', function(next) {
+    const salt  = bcrypt.genSaltSync();
+    bcrypt.hash(this.password, salt, (err, hash)=>{
+        if (err) this.invalidate();
+        else this.hashpassword = hash;
+        this.password = "";
+        next();
+    })
+});
 mongoose.model("user",user);

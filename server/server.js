@@ -27,7 +27,7 @@ const sessionOptions = {
 if (env == 'dev') {
     app.use(session(sessionOptions));
     app.use(authentication());
-    urls(app);
+    urls(app, staticDir);
 
     // start server
     app.listen(port, function() {
@@ -51,7 +51,7 @@ if (env == 'dev') {
         else res.redirect('https://dojo-food.xyz' + req.url);
     });
     app.use(authentication());
-    urls(app);
+    urls(app, staticDir);
     
     https.createServer(https_options, app).listen(port + 443);
     http.createServer(app).listen(port);
