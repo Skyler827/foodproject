@@ -12,12 +12,14 @@ import { OrderComponent } from './components/order/order.component';
 import { FunctionsComponent } from './components/functions/functions.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RoadmapComponent } from './components/roadmap/roadmap.component';
+import { RegisterComponent } from './components/register/register.component';
 const appRoutes: Routes = [
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
   { path: 'login',    component: LoginComponent         },
+  { path: 'register', component: RegisterComponent      },
   { path: 'dining-1', component: DiningRoomOneComponent },
   { path: 'dining-2', component: DiningRoomTwoComponent },
   { path: 'order',    component: OrderComponent         },
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     OrderComponent,
     FunctionsComponent,
     PageNotFoundComponent,
-    RoadmapComponent
+    RoadmapComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

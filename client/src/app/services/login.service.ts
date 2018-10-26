@@ -13,9 +13,9 @@ export class LoginService {
             .subscribe(resolve, reject);
         });
     }
-    async register(username: String, password: String, admin:Boolean) {
+    async register(username: String, password: String, userType:String) {
         return new Promise((resolve, reject) => 
-            this.http.post("/register", {"username": username, "password":password, admin})
+            this.http.post("/register", {"username": username, "password":password, "userType":userType})
             .subscribe(resolve, reject)
         );
     }

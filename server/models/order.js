@@ -10,8 +10,9 @@ let order = new Schema({
     },
     itemids:{
         type: [ForeignKey],
+        ref: 'item',
         required: true
     }
 })
 
-mongoose.model("order",order);
+mongoose.model("order", order);

@@ -6,8 +6,8 @@ import { LoginService } from '../../services/login.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    username: string = "";
-    password: string = "";
+    username: String = "";
+    password: String = "";
     constructor(ls: LoginService) {
     }
     ngOnInit() {

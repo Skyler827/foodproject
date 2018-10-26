@@ -10,5 +10,6 @@ router.post("/login", function(req, res) {
 router.post("/register", function(req,res) {
     console.log(req.body);
     res.send(req.body);
+    
 });
 module.exports = router;

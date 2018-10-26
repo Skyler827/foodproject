@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 const env = process.env.NODE_ENV || 'dev'; // either 'dev' or 'production'
 const urls = require("./config/urls");
-const authentication = require("./config/authentication");
+const authentication = function() {return require("./config/authentication");};
 // initialize database
 const db = require("./config/db.js").register();
 
@@ -26,7 +26,7 @@ const sessionOptions = {
 // set http handlers
 if (env == 'dev') {
     app.use(session(sessionOptions));
-    app.use(authentication);
+    app.use(authentication());
     urls(app);
 
     // start server
@@ -50,7 +50,7 @@ if (env == 'dev') {
             next();
         else res.redirect('https://dojo-food.xyz' + req.url);
     });
-    app.use(authentication);
+    app.use(authentication());
     urls(app);
     
     https.createServer(https_options, app).listen(port + 443);
