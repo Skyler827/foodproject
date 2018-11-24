@@ -14,6 +14,5 @@ module.exports = function(app, staticDir) {
     }
     app.use(loginRegController);
     app.get(/^api\//, (req, res)=> res.status(404).json({"error":req.url+" not found"}));
-    app.get("/", (_, res) => res.status(500).send(staticFilesError));
-    app.get("*", (req,res)=>res.sendFile(staticDir+"/index.html"));
+    app.get("*", (_,res)=>res.sendFile(staticDir+"/index.html"));
 }

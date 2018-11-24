@@ -13,12 +13,14 @@ import { FunctionsComponent } from './components/functions/functions.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RoadmapComponent } from './components/roadmap/roadmap.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LoggedOutComponent } from './components/logged-out/logged-out.component';
 const appRoutes: Routes = [
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
   { path: 'login',    component: LoginComponent         },
+  { path: 'logout',   component: LoggedOutComponent     },
   { path: 'register', component: RegisterComponent      },
   { path: 'dining-1', component: DiningRoomOneComponent },
   { path: 'dining-2', component: DiningRoomTwoComponent },
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
     FunctionsComponent,
     PageNotFoundComponent,
     RoadmapComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoggedOutComponent
   ],
   imports: [
     BrowserModule,

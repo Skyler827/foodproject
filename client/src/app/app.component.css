@@ -3,3 +3,7 @@ a {
     padding: 10px;
     margin: 10px;
 }
+.active {
+    outline: 2px solid yellow;
+    font-weight: bold;
+}
