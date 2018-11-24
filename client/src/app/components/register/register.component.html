@@ -1,5 +1,5 @@
 <div>
-  <p>{{error}}</p>
+  <p *ngIf="error.length > 0">{{error}}</p>
   <p>
     <label>Username:</label>
     <input type="text" id="reg-username" [(ngModel)]="username" name="username"/>

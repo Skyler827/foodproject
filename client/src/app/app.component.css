@@ -7,3 +7,8 @@ a {
     outline: 2px solid yellow;
     font-weight: bold;
 }
+.outlet-container {
+    height: 400px;
+    outline: 5px solid black;
+    overflow: auto;
+}

@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
     selectedUserType: String = "";
     username: String = "";
     password: String = "";
-    error: String = "default error message";
+    error: String = "";
     constructor(private ls: LoginService, private r:Router) { }
 
     ngOnInit() {

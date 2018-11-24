@@ -32,7 +32,9 @@ function handleOrders(req, res, next) {
         });
     }
 }
-function handleTables(req, res, next) {}
+function handleTables(req, res, next) {
+    next();
+}
 
 function handleRequest(req, res, next) {
     if (["GET","POST","PUT","DELETE"].indexOf(req.method) == -1)
@@ -45,6 +47,7 @@ function handleRequest(req, res, next) {
             case "items":  return handleItems(req,res,next);
             case "orders": return handleOrders(req,res,next);
             case "tables": return handleTables(req,res,next);
+            default: next();
         }
     } else next();
 }

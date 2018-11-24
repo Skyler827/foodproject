@@ -17,13 +17,11 @@ router.post("/register", function(req,res) {
             "message":"cannot create User with same name as previous user"
         }));
     }).then(() => {
-        console.log(req.body);
         return User.create(req.body);
     }).then((newUser) => {
         req.session.uid = newUser._id;
         res.json(newUser);
     }).catch((err) => {
-        console.log(err);
         if (err.short && err.short == "usernameTaken") 
             res.status(409).json(err);
         else res.status(500).json({message:err});
@@ -41,8 +39,6 @@ router.post("/login", function(req, res) {
         let passwordCorrect = await bcrypt.compare(req.body.password, users[0].hashpassword);
         if (passwordCorrect) {
             req.session.u_id = users[0]._id;
-            console.log(Object.keys(users[0]._id));
-            console.log(users[0]._id._bsontype);
             res.json({"message":"login succesful", "user":users[0]});
         }
         else res.status(401).json({"message":"invalid credentials"});

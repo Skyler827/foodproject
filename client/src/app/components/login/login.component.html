@@ -1,5 +1,6 @@
 <form>
-    <p class="error" *ngIf="error.length > 0">{{error}}</p>
+  <p class="error" *ngIf="error.length > 0">{{error}}</p>
+  <p>
     <label for="login-username">Username:</label>
     <input type="text" id="login-username" [(ngModel)]="username" name="username"/>
   </p>

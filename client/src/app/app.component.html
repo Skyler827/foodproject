@@ -1,15 +1,15 @@
 <div style="text-align:center">
   <h1>Dojo Food</h1>
-  <p>
+  <div class="outlet-container">
+    <router-outlet></router-outlet>
+  </div>
+  <p class="footer">
     <a routerLink="/login" *ngIf="!ls.loggedin" routerLinkActive="active">Login</a>
     <a routerLink="/register" *ngIf="!ls.loggedin" routerLinkActive="active">Register</a>
     <a routerLink="/dining-1" *ngIf="ls.loggedin" routerLinkActive="active">Dining Room 1</a>
     <a routerLink="/dining-2" *ngIf="ls.loggedin" routerLinkActive="active">Dining Room 2</a>
-    <a routerLink="/order" *ngIf="ls.loggedin" routerLinkActive="active">Enter New Order</a>
     <a routerLink="/functions" *ngIf="ls.loggedin" routerLinkActive="active">Functions</a>
     <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
     <a routerLink="/logout" (click)="ls.logOut()" *ngIf="ls.loggedin" routerLinkActive="active">Log Out</a>
   </p>
-  <router-outlet></router-outlet>
 </div>
-
