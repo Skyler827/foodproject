@@ -24,7 +24,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent      },
   { path: 'dining-1', component: DiningRoomOneComponent },
   { path: 'dining-2', component: DiningRoomTwoComponent },
-  { path: 'order',    component: OrderComponent         },
+  { path: 'tables/:n',component: OrderComponent         },
   { path: 'functions',component: FunctionsComponent     },
   { path: 'roadmap',  component: RoadmapComponent       },  
   { path: '**',       component: PageNotFoundComponent  }

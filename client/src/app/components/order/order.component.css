@@ -1,0 +1,46 @@
+:host {
+    height: 100%;
+}
+* {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    vertical-align: top;
+}
+.pane {
+    height: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.order-pane {
+    width: 40%;
+    background-color: lightsteelblue;
+}
+.menu-pane {
+    width: 60%;
+    background-color: lightgray;
+    /* display: flex; */
+}
+.category-pane {
+    width: 30%;
+    overflow: auto;
+}
+.category-pane > ul {
+    list-style: none;
+}
+.pane li {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+.item-pane {
+    width: 70%;
+}
+.quarter-screen {
+    background-color: lightblue;
+    padding: 20px;
+    outline: 2px solid black;
+}
