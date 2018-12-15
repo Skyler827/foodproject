@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { DiningRoomOneComponent } from './components/dining-room-one/dining-room-one.component';
-import { DiningRoomTwoComponent } from './components/dining-room-two/dining-room-two.component';
-import { TakeoutComponent } from './components/takeout/takeout.component';
-import { OrderComponent } from './components/order/order.component';
-import { FunctionsComponent } from './components/functions/functions.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { RoadmapComponent } from './components/roadmap/roadmap.component';
-import { RegisterComponent } from './components/register/register.component';
-import { LoggedOutComponent } from './components/logged-out/logged-out.component';
+import { LoginComponent } from '../login/login.component';
+import { DiningRoomOneComponent } from '../dining-room-one/dining-room-one.component';
+import { DiningRoomTwoComponent } from '../dining-room-two/dining-room-two.component';
+import { TakeoutComponent } from '../takeout/takeout.component';
+import { OrderComponent } from '../order/order.component';
+import { FunctionsComponent } from '../functions/functions.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { RoadmapComponent } from '../roadmap/roadmap.component';
+import { RegisterComponent } from '../register/register.component';
+import { LoggedOutComponent } from '../logged-out/logged-out.component';
 const appRoutes: Routes = [
   { path: '',
     redirectTo: '/login',
