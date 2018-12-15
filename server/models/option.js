@@ -2,7 +2,7 @@ let mongoose   = require("mongoose");
 let Schema     = mongoose.Schema;
 let ForeignKey = Schema.Types.ObjectId;
 
-let item = new Schema({
+let option = new Schema({
     name:{
         type:String,
         required:true
@@ -13,19 +13,14 @@ let item = new Schema({
     },
     category: {
         type: ForeignKey,
-        refPath: 'category',
+        refPath: 'option_menu',
         required: true
     },
     ingredients:{
         type:[ForeignKey],
         ref: 'ingredients',
         required:true
-    },
-    options: {
-        type: [ForeignKey],
-        ref: 'option_menu',
-
     }
 })
 
-mongoose.model("item",item);
+mongoose.model("option",option);

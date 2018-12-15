@@ -10,7 +10,11 @@ let order = new Schema({
     },
     itemids:{
         type: [ForeignKey],
-        ref: 'item',
+        ref: 'item_order',
+        required: true
+    },
+    open: {
+        type: Boolean,
         required: true
     }
 })

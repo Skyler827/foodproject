@@ -6,7 +6,8 @@ mongoose.connect('mongodb://localhost/foodproject');
 
 module.exports.register = function() {
     fs.readdirSync(models).forEach(function(file) {
-        if(file.indexOf('.js') >= 0) 
+        if(file.indexOf('.js') >= 0) {
             require(models + '/' + file);
+        }
     });
 }
