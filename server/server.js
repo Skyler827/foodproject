@@ -3,12 +3,12 @@ const express = require("express");
 const session = require('express-session')
 const bodyParser = require("body-parser");
 const path = require ("path");
-const initialize = require("./initialization/initialize.ts");
+const initialize = require("./initialization/initialize");
 const app = express();
 const port = 3000;
 const env = process.env.NODE_ENV || 'dev'; // either 'dev' or 'production'
 const urls = require("./config/urls");
-const authentication = function() {return require("./config/authentication");};
+const authentication = (app) => require("./config/authentication")(app);
 // initialize database
 const db = require("./config/db.js");
 db.register();
@@ -27,7 +27,7 @@ const sessionOptions = {
 // set http handlers
 if (env == 'dev') {
     app.use(session(sessionOptions));
-    app.use(authentication());
+    authentication(app);
     urls(app, staticDir);
 
     // start server

@@ -35,20 +35,20 @@ function handleOrders(req, res, next) {
 function handleTables(req, res, next) {
     next();
 }
-
-function handleRequest(req, res, next) {
-    if (["GET","POST","PUT","DELETE"].indexOf(req.method) == -1)
-    return res.status(405).send(errors.methodNotAllowed(req.method))
-    const urlPath = req.url.split("/");
-    console.log(req.url);
-    if (urlPath.slice(0,1) == "api") {
-        switch (urlPath.slice(1,2)) {
-            case "categories": return handleCategories(req,res,next);
-            case "items":  return handleItems(req,res,next);
-            case "orders": return handleOrders(req,res,next);
-            case "tables": return handleTables(req,res,next);
-            default: next();
-        }
-    } else next();
-}
-module.exports = handleRequest;
+let handleRequests = function(app) {
+    app.use((req,res,next) => {
+        if (["GET","POST","PUT","DELETE"].indexOf(req.method) == -1)
+        return res.status(405).send(errors.methodNotAllowed(req.method))
+        const urlPath = req.url.split("/");
+        if (urlPath.length > 2 && urlPath[1] == "api") {
+            switch (urlPath[2]) {
+                case "categories": return handleCategories(req,res,next);
+                case "items":  return handleItems(req,res,next);
+                case "orders": return handleOrders(req,res,next);
+                case "tables": return handleTables(req,res,next);
+                default: next();
+            }
+        } else next();
+    });
+};
+module.exports = handleRequests;
