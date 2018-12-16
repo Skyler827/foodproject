@@ -1,0 +1,27 @@
+[
+    {
+        "name":"Snack Wings",
+        "price":749,
+        "ingredients": [
+            {"name":"tradwings","quantity":5,"unit":"wings"}
+        ]
+    }, {
+        "name":"Small Wings",
+        "price":1199,
+        "ingredients": [
+            {"name":"tradwings","quantity":9,"unit":"wings"}
+        ]
+    }, {
+        "name":"Medium Wings",
+        "price":1749,
+        "ingredients": [
+            {"name":"tradwings","quantity":14,"unit":"wings"}
+        ]
+    }, {
+        "name":"Large Wings",
+        "price": 2149,
+        "ingredients": [
+            {"name":"tradwings","quantity":18,"unit":"wings"}
+        ]
+    }
+]

@@ -1,0 +1,29 @@
+[
+    {
+        "name":"Snack Bonless",
+        "price":879,
+        "ingredients": [
+            {"name":"bonlesswings","quantity":7,"unit":"wings"}
+        ]
+    }, {
+        "name":"Small Bonelss",
+        "price": 1099,
+        "ingredients": [
+            {"name":"bonlesswings","quantity":10,"unit":"wings"}
+        ]
+    }, {
+        "name":"Medium Bonless",
+        "price": 1579,
+        "ingredients": [
+            {"name":"bonlesswings","quantity":16,"unit":"wings"}
+        ]
+
+    }, {
+        "name":"Large Bonless",
+        "price": 1999,
+        "ingredients": [
+            {"name":"bonlesswings","quantity":20,"unit":"wings"}
+        ]
+
+    }
+]

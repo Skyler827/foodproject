@@ -1,0 +1,57 @@
+[
+    {
+        "name":"Trad Sampler",
+        "price":1249,
+        "ingredients": [
+            {"name":"tradwings","quantity":5,"unit":"wing"},
+            {"name":"tortillachips","quantity":1,"unit":"serving"},
+            {"name":"chilli","quantity":1,"unit":"serving"},
+            {"name":"picodegaillo","quantity":3,"unit":"oz"},
+            {"name":"swranch","quantity":2,"unit":"oz"},
+            {"name":"mozzsticks","quantity":6,"unit":"stick"},
+            {"name":"marinara","quantity":3,"unit":"oz"}
+        ],
+        "options": ["dressing"]
+    }, {
+        "name":"Bonless Sampler",
+        "price":1199,
+        "ingredients": [
+            {"name":"bonlesswings","quantity":5,"unit":"wing"},
+            {"name":"tortillachips","quantity":1,"unit":"serving"},
+            {"name":"chilli","quantity":1,"unit":"serving"},
+            {"name":"picodegaillo","quantity":2,"unit":"oz"},
+            {"name":"swranch","quantity":3,"unit":"oz"},
+            {"name":"mozzsticks","quantity":6,"unit":"stick"},
+            {"name":"marinara","quantity":3,"unit":"oz"}
+        ]
+    }, {
+        "name":"Spinach Artichoke Dip",
+        "price":799,
+        "ingredients": [
+            {"name":"tortillachips","quantity":2,"unit":"serving"},
+            {"name":"spindip","quantity":6,"unit":"oz"},
+            {"name":"parmesiancheese","quantity":1,"unit":"shaving"}
+        ]
+    }, {
+        "name":"Basket French Fries",
+        "price": 549,
+        "ingredients": [
+            {"name":"fries", "quantity":1,"unit":"basket"}
+        ]
+    }, {
+        "name":"Chicken Quesadilla",
+        "price":849,
+        "ingredients": [
+            {"name":"flourtortilla","quantity":1,"unit":"tortilla"},
+            {"name":"grilledchicken","quantity":7,"unit":"oz"},
+            {"name":"picodegaillo","quantity":3,"unit":"oz"},
+            {"name":"parmesiancheese","quantity":3,"unit":"shaving"}
+        ]
+    }, {
+        "name":"Basket Cheese Curds", 
+        "price":899,
+        "ingredients": [
+            {"name":"cheesecurds","quantity":1,"unit":"basket"}
+        ]
+    }
+]

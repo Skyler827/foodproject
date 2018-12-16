@@ -3,12 +3,13 @@ const express = require("express");
 const session = require('express-session')
 const bodyParser = require("body-parser");
 const path = require ("path");
-const initialize = require("./initialization/initialize");
+
+const initialize = () => require("./config/initialize")(); //wrapped to delay model lookup until after db.register()
 const app = express();
 const port = 3000;
 const env = process.env.NODE_ENV || 'dev'; // either 'dev' or 'production'
 const urls = require("./config/urls");
-const authentication = (app) => require("./config/authentication")(app);
+const authentication = (app) => require("./config/authentication")(app); //wrapped to delay model lookup until after db.register()
 // initialize database
 const db = require("./config/db.js");
 db.register();
@@ -33,7 +34,7 @@ if (env == 'dev') {
     // start server
     app.listen(port, function() {
         console.log(`Example app listening on port ${port}!`);
-        initialize.main();
+        initialize();
     });
 } else if (env == 'production') {
     // serve over https only

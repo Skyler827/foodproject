@@ -8,7 +8,7 @@ let item = new Schema({
         required:true
     },
     price:{
-        type:Number,
+        type:Number, // integer number of cents
         required:true
     },
     category: {
