@@ -1,0 +1,73 @@
+[
+    {
+        "name":"tradwings",
+        "bulkCost": 1,
+        "bulkCostUnit": "bucket",
+        "units": {"wing":1, "bucket":200}
+    }, {
+        "name":"bonlesswings",
+        "bulkCost": 1,
+        "bulkCostUnit": "bucket",
+        "units": {"wing":1,"bucket":300}
+    }, {
+        "name":"tortillachips",
+        "bulkCost": 1,
+        "bulkCostUnit": "serving",
+        "units": {"serving":1,"bucket":50}
+    }, {
+        "name":"chilli",
+        "bulkCost": 1,
+        "bulkCostUnit": "serving",
+        "units": {"serving":1,"bag":50}
+    }, {
+        "name": "picodegaillo",
+        "bulkCost":1,
+        "bulkCostUnit":"oz",
+        "units": {"oz":1,"bag":75}
+    }, {
+        "name":"swranch",
+        "bulkCost":1,
+        "bulkCostUnit":"oz",
+        "units":{"oz":1,"bag":100}
+    }, {
+        "name":"mozzsticks",
+        "bulkCost":1,
+        "bulkCostUnit":"package",
+        "units":{"stick":1,"serving":6,"package":100}
+    }, {
+        "name":"marinara",
+        "bulkCost":1,
+        "bulkCostUnit":"oz",
+        "units":{"oz":1}
+    }, {
+        "name":"spindip",
+        "bulkCost":1,
+        "bulkCostUnit":"oz",
+        "units":{"oz":1}
+    }, {
+        "name":"parmesiancheese",
+        "bulkCost":12,
+        "bulkCostUnit":"package",
+        "units":{"shaving":0.01,"bag":1, "package":30}
+    }, {
+        "name":"fries",
+        "bulkCost":10,
+        "bulkCostUnit":"box",
+        "units": {"box":1000,"basket":50,"side":25,"fry":1}
+    }, {
+        "name":"flourtortilla",
+        "bulkCost":7,
+        "bulkCostUnit":"box",
+        "units": {"tortilla":1,"bag":10,"box":80}
+    }, {
+        "name":"grilledchicken",
+        "bulkCost":15,
+        "bulkCostUnit":"package",
+        "units": {"dice":0.1,"breast":1,"package":100}
+    }, {
+        "name": "cheesecurds",
+        "bulkCost": 100,
+        "bulkCostUnit": "package",
+        "units": {"curd":1,"side":30,"basket":60,"package":12000}
+    }
+]

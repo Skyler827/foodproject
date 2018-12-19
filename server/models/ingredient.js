@@ -6,14 +6,24 @@ let ingredient = new Schema({
         type: String,
         required: true
     },
-    quantity: {
+    quantity_base_units: {
         type: String,
         required: true
     },
-    quantity_unit: {
+    base_unit_name: {
         type: String,
         required: true
     },
+    units: [{
+        unit_name: {
+            type:String,
+            required: true
+        },
+        unit_size: {
+            type:Number,
+            required: true
+        }
+    }],
     unit_price: {
         type: Number,
         required: true
