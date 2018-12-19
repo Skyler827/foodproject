@@ -1,0 +1,23 @@
+[
+    {
+        "name":"fries",
+        "price":0,
+        "ingredients":[
+            {"name":"fries","quantity":1,"unit":"side"}
+        ],
+        "options":["fry_mods"]
+    }, {
+        "name":"buffalo chips",
+        "price":100,
+        "ingredients": [
+            {"name":"buffalochips","quantity":1,"unit":"side"}
+        ],"options": ["fry_mods"]
+    }, {
+        "name":"onion rings",
+        "price":280,
+        "ingredients": [
+            {"name":"onionrings","quantity":1,"unit":"side"}
+        ],
+        "options":[]
+    }
+]

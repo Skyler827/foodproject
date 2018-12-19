@@ -53,5 +53,18 @@
         "ingredients": [
             {"name":"cheesecurds","quantity":1,"unit":"basket"}
         ]
+    }, {
+        "name": "Basket Buffalo Chips",
+        "price":799,
+        "ingredients":[
+            {"name":"buffalochips","quantity":1,"unit":"basket"}
+        ]
+    }, {
+        "name": "Basket Onion Rings",
+        "price":999,
+        "ingredients":[
+            {"name":"onionrings","quantity":1,"unit":"basket"},
+            {"name":"swranch","quantity":3,"unit":"oz"}
+        ]
     }
 ]
