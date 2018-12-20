@@ -1,0 +1,32 @@
+{
+    "min_options":0,
+    "free_options":1,
+    "max_options":3,
+    "options":[
+        {
+            "name":"Ranch",
+            "price":"60",
+            "ingredients":[
+                {"name":"ranch","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Blue Cheese",
+            "price":60,
+            "ingredients":[
+                {"name":"bluecheese","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"FF Rach",
+            "price":60,
+            "ingredients":[
+                {"name":"ffrach","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Lemon Vinagarette",
+            "price":60,
+            "ingredients":[
+                {"name":"lemonvinagarette","quantity":2,"unit":"oz"}
+            ]
+        }
+    ]
+}

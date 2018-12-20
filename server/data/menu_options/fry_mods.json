@@ -1,0 +1,13 @@
+{
+    "min_options":0,
+    "free_options":0,
+    "options":[
+        {
+            "name":"Salt and Vinegar",
+            "price":60,
+            "ingredients":[
+                {"name":"saltandvinegar","quantity":2,"unit":"oz"}
+            ]
+        }
+    ]
+}

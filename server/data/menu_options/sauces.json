@@ -1,0 +1,25 @@
+{
+    "min_options":0,
+    "free_options":0,
+    "options":[
+        {"name":"Teryaki"},
+        {"name":"Sweet BBQ"},
+        {"name":"Salt n Vinegar"},
+        {"name":"Parmesian Garlic"},
+        {"name":"Honey BBQ"},
+        {"name":"Bourbon Honey Mustard"},
+        {"name":"Mild"},
+        {"name":"Spicy Garlic"},
+        {"name":"Medium"},
+        {"name":"Chipotle BBQ"},
+        {"name":"Carribean Jerk"},
+        {"name":"Thai Curry"},
+        {"name":"Hot BBQ"},
+        {"name":"Desert Heat"},
+        {"name":"Mango Habeñero"},
+        {"name":"Hot"},
+        {"name":"Wild"},
+        {"name":"Blazing"}
+    
+    ]
+}
