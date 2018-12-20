@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const mongoose = require("mongoose");
 const Category = mongoose.model("category");
 const Item = mongoose.model("item");
@@ -18,74 +19,61 @@ function flatten(arr) {
  * This file populates the restaraunt database with food/drink/ingredient/menu data in the supplied JSON files
  */
 async function drop_everything() {
-    return new Promise.all([Category, Ingredient, Item].map(model=>
+    return Promise.all([Category, Ingredient, Item].map(model=>
         new Promise((resolve, reject) => 
             model.deleteMany({},err =>
-                err? reject(err) : resolve()))
+                err? reject(err) : resolve()
+            )
+        )
     ));
 }
 async function create_categories(filenames) {
     const category_objects = filenames.map((s) => ({"name":s.slice(0,-5)}));
-    Category.create(category_objects, (err, created_categories) => {
-        if (err) reject(err);
-        else resolve(created_categories);
-    });
+    return new Promise((resolve, reject) =>
+        Category.create(category_objects, (err, created_categories) => {
+            if (err) reject(err);
+            else resolve(created_categories);
+        })
+    );
 }
-async function create_menu_items(filenames) {
-    return new Promise.all(filenames.map(filename =>
+async function create_menu_items(filenames, directory) {
+    return Promise.all(filenames.map(filename =>
         new Promise((resolve, reject) => 
-            fs.readFile(filename, (err,data) => {
+            fs.readFile(path.join(directory,filename), (err, data) => {
                 if (err) reject(err);
-                else resolve(data);
-            })
-        )
-    ));
-}
-async function db_save_ingredients(filenames) {
-    //get data from files
-    return new Promise.all(filenames.map(filename => 
-        new Promise((resolve, reject) => 
-            fs.readFile(filename,(err, data)=>{
-                if (err) reject(err);
-                else resolve(data);
+                else resolve(JSON.parse(data));
             })
         )
     )).then(flatten)
-    .then(items=>
-        items.map(item=>item.ingredients))
-    .then(flatten)
-    .then(ingredients=>Promise.all(
-        ingredients.map(ingredient=>
-            new Promise((resolve, reject)=> {
-                const conditions = {name:ingredient.name};
-                const update = {
-                    $setOnInsert: {
-                        base_unit_name: ingredient.unit,
-                        quantity_base_units: ingredient.quantity * initial_supply_factor,
-                        units: [{
-                            unit_name:ingredient.unit,
-                            unit_size:1
-                        }]
-                    },
-                    $inc: {
-                        quantity_base_units: ingredient.quantity * initial_supply_factor
-                    }
-                };
-                const options = {upsert:true};
-                Item.findOneAndUpdate(conditions,update,options,(err,doc)=>{
+    .then(itemList=>Promise.all(itemList.map(Item.create)));
+}
+async function db_save_ingredients() {
+    const ingredients_path = path.posix.resolve("./data/ingredients");
+    const ingredient_filenames = fs.readdirSync(ingredients_path);
+    const ingredients_list = await Promise.all(
+        ingredient_filenames.map(
+            filename=>new Promise((resolve, reject)=> {
+                const full_filename = path.join(ingredients_path, filename);
+                fs.readFile(full_filename,{"encoding":"utf-8"},(err, data)=>{
+                    const parsedData = JSON.parse(data);
                     if (err) reject(err);
-                    else resolve(doc);
+                    else resolve(parsedData);
                 });
             })
-        ))
-    );
+        )
+    ).then(flatten);
+    return Promise.all(ingredients_list.map(ingredient => 
+        Ingredient.create(ingredient)
+    ));
 }
 
 async function main() {
+    const menu_item_dir = path.resolve("data","menu_items")
+    const menu_item_filenames = fs.readdirSync(menu_item_dir);
     await drop_everything();
-    const json_filenames = fs.readdirSync("./data/menu_items");
-    create_categories(json_filenames);
-    create_menu_items(json_filenames);
+    create_categories(menu_item_filenames);
+    await db_save_ingredients();
+    create_menu_items(menu_item_filenames, menu_item_dir);
 
 }
 module.exports = main;

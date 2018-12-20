@@ -1,30 +1,24 @@
 let mongoose   = require("mongoose");
 let Schema     = mongoose.Schema;
-
+let Mixed      = mongoose.Schema.Types.Mixed;
 let ingredient = new Schema({
     name: {
         type: String,
         required: true
     },
-    quantity_base_units: {
+    quantity: {
+        type: String,
+        required: false
+    },
+    bulkUnit: {
         type: String,
         required: true
     },
-    base_unit_name: {
-        type: String,
-        required: true
+    units: {
+        type: Mixed,
+        required: true 
     },
-    units: [{
-        unit_name: {
-            type:String,
-            required: true
-        },
-        unit_size: {
-            type:Number,
-            required: true
-        }
-    }],
-    unit_price: {
+    bulkCost: {
         type: Number,
         required: true
     }
