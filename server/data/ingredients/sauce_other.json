@@ -1,0 +1,6 @@
+{
+    "name":"swranch",
+    "bulkCost":1,
+    "bulkCostUnit":"oz",
+    "units":{"oz":1,"bag":100}
+}

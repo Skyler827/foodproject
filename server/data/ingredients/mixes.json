@@ -1,0 +1,23 @@
+[
+    {
+        "name":"chilli",
+        "bulkCost": 1,
+        "bulkCostUnit": "serving",
+        "units": {"serving":1,"bag":50}
+    }, {
+        "name": "picodegaillo",
+        "bulkCost":1,
+        "bulkCostUnit":"oz",
+        "units": {"oz":1,"bag":75}
+    }, {
+        "name":"marinara",
+        "bulkCost":1,
+        "bulkCostUnit":"oz",
+        "units":{"oz":1}
+    }, {
+        "name":"spindip",
+        "bulkCost":1,
+        "bulkCostUnit":"oz",
+        "units":{"oz":1}
+    }
+]

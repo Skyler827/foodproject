@@ -1,0 +1,98 @@
+[
+    {
+        "name":"Budweiser",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Bud Light",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Bud Light Lime",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Coors",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Coors Light",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Michelob Ultra",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Miller Lite",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Amstel Light",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Corona Extra",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Corona Light",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Dos Equis",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Dos Equis Amber ",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Heineken",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Pacifico",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Peroni",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Sam Adams",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"samglass":22,"keg":3960}
+    }, {
+        "name":"Guiness Stout",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Blue Moon",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }, {
+        "name":"Fat Tire",
+        "bulkCost":100,
+        "bulkUnit":"barrel",
+        "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
+    }
+]

@@ -12,104 +12,104 @@
             "name":"Sweet BBQ",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"sweetbbq","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Salt n Vinegar",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"saltnvinegar","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Parmesian Garlic",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"parmesiangarlic","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Honey BBQ",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"honeybbq","quantity":2,"unit":"oz"}
             ]
         },
         {
             "name":"Bourbon Honey Mustard",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"bourbonhoneymustard","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Mild",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"mild","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Spicy Garlic",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"spicygarlic","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Medium",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"medium","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Chipotle BBQ",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"chipotlebbq","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Carribean Jerk",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"carribeanjerk","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Thai Curry",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"thaicurry","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Hot BBQ",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"hotbbq","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Desert Heat",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"desertheat","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Mango Habeñero",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"mangohabenero","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Hot",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"hot","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Wild",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"wild","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Blazing",
             "price":0,
             "ingredients":[
-                {"name":"teryaki","quantity":2,"unit":"oz"}
+                {"name":"blazin","quantity":2,"unit":"oz"}
             ]
         }
     ]

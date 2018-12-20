@@ -1,0 +1,94 @@
+[
+    {
+        "name":"teryaki",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"sweetbbq",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"saltnvinegar",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"parmesiangarlic",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"honeybbq",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    },
+    {
+        "name":"bourbonhoneymustard",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"mild",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"spicygarlic",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"medium",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"chipotlebbq",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"carribeanjerk",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"thaicurry",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"hotbbq",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"desertheat",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"mangohabenero",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"hot",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"wild",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }, {
+        "name":"blazin",
+        "bulkCost":1,
+        "bulkCostUnit":"box",
+        "units":{"oz":1,"serving":3,"bag":100,"box":1000}
+    }
+]
