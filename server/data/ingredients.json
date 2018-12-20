@@ -69,5 +69,12 @@
         "bulkCost": 100,
         "bulkCostUnit": "package",
         "units": {"curd":1,"side":30,"basket":60,"package":12000}
+    }, {
+        "name":"celery",
+        "bulkCost":100,
+        "bulkCostUnit":"package",
+        "units":{"stick":1,"package":1000}
+    }, {
+        "name":"carrot"
     }
 ]

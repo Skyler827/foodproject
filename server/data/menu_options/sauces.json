@@ -2,24 +2,115 @@
     "min_options":0,
     "free_options":0,
     "options":[
-        {"name":"Teryaki"},
-        {"name":"Sweet BBQ"},
-        {"name":"Salt n Vinegar"},
-        {"name":"Parmesian Garlic"},
-        {"name":"Honey BBQ"},
-        {"name":"Bourbon Honey Mustard"},
-        {"name":"Mild"},
-        {"name":"Spicy Garlic"},
-        {"name":"Medium"},
-        {"name":"Chipotle BBQ"},
-        {"name":"Carribean Jerk"},
-        {"name":"Thai Curry"},
-        {"name":"Hot BBQ"},
-        {"name":"Desert Heat"},
-        {"name":"Mango Habeñero"},
-        {"name":"Hot"},
-        {"name":"Wild"},
-        {"name":"Blazing"}
-    
+        {
+            "name":"Teryaki",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Sweet BBQ",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Salt n Vinegar",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Parmesian Garlic",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Honey BBQ",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        },
+        {
+            "name":"Bourbon Honey Mustard",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Mild",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Spicy Garlic",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Medium",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Chipotle BBQ",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Carribean Jerk",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Thai Curry",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Hot BBQ",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Desert Heat",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Mango Habeñero",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Hot",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Wild",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }, {
+            "name":"Blazing",
+            "price":0,
+            "ingredients":[
+                {"name":"teryaki","quantity":2,"unit":"oz"}
+            ]
+        }
     ]
 }

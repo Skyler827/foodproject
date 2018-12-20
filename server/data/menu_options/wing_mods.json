@@ -2,5 +2,30 @@
     "min_options":0,
     "free_options":0,
     "options":[
+        {
+            "name":"All Flats",
+            "price":0,
+            "ingredients":[]
+        }, {
+            "name":"All Drums",
+            "price":0,
+            "ingredients":[]
+        }, {
+            "name":"Extra Crispy",
+            "price":0,
+            "ingredients":[]
+        }, {
+            "name":"Wet",
+            "price":0,
+            "ingredients":[]
+        }, {
+            "name":"Lite Sauce",
+            "price":0,
+            "ingredients":[]
+        }, {
+            "name":"Sauce On Side",
+            "price":0,
+            "ingredients":[]
+        }
     ]
 }
