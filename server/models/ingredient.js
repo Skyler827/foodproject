@@ -7,10 +7,10 @@ let ingredient = new Schema({
         required: true
     },
     quantity: {
-        type: String,
-        required: false
+        type: Number,
+        default: 0
     },
-    bulkUnit: {
+    bulkCostUnit: {
         type: String,
         required: true
     },
