@@ -18,7 +18,7 @@ let option = new Schema({
     },
     ingredients:{
         type:[ForeignKey],
-        ref: 'ingredients',
+        ref: 'ingredient',
         required:true
     }
 })

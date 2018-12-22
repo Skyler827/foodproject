@@ -22,11 +22,11 @@ let item = new Schema({
             ref: 'ingredient',
             required: true
         },
-        quantity:{
+        quantity: {
             type:Number,
             required: true
         },
-        unit:{
+        unit: {
             type: String,
             required: true
         }
@@ -34,6 +34,7 @@ let item = new Schema({
     options: {
         type: [ForeignKey],
         ref: 'option_menu',
+        required: false
 
     }
 })

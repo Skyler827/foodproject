@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Category = mongoose.model("category");
 const Item = mongoose.model("item");
 const Ingredient = mongoose.model("ingredient");
+const Option_Menu = mongoose.model("option_menu");
 
 // initially has enough ingredients to make this many of all the items on the menu 
 const initial_supply_factor = 3;
@@ -60,34 +61,53 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
                 console.log("item.ingredients == null!");
                 console.log(item);
             }
-            return Promise.all(item.ingredients.map(async ingredient=>
-                new Promise((resolve, reject)=>
-                    Ingredient.findOne({name:ingredient.name},(err,ingredientRecord)=>{
-                        if (err) reject(err);
-                        else if (ingredientRecord == null) {
-                            console.error("while filling out item \""+item.name+"\",");
-                            console.error("no ingredient record found for \""+ingredient.name+"\".");
-                            console.error("add an entry in your ingredients files!");
-                            // reject(error_message);
-                            process.exit(1);
-                        }
-                        else {
-                            ingredient.id = ingredientRecord._id;
-                            resolve(ingredient);
-                        }
-                    })
+            return Promise.all(
+                item.ingredients.map(async ingredient=>
+                    new Promise((resolve, reject)=>
+                        Ingredient.findOne({name:ingredient.name},(err,ingredientRecord)=>{
+                            if (err) reject(err);
+                            else if (ingredientRecord == null) {
+                                console.error("while filling out item \""+item.name+"\",");
+                                console.error("no ingredient record found for \""+ingredient.name+"\".");
+                                console.error("add an entry in your ingredients files!");
+                                // reject(error_message);
+                                process.exit(1);
+                            }
+                            else {
+                                ingredient.id = ingredientRecord._id;
+                                resolve(ingredient);
+                            }
+                        })
+                    )
                 )
-            )).then(async updatedIngredients=> {
+            ).then(async updatedIngredients => {
                 item.ingredients = updatedIngredients;
-                return item;
-            })
-        }
-        ))
+                if (item.options == null) {
+                    console.log("Item \""+item.name+"\" missing property \"options\"!");
+                }
+                return Promise.all(item.options.map(option_name=>
+                    new Promise((resolve, reject)=>
+                        Option_Menu.findOne({name:option_name}, (err,record)=>{
+                            if (err) reject(err);
+                            else if (record == null) {
+                                console.log("Could not find an option listing by the name of \""+option_name+"\"!");
+                                process.exit(1);
+                            } 
+                            else resolve(record._id);
+                        })
+                    )
+                )).then(option_menu_ids=>
+                    item.options = option_menu_ids
+                )
+            }).then(_=> item);
+        }))
     ).then(async preparedItems => {
         console.log(preparedItems[0]);
-        return Item.insertMany(preparedItems)
-    }
-    );
+        console.log("-".repeat(20));
+        console.log("preparedItems.length is: "+preparedItems.length);
+        console.log("-".repeat(20));
+        return Item.insertMany(preparedItems);
+    });
 }
 async function db_save_ingredients() {
     const ingredients_path = path.posix.resolve("./data/ingredients");
