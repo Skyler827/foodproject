@@ -16,11 +16,21 @@ let item = new Schema({
         refPath: 'category',
         required: true
     },
-    ingredients: {
-        type: [ForeignKey],
-        ref: 'ingredients',
-        required:true
-    },
+    ingredients: [{
+        id:{
+            type: ForeignKey,
+            ref: 'ingredient',
+            required: true
+        },
+        quantity:{
+            type:Number,
+            required: true
+        },
+        unit:{
+            type: String,
+            required: true
+        }
+    }],
     options: {
         type: [ForeignKey],
         ref: 'option_menu',

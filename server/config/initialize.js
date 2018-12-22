@@ -48,18 +48,18 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
             })
         )
     )).then(objects=> 
-        objects.reduce((prev_items,curr_items_obj,_,_)=>{
+        objects.reduce((prev_items,curr_items_obj)=>{
             for (let i=0; i<curr_items_obj.data.length; i++) {
-                curr_items_obj.data[i].category = cat_names_to_ids[curr_items_obj.filenames.slice(0,-5)]
+                curr_items_obj.data[i].category = cat_names_to_ids[curr_items_obj.filename.slice(0,-5)]
             }
-            prev_items.concat(curr_items_obj.data);
+            return prev_items.concat(curr_items_obj.data);
         },[])
     ).then(
         itemList=>{
             Promise.all(
                 itemList.map(i => {
                     console.log(i);
-                    Item.create(i);
+                    // Item.create(i);
                 })
             )
         }
