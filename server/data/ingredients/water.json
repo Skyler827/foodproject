@@ -1,0 +1,8 @@
+[
+    {
+        "name":"water",
+        "bulkCost":0,
+        "bulkCostUnit":"gallon",
+        "units":{"oz":1,"pint":20,"gallon":160}
+    }
+]

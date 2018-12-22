@@ -10,65 +10,81 @@
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_pepsi","quantity":1,"unit":"oz"}
+            {"name":"pepsi","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"20 Oz Diet Pepsi",
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_dietpepsi","quantity":1,"unit":"oz"}
+            {"name":"dietpepsi","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"20 Oz Mountain Dew",
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_mountaindew","quantity":1,"unit":"oz"}
+            {"name":"mountaindew","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"20 Oz Dr. Pepper",
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_drpepper","quantity":1,"unit":"oz"}
+            {"name":"drpepper","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"20 Oz Ginger Ale",
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_gingerale","quantity":1,"unit":"oz"}
+            {"name":"gingerale","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"20 Oz Sierra Mist",
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_sierramist","quantity":1,"unit":"oz"}
+            {"name":"sierramist","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"20 Oz Root Beer",
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_rootbeer","quantity":1,"unit":"oz"}
+            {"name":"rootbeer","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"20 Oz Diet Mountain Dew",
         "price": 299,
         "ingredients":[
             {"name":"water","quantity":19,"unit":"oz"},
-            {"name":"syrup_dietmountaindew","quantity":1,"unit":"oz"}
+            {"name":"dietmountaindew","quantity":1,"unit":"oz"}
         ]
     }, {
         "name":"Strawberry Lemonade",
-        "price": 350
+        "price": 350,
+        "ingredients":[
+            {"name":"water","quantity":4,"unit":"oz"},
+            {"name":"lemonsour","quantity":4,"unit":"oz"},
+            {"name":"strawberry","quantity":2,"unit":"strawberry"}
+        ]
     }, {
         "name":"Blueberry Mint Lemonade",
-        "price": 350
+        "price": 350,
+        "ingredients":[
+            {"name":"water","quantity":4,"unit":"oz"},
+            {"name":"blueberrysour","quantity":4,"unit":"oz"},
+            {"name":"strawberry","quantity":2,"unit":"strawberry"}
+        ]
     }, {
         "name":"Black Cherry Limade",
-        "price": 350
+        "price": 350,
+        "ingredients":[
+            {"name":"water","quantity":4,"unit":"oz"},
+            {"name":"blackcherrysour","quantity":4,"unit":"oz"},
+            {"name":"strawberry","quantity":2,"unit":"strawberry"}
+        ]
+
     }
 ]

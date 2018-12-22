@@ -19,5 +19,15 @@
         "bulkCost": 100,
         "bulkCostUnit": "package",
         "units": {"curd":1,"side":30,"basket":60,"package":12000}
+    }, {
+        "name": "onionrings",
+        "bulkCost": 100,
+        "bulkCostUnit":"box",
+        "units": {"ring":1,"side":10,"basket":25,"package":200,"box":1000}
+    }, {
+        "name": "buffalochips",
+        "bulkCost": 100,
+        "bulkCostUnit":"box",
+        "units": {"ring":1,"side":10,"basket":25,"package":200,"box":1000}
     }
 ]

@@ -47,22 +47,46 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
                 else resolve({"data":JSON.parse(data),"filename":filename});
             })
         )
-    )).then(objects=> 
+    )).then(objects =>
         objects.reduce((prev_items,curr_items_obj)=>{
             for (let i=0; i<curr_items_obj.data.length; i++) {
                 curr_items_obj.data[i].category = cat_names_to_ids[curr_items_obj.filename.slice(0,-5)]
             }
             return prev_items.concat(curr_items_obj.data);
         },[])
-    ).then(
-        itemList=>{
-            Promise.all(
-                itemList.map(i => {
-                    console.log(i);
-                    // Item.create(i);
-                })
-            )
+    ).then(itemList =>
+        Promise.all(itemList.map(async item => {
+            if (item.ingredients == null) {
+                console.log("item.ingredients == null!");
+                console.log(item);
+            }
+            return Promise.all(item.ingredients.map(async ingredient=>
+                new Promise((resolve, reject)=>
+                    Ingredient.findOne({name:ingredient.name},(err,ingredientRecord)=>{
+                        if (err) reject(err);
+                        else if (ingredientRecord == null) {
+                            console.error("while filling out item \""+item.name+"\",");
+                            console.error("no ingredient record found for \""+ingredient.name+"\".");
+                            console.error("add an entry in your ingredients files!");
+                            // reject(error_message);
+                            process.exit(1);
+                        }
+                        else {
+                            ingredient.id = ingredientRecord._id;
+                            resolve(ingredient);
+                        }
+                    })
+                )
+            )).then(async updatedIngredients=> {
+                item.ingredients = updatedIngredients;
+                return item;
+            })
         }
+        ))
+    ).then(async preparedItems => {
+        console.log(preparedItems[0]);
+        return Item.insertMany(preparedItems)
+    }
     );
 }
 async function db_save_ingredients() {
