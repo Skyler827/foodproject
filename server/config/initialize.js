@@ -27,6 +27,7 @@ async function drop_everything() {
         )
     ));
 }
+
 async function create_categories(filenames) {
     const category_objects = filenames.map((s) => ({"name":s.slice(0,-5)}));
     return new Promise((resolve, reject) =>
@@ -40,6 +41,51 @@ async function create_categories(filenames) {
         })
     );
 }
+
+async function db_save_ingredients() {
+    const ingredients_path = path.resolve("data","ingredients");
+    const ingredient_filenames = fs.readdirSync(ingredients_path);
+    const ingredients_list = await Promise.all(
+        ingredient_filenames.map(
+            filename=>new Promise((resolve, reject)=> {
+                const full_filename = path.join(ingredients_path, filename);
+                fs.readFile(full_filename,{"encoding":"utf-8"},(err, data)=>{
+                    const parsedData = JSON.parse(data);
+                    if (err) reject(err);
+                    else resolve(parsedData);
+                });
+            })
+        )
+    ).then(flatten);
+    return Promise.all(ingredients_list.map(ingredient => {
+        Ingredient.create(ingredient)
+    }));
+}
+
+async function create_option_menus() {
+    // we're going to read the options directory,
+    const menu_options_dir = path.resolve("data","menu_options");
+    const menu_options_filenames = fs.readdirSync(menu_options_dir);
+    return Promise.all(menu_options_filenames.map(filename=>
+        new Promise((resolve, reject)=>
+            fs.readFile(
+                path.join(menu_options_dir,filename),{encoding:'utf-8'},
+                (err,fileData) => {
+                    if (err) reject(err);
+                    else resolve(JSON.parse(fileData));
+                }
+            )
+        )
+    )).then(option_lists=>
+        new Promise.all(option_lists.map(option_menu=>
+            new Promise((resolve, reject)=>{
+                //TODO: finish this function
+                resolve(1);
+            })
+        ))
+    )
+}
+
 async function create_menu_items(filenames, directory, cat_names_to_ids) {
     return Promise.all(filenames.map(filename =>
         new Promise((resolve, reject) => 
@@ -109,33 +155,15 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
         return Item.insertMany(preparedItems);
     });
 }
-async function db_save_ingredients() {
-    const ingredients_path = path.posix.resolve("./data/ingredients");
-    const ingredient_filenames = fs.readdirSync(ingredients_path);
-    const ingredients_list = await Promise.all(
-        ingredient_filenames.map(
-            filename=>new Promise((resolve, reject)=> {
-                const full_filename = path.join(ingredients_path, filename);
-                fs.readFile(full_filename,{"encoding":"utf-8"},(err, data)=>{
-                    const parsedData = JSON.parse(data);
-                    if (err) reject(err);
-                    else resolve(parsedData);
-                });
-            })
-        )
-    ).then(flatten);
-    return Promise.all(ingredients_list.map(ingredient => {
-        Ingredient.create(ingredient)
-    }));
-}
 
 async function main() {
     await drop_everything();
     const menu_item_dir = path.resolve("data","menu_items")
     const menu_item_filenames = fs.readdirSync(menu_item_dir);
     const categories_name_to_id = await create_categories(menu_item_filenames);
-    await db_save_ingredients();
+    db_save_ingredients();
+    await create_option_menus();
     await create_menu_items(menu_item_filenames, menu_item_dir, categories_name_to_id);
-
 }
+
 module.exports = main;
