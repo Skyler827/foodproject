@@ -1,10 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
+
 const Category = mongoose.model("category");
 const Item = mongoose.model("item");
 const Ingredient = mongoose.model("ingredient");
 const Option_Menu = mongoose.model("option_menu");
+const Option_Item = mongoose.model("option");
 
 // initially has enough ingredients to make this many of all the items on the menu 
 const initial_supply_factor = 3;
@@ -58,12 +60,11 @@ async function db_save_ingredients() {
         )
     ).then(flatten);
     return Promise.all(ingredients_list.map(ingredient => {
-        Ingredient.create(ingredient)
+        Ingredient.create(ingredient);
     }));
 }
 
 async function create_option_menus() {
-    // we're going to read the options directory,
     const menu_options_dir = path.resolve("data","menu_options");
     const menu_options_filenames = fs.readdirSync(menu_options_dir);
     return Promise.all(menu_options_filenames.map(filename=>
@@ -77,8 +78,9 @@ async function create_option_menus() {
             )
         )
     )).then(option_lists=>
-        new Promise.all(option_lists.map(option_menu=>
+        Promise.all(option_lists.map(option_menu=>
             new Promise((resolve, reject)=>{
+                Option_Menu.create(option_menu)
                 //TODO: finish this function
                 resolve(1);
             })
@@ -131,7 +133,11 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
                 if (item.options == null) {
                     console.log("Item \""+item.name+"\" missing property \"options\"!");
                 }
-                return Promise.all(item.options.map(option_name=>
+                else if (item.options.map == null) {
+                    console.log("something's weird:");
+                    console.log(item);
+                }
+                else return Promise.all(item.options.map(option_name=>
                     new Promise((resolve, reject)=>
                         Option_Menu.findOne({name:option_name}, (err,record)=>{
                             if (err) reject(err);

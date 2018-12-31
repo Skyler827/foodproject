@@ -4,24 +4,28 @@
         "price":749,
         "ingredients": [
             {"name":"tradwings","quantity":5,"unit":"wings"}
-        ]
+        ],
+        "options":["wing_mods","wing_sides"]
     }, {
         "name":"Small Wings",
         "price":1199,
         "ingredients": [
             {"name":"tradwings","quantity":9,"unit":"wings"}
-        ]
+        ],
+        "options":["wing_mods","wing_sides"]
     }, {
         "name":"Medium Wings",
         "price":1749,
         "ingredients": [
             {"name":"tradwings","quantity":14,"unit":"wings"}
-        ]
+        ],
+        "options":["wing_mods","wing_sides"]
     }, {
         "name":"Large Wings",
         "price": 2149,
         "ingredients": [
             {"name":"tradwings","quantity":18,"unit":"wings"}
-        ]
+        ],
+        "options":["wing_mods","wing_sides"]
     }
 ]

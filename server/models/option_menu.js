@@ -3,19 +3,15 @@ let Schema     = mongoose.Schema;
 let ForeignKey = Schema.Types.ObjectId;
 
 let option_menu = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    minimum: {
+    min_options: {
         type: Number,
         required: true
     },
-    num_free: {
+    free_options: {
         type: Number,
-        required: false
+        required: true
     },
-    maximum: {
+    max_options: {
         type: Number,
         required: false
     }
