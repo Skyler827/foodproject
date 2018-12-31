@@ -1,0 +1,33 @@
+[
+    {
+        "name":"tortillachips",
+        "bulkCost": 1,
+        "bulkCostUnit": "serving",
+        "units": {"serving":1,"bucket":50}
+    }, {
+        "name":"mozzsticks",
+        "bulkCost":1,
+        "bulkCostUnit":"package",
+        "units":{"stick":1,"serving":6,"package":100}
+    }, {
+        "name":"fries",
+        "bulkCost":10,
+        "bulkCostUnit":"box",
+        "units": {"box":1000,"basket":50,"side":25,"fry":1}
+    }, {
+        "name": "cheesecurds",
+        "bulkCost": 100,
+        "bulkCostUnit": "package",
+        "units": {"curd":1,"side":30,"basket":60,"package":12000}
+    }, {
+        "name": "onionrings",
+        "bulkCost": 100,
+        "bulkCostUnit":"box",
+        "units": {"ring":1,"side":10,"basket":25,"package":200,"box":1000}
+    }, {
+        "name": "buffalochips",
+        "bulkCost": 100,
+        "bulkCostUnit":"box",
+        "units": {"ring":1,"side":10,"basket":25,"package":200,"box":1000}
+    }
+]

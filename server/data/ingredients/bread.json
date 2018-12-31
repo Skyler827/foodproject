@@ -1,0 +1,8 @@
+[
+    {
+        "name":"flourtortilla",
+        "bulkCost":7,
+        "bulkCostUnit":"box",
+        "units": {"tortilla":1,"bag":10,"box":80}
+    }
+]

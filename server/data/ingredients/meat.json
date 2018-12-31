@@ -1,0 +1,18 @@
+[
+    {
+        "name":"tradwings",
+        "bulkCost": 1,
+        "bulkCostUnit": "bucket",
+        "units": {"wing":1, "bucket":200}
+    }, {
+        "name":"bonlesswings",
+        "bulkCost": 1,
+        "bulkCostUnit": "bucket",
+        "units": {"wing":1,"bucket":300}
+    }, {
+        "name":"grilledchicken",
+        "bulkCost":15,
+        "bulkCostUnit":"package",
+        "units": {"dice":0.1,"breast":1,"package":100}
+    }
+]

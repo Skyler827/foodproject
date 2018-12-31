@@ -1,0 +1,33 @@
+{
+    "min_options":0,
+    "free_options":0,
+    "options":[
+        {
+            "name":"Fries",
+            "price":0,
+            "ingredients":[
+                {"name":"fries","quantity":1,"unit":"side"}
+            ],
+            "options":["fry_mods"]
+        }, {
+            "name":"Potato Wedges",
+            "price":80,
+            "ingredients":[
+                {"name":"fries","quantity":1,"unit":"side"}
+            ]
+        }, {
+            "name":"buffalo chips",
+            "price":100,
+            "ingredients": [
+                {"name":"buffalochips","quantity":1,"unit":"side"}
+            ],"options": ["fry_mods"]
+        }, {
+            "name":"Onion Rings",
+            "price":280,
+            "ingredients": [
+                {"name":"onionrings","quantity":1,"unit":"side"}
+            ],
+            "options":[]
+        }
+    ]
+}

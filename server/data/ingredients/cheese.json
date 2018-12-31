@@ -1,0 +1,8 @@
+[
+    {
+        "name":"parmesiancheese",
+        "bulkCost":12,
+        "bulkCostUnit":"package",
+        "units":{"shaving":0.01,"bag":1, "package":30}
+    }
+]

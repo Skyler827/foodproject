@@ -3,27 +3,38 @@ let Schema     = mongoose.Schema;
 let ForeignKey = Schema.Types.ObjectId;
 
 let item = new Schema({
-    name:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true
     },
-    price:{
-        type:Number, // integer number of cents
-        required:true
+    price: {
+        type: Number, // integer number of cents
+        required: true
     },
     category: {
         type: ForeignKey,
         refPath: 'category',
         required: true
     },
-    ingredients:{
-        type:[ForeignKey],
-        ref: 'ingredients',
-        required:true
-    },
+    ingredients: [{
+        id:{
+            type: ForeignKey,
+            ref: 'ingredient',
+            required: true
+        },
+        quantity: {
+            type:Number,
+            required: true
+        },
+        unit: {
+            type: String,
+            required: true
+        }
+    }],
     options: {
         type: [ForeignKey],
         ref: 'option_menu',
+        required: false
 
     }
 })
