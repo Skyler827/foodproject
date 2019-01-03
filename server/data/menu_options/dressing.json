@@ -19,7 +19,7 @@
             "name":"FF Rach",
             "price":60,
             "ingredients":[
-                {"name":"ffrach","quantity":2,"unit":"oz"}
+                {"name":"ffranch","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Lemon Vinagarette",

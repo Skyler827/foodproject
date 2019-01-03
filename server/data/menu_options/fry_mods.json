@@ -6,7 +6,7 @@
             "name":"Salt and Vinegar",
             "price":60,
             "ingredients":[
-                {"name":"saltandvinegar","quantity":2,"unit":"oz"}
+                {"name":"saltnvinegar","quantity":2,"unit":"oz"}
             ]
         }
     ]

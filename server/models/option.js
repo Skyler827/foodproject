@@ -16,11 +16,21 @@ let option = new Schema({
         refPath: 'option_menu',
         required: true
     },
-    ingredients:{
-        type:[ForeignKey],
-        ref: 'ingredient',
-        required:true
-    }
+    ingredients:[{
+        id:{
+            type: ForeignKey,
+            required: true,
+            ref: 'ingredient'
+        },
+        quantity:{
+            type: Number,
+            required: true
+        },
+        unit:{
+            type:String,
+            required: true
+        }
+    }]
 })
 
 mongoose.model("option",option);

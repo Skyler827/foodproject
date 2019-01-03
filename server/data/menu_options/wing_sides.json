@@ -25,14 +25,14 @@
             "name":"Carrots",
             "price":60,
             "ingredients":[
-                {"name":"carrots","quantity":6,"unit":"sticks"}
+                {"name":"carrot","quantity":6,"unit":"sticks"}
             ]
         }, {
             "name":"CC",
             "price":60,
             "ingredients":[
                 {"name":"celery","quantity":2,"unit":"sticks"},
-                {"name":"carrots","quantity":3,"unit":"sticks"}
+                {"name":"carrot","quantity":3,"unit":"sticks"}
             ]
         }
     ]

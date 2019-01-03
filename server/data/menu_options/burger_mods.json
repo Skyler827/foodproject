@@ -5,9 +5,7 @@
         {
             "name":"Well Done",
             "price":0,
-            "inggredients":[]
-        }, {
-            
+            "ingredients":[]
         }
     ]
 }

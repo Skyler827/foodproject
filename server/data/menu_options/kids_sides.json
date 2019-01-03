@@ -2,5 +2,10 @@
     "min_options":0,
     "free_options":0,
     "options":[
+        {
+            "name":"Fries",
+            "price":0,
+            "ingredients":[{"name":"fries", "quantity":1,"unit":"side"}]
+        }
     ]
 }
