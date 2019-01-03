@@ -23,7 +23,8 @@
             {"name":"swranch","quantity":3,"unit":"oz"},
             {"name":"mozzsticks","quantity":6,"unit":"stick"},
             {"name":"marinara","quantity":3,"unit":"oz"}
-        ]
+        ],
+        "options":["dressing"]
     }, {
         "name":"Spinach Artichoke Dip",
         "price":799,
@@ -31,13 +32,15 @@
             {"name":"tortillachips","quantity":2,"unit":"serving"},
             {"name":"spindip","quantity":6,"unit":"oz"},
             {"name":"parmesiancheese","quantity":1,"unit":"shaving"}
-        ]
+        ],
+        "options":[]
     }, {
         "name":"Basket French Fries",
         "price": 549,
         "ingredients": [
             {"name":"fries", "quantity":1,"unit":"basket"}
-        ]
+        ],
+        "options":["fry_mods"]
     }, {
         "name":"Chicken Quesadilla",
         "price":849,
@@ -46,25 +49,29 @@
             {"name":"grilledchicken","quantity":7,"unit":"oz"},
             {"name":"picodegaillo","quantity":3,"unit":"oz"},
             {"name":"parmesiancheese","quantity":3,"unit":"shaving"}
-        ]
+        ],
+        "options":[]
     }, {
         "name":"Basket Cheese Curds", 
         "price":899,
         "ingredients": [
             {"name":"cheesecurds","quantity":1,"unit":"basket"}
-        ]
+        ],
+        "options":[]
     }, {
         "name": "Basket Buffalo Chips",
         "price":799,
         "ingredients":[
             {"name":"buffalochips","quantity":1,"unit":"basket"}
-        ]
+        ],
+        "options":["fry_mods"]
     }, {
         "name": "Basket Onion Rings",
         "price":999,
         "ingredients":[
             {"name":"onionrings","quantity":1,"unit":"basket"},
             {"name":"swranch","quantity":3,"unit":"oz"}
-        ]
+        ],
+        "options":[]
     }
 ]

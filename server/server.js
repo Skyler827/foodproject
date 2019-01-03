@@ -24,6 +24,7 @@ app.use(express.static(staticDir, {redirect: false}));
 const sessionOptions = {
     secret: 'sdkjvalkwejd;lfkv',
     saveUninitialized: true,
+    resave: true
 };
 // set http handlers
 if (env == 'dev') {

@@ -72,18 +72,16 @@ async function create_option_menus() {
             fs.readFile(
                 path.join(menu_options_dir,filename),{encoding:'utf-8'},
                 (err,fileData) => {
+                    let data = JSON.parse(fileData);
+                    data.name = filename.slice(0,-5);
                     if (err) reject(err);
-                    else resolve(JSON.parse(fileData));
+                    else resolve(data);
                 }
             )
         )
-    )).then(option_lists=>
-        Promise.all(option_lists.map(option_menu=>
-            new Promise((resolve, reject)=>{
-                Option_Menu.create(option_menu)
-                //TODO: finish this function
-                resolve(1);
-            })
+    )).then(option_lists =>
+        Promise.all(option_lists.map(option_menu =>
+            Option_Menu.create(option_menu)
         ))
     )
 }
@@ -154,9 +152,8 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
             }).then(_=> item);
         }))
     ).then(async preparedItems => {
-        console.log(preparedItems[0]);
         console.log("-".repeat(20));
-        console.log("preparedItems.length is: "+preparedItems.length);
+        console.log(preparedItems.length+" Items inserted");
         console.log("-".repeat(20));
         return Item.insertMany(preparedItems);
     });
