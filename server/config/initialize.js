@@ -64,7 +64,7 @@ async function db_save_ingredients() {
     }));
 }
 
-async function create_option_menus() {
+async function create_option_menus_and_items() {
     const menu_options_dir = path.resolve("data","menu_options");
     const menu_options_filenames = fs.readdirSync(menu_options_dir);
     return Promise.all(menu_options_filenames.map(filename=>
@@ -81,7 +81,49 @@ async function create_option_menus() {
         )
     )).then(option_lists =>
         Promise.all(option_lists.map(option_menu =>
-            Option_Menu.create(option_menu)
+            Option_Menu.create(option_menu).then((new_menu)=>{
+                // console.log(option_menu.name+":");
+                // console.log(option_menu.options);
+                return Promise.all(option_menu.options.map(async option_item=>{
+                    option_item.category = new_menu._id;
+                    if (!option_item.ingredients) {
+                        console.log("option_item.ingredients === null!!!");
+                        console.log("for option \""+JSON.stringify(option_item)+"\"");
+                        console.log("exiting now");
+                        process.exit(1);
+                    }
+                    let new_ingredients = await Promise.all(
+                        option_item.ingredients.map(ingredient=>
+                            new Promise((resolve, reject)=>{
+                                Ingredient.findOne({name:ingredient.name},(err, ingredient_record)=>{
+                                    if (err) reject(err);
+                                    else if (ingredient_record == null){
+                                        console.log("Error while reading "+path.join("server","data","menu_options", option_menu.name+".json")+": "+option_item.name)
+                                        reject("no such ingredient found: \""+ingredient.name+"\".");
+                                    } else {
+                                        ingredient.id = ingredient_record._id;
+                                        // console.log("processing ingredient: "+ingredient.name);
+                                        delete ingredient.name;
+                                        resolve(ingredient);
+                                    }
+                                });
+                            })
+                        )
+                    );
+                    // console.log("new ingredients for "+option_item.name);
+                    // console.log(new_ingredients);
+                    option_item.ingredients = new_ingredients;
+                    return Option_Item.create(option_item).then((result)=>{
+                        // console.log("created option: "+option_item.name)
+                        return result;
+                    }).catch((err)=>{
+                        console.log("error on option: "+option_item.name);
+                        console.log(JSON.stringify(option_item))
+                        console.error(err);
+                        return err;
+                    });
+                }));
+            })
         ))
     )
 }
@@ -165,7 +207,7 @@ async function main() {
     const menu_item_filenames = fs.readdirSync(menu_item_dir);
     const categories_name_to_id = await create_categories(menu_item_filenames);
     db_save_ingredients();
-    await create_option_menus();
+    await create_option_menus_and_items();
     await create_menu_items(menu_item_filenames, menu_item_dir, categories_name_to_id);
 }
 
