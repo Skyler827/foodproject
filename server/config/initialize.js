@@ -8,6 +8,7 @@ const Ingredient = mongoose.model("ingredient");
 const Option_Menu = mongoose.model("option_menu");
 const Option_Item = mongoose.model("option");
 
+const all_models = [Category, Item, Ingredient, Option_Menu, Option_Item];
 // initially has enough ingredients to make this many of all the items on the menu 
 const initial_supply_factor = 3;
 
@@ -21,7 +22,7 @@ function flatten(arr) {
  * This file populates the restaraunt database with food/drink/ingredient/menu data in the supplied JSON files
  */
 async function drop_everything() {
-    return Promise.all([Category, Ingredient, Item].map(model=>
+    return Promise.all(all_models.map(model=>
         new Promise((resolve, reject) => 
             model.deleteMany({},err =>
                 err? reject(err) : resolve()
@@ -98,7 +99,8 @@ async function create_option_menus_and_items() {
                                 Ingredient.findOne({name:ingredient.name},(err, ingredient_record)=>{
                                     if (err) reject(err);
                                     else if (ingredient_record == null){
-                                        console.log("Error while reading "+path.join("server","data","menu_options", option_menu.name+".json")+": "+option_item.name)
+                                        console.log("Error while reading "+
+                                        path.join("server","data","menu_options", option_menu.name+".json")+": "+option_item.name);
                                         reject("no such ingredient found: \""+ingredient.name+"\".");
                                     } else {
                                         ingredient.id = ingredient_record._id;
