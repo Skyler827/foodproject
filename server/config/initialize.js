@@ -86,7 +86,7 @@ async function create_option_menus_and_items() {
                 // console.log(option_menu.name+":");
                 // console.log(option_menu.options);
                 return Promise.all(option_menu.options.map(async option_item=>{
-                    option_item.category = new_menu._id;
+                    option_item.menu = new_menu._id;
                     if (!option_item.ingredients) {
                         console.log("option_item.ingredients === null!!!");
                         console.log("for option \""+JSON.stringify(option_item)+"\"");

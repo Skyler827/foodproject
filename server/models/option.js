@@ -11,7 +11,7 @@ let option = new Schema({
         type:Number,
         required:true
     },
-    category: {
+    menu: {
         type: ForeignKey,
         refPath: 'option_menu',
         required: true
