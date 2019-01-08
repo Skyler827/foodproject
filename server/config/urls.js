@@ -4,12 +4,13 @@ const staticFilesError = require("./errors").errorHTML;
 module.exports = function(app, staticDir) {
     const loginRegController = require("../controllers/LoginRegController")
     const controllers = {
-        'categories':require(path.join("..","controllers","CategoryController")),
-        'items':  require(path.join("..", "controllers", "ItemController")),
-        'orders': require(path.join("..", "controllers", "OrderController")),
-        'tables': require(path.join("..", "controllers", "TableController")),
-        'users':  require(path.join("..","controllers","UserController")),
-        'options':require(path.join("..","controllers","OptionController"))
+        'categories': require(path.join("..","controllers","CategoryController")),
+        'items':      require(path.join("..","controllers","ItemController")),
+        'orders':     require(path.join("..","controllers","OrderController")),
+        'tables':     require(path.join("..","controllers","TableController")),
+        'users':      require(path.join("..","controllers","UserController")),
+        'options':    require(path.join("..","controllers","OptionController")),
+        'ingredients':require(path.join("..","controllers","IngredientController"))
     };
     
     for (key in controllers) {

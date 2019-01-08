@@ -4,7 +4,7 @@ const session = require('express-session')
 const bodyParser = require("body-parser");
 const path = require ("path");
 
-const initialize = () => require("./config/initialize")(); //wrapped to delay model lookup until after db.register()
+const initialize = (cb) => require("./config/initialize")(cb); //wrapped to delay model lookup until after db.register()
 const app = express();
 const port = 3000;
 const env = process.env.NODE_ENV || 'dev'; // either 'dev' or 'production'
@@ -34,8 +34,7 @@ if (env == 'dev') {
 
     // start server
     app.listen(port, function() {
-        console.log(`Example app listening on port ${port}!`);
-        initialize();
+        initialize(()=>console.log(`Example app listening on port ${port}`));
     });
 } else if (env == 'production') {
     // serve over https only

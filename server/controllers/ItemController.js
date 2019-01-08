@@ -4,7 +4,7 @@ const router = express.Router();
 const Item = mongoose.model("item");
 
 router.get("/", function(req, res) {
-    Item.find({}, function(err, data) {
+    Item.find({}).select("name").exec(function(err, data) {
         if (err) res.json(err);
         else res.json(data);
     });

@@ -4,7 +4,7 @@ const router = express.Router();
 const Category = mongoose.model("category");
 const Item = mongoose.model("item");
 router.get("/", function(req, res) {
-    Category.find({},(err,data) => {
+    Category.find({}).select("name").exec((err,data) => {
         if (err) res.json(err);
         else res.json(data);
     });
@@ -19,6 +19,9 @@ router.post("/", function(req, res) {
         }
     );
 });
+router.get("/:id", function(req, res) {
+    res.redirect("items");
+})
 router.get("/:id/items", function(req, res) {
     return new Promise((resolve, reject)=>{
         Category.findById(req.params.id, function(err, data) {

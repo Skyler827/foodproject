@@ -7,8 +7,8 @@ let item = new Schema({
         type: String,
         required: true
     },
-    price: {
-        type: Number, // integer number of cents
+    priceCents: {
+        type: Number,
         required: true
     },
     category: {
@@ -17,7 +17,7 @@ let item = new Schema({
         required: true
     },
     ingredients: [{
-        id:{
+        id: {
             type: ForeignKey,
             ref: 'ingredient',
             required: true
@@ -27,6 +27,10 @@ let item = new Schema({
             required: true
         },
         unit: {
+            type: String,
+            required: true
+        },
+        name: {
             type: String,
             required: true
         }

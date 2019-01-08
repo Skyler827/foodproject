@@ -1,7 +1,7 @@
 [
     {
         "name":"Trad Sampler",
-        "price":1249,
+        "priceCents":1249,
         "ingredients": [
             {"name":"tradwings","quantity":5,"unit":"wing"},
             {"name":"tortillachips","quantity":1,"unit":"serving"},
@@ -14,7 +14,7 @@
         "options": ["dressing"]
     }, {
         "name":"Bonless Sampler",
-        "price":1199,
+        "priceCents":1199,
         "ingredients": [
             {"name":"bonlesswings","quantity":5,"unit":"wing"},
             {"name":"tortillachips","quantity":1,"unit":"serving"},
@@ -27,7 +27,7 @@
         "options":["dressing"]
     }, {
         "name":"Spinach Artichoke Dip",
-        "price":799,
+        "priceCents":799,
         "ingredients": [
             {"name":"tortillachips","quantity":2,"unit":"serving"},
             {"name":"spindip","quantity":6,"unit":"oz"},
@@ -36,14 +36,14 @@
         "options":[]
     }, {
         "name":"Basket French Fries",
-        "price": 549,
+        "priceCents": 549,
         "ingredients": [
             {"name":"fries", "quantity":1,"unit":"basket"}
         ],
         "options":["fry_mods"]
     }, {
         "name":"Chicken Quesadilla",
-        "price":849,
+        "priceCents":849,
         "ingredients": [
             {"name":"flourtortilla","quantity":1,"unit":"tortilla"},
             {"name":"grilledchicken","quantity":7,"unit":"oz"},
@@ -53,21 +53,21 @@
         "options":[]
     }, {
         "name":"Basket Cheese Curds", 
-        "price":899,
+        "priceCents":899,
         "ingredients": [
             {"name":"cheesecurds","quantity":1,"unit":"basket"}
         ],
         "options":[]
     }, {
         "name": "Basket Buffalo Chips",
-        "price":799,
+        "priceCents":799,
         "ingredients":[
             {"name":"buffalochips","quantity":1,"unit":"basket"}
         ],
         "options":["fry_mods"]
     }, {
         "name": "Basket Onion Rings",
-        "price":999,
+        "priceCents":999,
         "ingredients":[
             {"name":"onionrings","quantity":1,"unit":"basket"},
             {"name":"swranch","quantity":3,"unit":"oz"}

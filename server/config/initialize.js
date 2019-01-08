@@ -22,16 +22,26 @@ function flatten(arr) {
  * This file populates the restaraunt database with food/drink/ingredient/menu data in the supplied JSON files
  */
 async function drop_everything() {
+    process.stdout.write("dropping database...")
     return Promise.all(all_models.map(model=>
         new Promise((resolve, reject) => 
-            model.deleteMany({},err =>
-                err? reject(err) : resolve()
-            )
+            model.deleteMany({},err => {
+                if (err) reject(err)
+                else {
+                    process.stdout.write(".");
+                    resolve()
+                }
+            })
         )
-    ));
+    )).then(()=>{
+        console.log("done.")
+        // process.stdout.write("done.");
+        // console.log("");
+    });
 }
 
 async function create_categories(filenames) {
+    process.stdout.write("creating categories...");
     const category_objects = filenames.map((s) => ({"name":s.slice(0,-5)}));
     return new Promise((resolve, reject) =>
         Category.create(category_objects, (err, created_categories) => {
@@ -40,12 +50,19 @@ async function create_categories(filenames) {
                 category_names_to_ids[created_categories[i].name] = created_categories[i]._id;
             }
             if (err) reject(err);
-            else resolve(category_names_to_ids);
+            else {
+                resolve(category_names_to_ids);
+                process.stdout.write(".");
+            }
         })
-    );
+    ).then((data)=>{
+        console.log("done.");
+        return data;
+    });
 }
 
 async function db_save_ingredients() {
+    process.stdout.write("reading ingredient data...");
     const ingredients_path = path.resolve("data","ingredients");
     const ingredient_filenames = fs.readdirSync(ingredients_path);
     const ingredients_list = await Promise.all(
@@ -55,17 +72,27 @@ async function db_save_ingredients() {
                 fs.readFile(full_filename,{"encoding":"utf-8"},(err, data)=>{
                     const parsedData = JSON.parse(data);
                     if (err) reject(err);
-                    else resolve(parsedData);
+                    else {
+                        process.stdout.write(".");
+                        resolve(parsedData);
+                    }
                 });
             })
         )
-    ).then(flatten);
+    ).then(flatten).then((data)=>{
+        console.log("done");
+        return data;
+    })
+    process.stdout.write("saving ingredient data...");
     return Promise.all(ingredients_list.map(ingredient => {
         Ingredient.create(ingredient);
-    }));
+    })).then(()=>{
+        console.log("done.")
+    });
 }
 
 async function create_option_menus_and_items() {
+    process.stdout.write("saving option menus and items...")
     const menu_options_dir = path.resolve("data","menu_options");
     const menu_options_filenames = fs.readdirSync(menu_options_dir);
     return Promise.all(menu_options_filenames.map(filename=>
@@ -127,10 +154,14 @@ async function create_option_menus_and_items() {
                 }));
             })
         ))
-    )
+    ).then((_)=>{
+        console.log("done.");
+        return _;
+    });
 }
 
 async function create_menu_items(filenames, directory, cat_names_to_ids) {
+    process.stdout.write("creating menu items...");
     return Promise.all(filenames.map(filename =>
         new Promise((resolve, reject) => 
             fs.readFile(path.join(directory,filename), (err, data) => {
@@ -164,6 +195,8 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
                                 process.exit(1);
                             }
                             else {
+                                delete ingredient._id;
+                                ingredient.name = ingredientRecord.name;
                                 ingredient.id = ingredientRecord._id;
                                 resolve(ingredient);
                             }
@@ -196,21 +229,25 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
             }).then(_=> item);
         }))
     ).then(async preparedItems => {
-        console.log("-".repeat(20));
-        console.log(preparedItems.length+" Items inserted");
-        console.log("-".repeat(20));
+        // console.log("-".repeat(20));
+        // console.log(preparedItems.length+" Items inserted");
+        // console.log("-".repeat(20));
         return Item.insertMany(preparedItems);
+    }).then((_)=>{
+        console.log("done");
     });
 }
 
-async function main() {
+async function main(cb) {
     await drop_everything();
     const menu_item_dir = path.resolve("data","menu_items")
     const menu_item_filenames = fs.readdirSync(menu_item_dir);
     const categories_name_to_id = await create_categories(menu_item_filenames);
-    db_save_ingredients();
+    await db_save_ingredients();
     await create_option_menus_and_items();
     await create_menu_items(menu_item_filenames, menu_item_dir, categories_name_to_id);
+    console.log("food app is ready to serve!")
+    cb();
 }
 
 module.exports = main;
