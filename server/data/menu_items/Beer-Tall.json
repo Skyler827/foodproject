@@ -1,0 +1,43 @@
+[
+    {
+        "name":"TALL BUD",
+        "priceCents":599,
+        "ingredients": [{"name":"Budweiser", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }, {
+        "name":"TALL BUD LIGHT",
+        "priceCents":599,
+        "ingredients": [{"name":"Bud Light", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }, {
+        "name":"TALL COORS",
+        "priceCents":599,
+        "ingredients": [{"name":"Coors", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }, {
+        "name":"TALL COORS LIGHT",
+        "priceCents":599,
+        "ingredients": [{"name":"Coors Light", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }, {
+        "name":"TALL MICHELOB",
+        "priceCents":599,
+        "ingredients": [{"name":"Michelob Ultra", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }, {
+        "name":"TALL MILLER LIGHT",
+        "priceCents":599,
+        "ingredients": [{"name":"Miller Lite", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }, {
+        "name":"TALL DOS EQUIS",
+        "priceCents":599,
+        "ingredients": [{"name":"Dos Equis", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }, {
+        "name":"HEINEKIN",
+        "priceCents":799,
+        "ingredients": [{"name":"Heineken", "quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
+    }
+]
