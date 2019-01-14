@@ -55,7 +55,7 @@
         "bulkCostUnit":"barrel",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Dos Equis Amber ",
+        "name":"Dos Equis Amber",
         "bulkCost":100,
         "bulkCostUnit":"barrel",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
