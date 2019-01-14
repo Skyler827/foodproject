@@ -3,19 +3,30 @@ let Schema     = mongoose.Schema;
 let ForeignKey = Schema.Types.ObjectId;
 
 let order = new Schema({
-    table:{
+    server: {
         type: ForeignKey,
-        ref: 'table',
+        ref: 'user',
         required: true
     },
-    itemids:{
-        type: [ForeignKey],
-        ref: 'item_order',
+    tableNumber: {
+        type: Number,
+        required: true
+    },
+    orderNumber: {
+        type: Number,
         required: true
     },
     open: {
         type: Boolean,
         required: true
+    },
+    openTime: {
+        type: Date,
+        required: true
+    },
+    closeTime: {
+        type: Date,
+        required: false
     }
 })
 

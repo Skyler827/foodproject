@@ -2,15 +2,15 @@ let mongoose   = require("mongoose");
 let Schema     = mongoose.Schema;
 let ForeignKey = Schema.Types.ObjectId;
 
-let table = new Schema({
-    number:{
+let seat = new Schema({
+    seatNumber:{
         type: Number,
         required: true
     },
-    server: {
+    order: {
         type: ForeignKey,
-        ref: 'user'
+        ref: 'order'
     }
 })
 
-mongoose.model("table",table);
+mongoose.model("seat", seat);
