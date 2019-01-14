@@ -14,11 +14,6 @@ export class OrderComponent implements OnInit {
     categories: Array<{name:String, id:String}> = [];
     selected_category: Number = 0;
     menu_items: Array<{name:String, id:String}> = [];
-    order_pane: Array<{
-        name:String,
-        options:Array<{name:String, priceCents:Number}>,
-        priceCents:Number
-    }> = [];
     
     //State variable initialization:
     constructor(private ar: ActivatedRoute, private ms:MenuService) { }
@@ -33,9 +28,14 @@ export class OrderComponent implements OnInit {
             });
         });
     }
-    onSelect(category_id:String) {
+    SelectCategory(category_id:String) {
         this.ms.getItems(category_id).then((itemRecords)=>{
             this.menu_items = itemRecords.map(i=>({name:i.name,id:i._id}));
+        });
+    }
+    SelectItem(itemId:String) {
+        this.ms.getItemData(itemId).then(itemRecord=>{
+            if (itemRecord.options.length > 0) {}
         });
     }
 

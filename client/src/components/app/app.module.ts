@@ -14,6 +14,7 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 import { RoadmapComponent } from '../roadmap/roadmap.component';
 import { RegisterComponent } from '../register/register.component';
 import { LoggedOutComponent } from '../logged-out/logged-out.component';
+import { MenuComponent } from '../menu/menu.component';
 const appRoutes: Routes = [
   { path: '',
     redirectTo: '/login',
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     RoadmapComponent,
     RegisterComponent,
-    LoggedOutComponent
+    LoggedOutComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
