@@ -39,5 +39,10 @@
         "priceCents":799,
         "ingredients": [{"name":"Heineken", "quantity":1,"unit":"tall"}],
         "options":["bar_mods"]
+    }, {
+        "name":"ANGRY ORCHARD",
+        "priceCents":699,
+        "ingredients": [{"name":"Angry Orchard","quantity":1,"unit":"tall"}],
+        "options":["bar_mods"]
     }
 ]

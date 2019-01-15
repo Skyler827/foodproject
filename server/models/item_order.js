@@ -13,10 +13,6 @@ let item_order = new Schema({
         ref: 'seat',
         required: true
     },
-    item_name: {
-        type: String,
-        required: true
-    },
     option_line: {
         type: String,
         required: false,
@@ -40,6 +36,11 @@ let item_order = new Schema({
         ingredientName: {
             type: String,
             required: true,
+        },
+        ingredient_id: {
+            type: ForeignKey,
+            ref: 'ingredient',
+            required: true
         },
         modification: {
             type: String,

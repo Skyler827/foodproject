@@ -1,14 +1,27 @@
+/**
+ * This file populates the restaraunt database with food/drink/ingredient/menu data in the supplied JSON files
+ */
+
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const Category = mongoose.model("category");
-const Item = mongoose.model("item");
 const Ingredient = mongoose.model("ingredient");
+const ItemOrder = mongoose.model("item_order");
+const Item = mongoose.model("item");
 const Option_Menu = mongoose.model("option_menu");
 const Option_Item = mongoose.model("option");
+const Order = mongoose.model("order");
+const Payment = mongoose.model("payment");
+const Seat = mongoose.model("seat");
+const User = mongoose.model("user");
 
-const all_models = [Category, Item, Ingredient, Option_Menu, Option_Item];
+const all_models = [
+    Category, Item, Ingredient, ItemOrder, Option_Menu, Option_Item, Order, Payment,
+    Seat, User
+];
 // initially has enough ingredients to make this many of all the items on the menu 
 const initial_supply_factor = 3;
 
@@ -18,9 +31,7 @@ function flatten(arr) {
           return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
     }, []);
 }
-/**
- * This file populates the restaraunt database with food/drink/ingredient/menu data in the supplied JSON files
- */
+
 async function drop_everything() {
     process.stdout.write("dropping database...")
     return Promise.all(all_models.map(model=>
@@ -237,6 +248,65 @@ async function create_menu_items(filenames, directory, cat_names_to_ids) {
         console.log("done");
     });
 }
+async function generate_default_user() {
+    return User.create({
+        username:'skyler',
+        password: 'skyler',
+        userType: "server"
+    });
+}
+async function getItemByName(itemName) {
+    return new Promise((resolve, reject)=>{
+        Item.findOne({name:itemName}, (err, obj)=>{
+            if (err) reject(err);
+            else resolve(obj);
+        });
+    });
+}
+async function insert_test_order() {
+    new Promise((resolve, reject)=> {
+        User.findOne({username:'skyler'}, (err, user)=>{
+            if (err) reject(err);
+            else resolve(user);
+        });
+    }).then(user=>
+        Order.create({
+            server:user._id,
+            tableNumber: 241,
+            orderNumber: 1,
+            open: true,
+            openTime: new Date()
+        })
+    ).then(order=>
+        Seat.create({
+            seatNumber:1,
+            order:order._id
+        })
+    ).then(async seat=> {
+        let itemNames = [
+            "Trad Sampler",
+            "ANGRY ORCHARD",
+            "Small Wings"
+        ];
+        return Promise.all(itemNames.map(async name=>{
+            item_obj = await getItemByName(name);
+            ItemOrder.create({
+                item: item_obj._id,
+                seat: seat._id,
+                options: name == "Small Wings" ? [{
+                        "option_menu_name":"wing_sides",
+                        "option_item_name":"CC"
+                    }, {
+                        "option_menu_name":"wing_sides",
+                        "option_item_name":"CC"} 
+                ] : [],
+                ingredient_modifiers: [],
+                basePriceCents: item_obj.priceCents,
+                totalPriceCents: item_obj.priceCents
+            })
+        }));
+    });
+}
 
 async function main(cb) {
     await drop_everything();
@@ -246,6 +316,8 @@ async function main(cb) {
     await db_save_ingredients();
     await create_option_menus_and_items();
     await create_menu_items(menu_item_filenames, menu_item_dir, categories_name_to_id);
+    await generate_default_user();
+    await insert_test_order();
     console.log("food app is ready to serve!")
     cb();
 }
