@@ -5,8 +5,12 @@ const Order = mongoose.model("order");
 const Seat = mongoose.model("seat");
 const ItemOrder = mongoose.model("item_order");
 
+router.all("*", function(req, res, next) {
+    console.log("in OrderController.js: "+req.method+": "+req.hostname+req.url);
+    next();
+});
+
 router.get("/", function(req, res) {
-    console.log(req.path);
     Order.find({}, function(err, data) {
         if (err) res.json(err);
         else res.json(data);

@@ -26,6 +26,10 @@ const sessionOptions = {
     saveUninitialized: true,
     resave: true
 };
+app.use(function(req, res, next) {
+    console.log("in server.js: "+req.method+": "+req.hostname+req.url);
+    next();
+});
 // set http handlers
 if (env == 'dev') {
     app.use(session(sessionOptions));

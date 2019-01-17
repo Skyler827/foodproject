@@ -13,14 +13,13 @@ router.get("/", function(req, res) {
     });
 });
 router.get("/:diningRoomNumber", function(req, res) {
-    console.log(req.param.diningRoomNumber);
     let x = req.params.diningRoomNumber;
     let query_conditions = {
-        tableNumber:{
-            $gte:x   *100,
-            $lt:(x+1)*100
-        },
-        open: true
+        $and: [
+            {tableNumber:{$gt: x*100}},
+            {tableNumber:{$lt: x*100+100}},
+            {open: true}
+        ],
     };
     Order.find(query_conditions, (err, tables)=>{
         if (err) res.json(err);

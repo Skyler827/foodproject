@@ -3,6 +3,11 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const User = mongoose.model("user");
 
+router.all("*", function(req, res, next) {
+    console.log("in UserController.js: "+req.method+": "+req.hostname+req.baseUrl);
+    next();
+});
+
 router.get("/", function(req, res) {
     User.find({}, (err, data)=> {
         if (err) res.status(500).json(err);
