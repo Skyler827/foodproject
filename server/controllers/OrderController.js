@@ -5,21 +5,24 @@ const Order = mongoose.model("order");
 const Seat = mongoose.model("seat");
 const ItemOrder = mongoose.model("item_order");
 
-router.all("*", function(req, res, next) {
-    console.log("in OrderController.js: "+req.method+": "+req.hostname+req.url);
-    next();
-});
-
+/**
+ * gets a list of all orders, but not the items in each order
+ */
 router.get("/", function(req, res) {
     Order.find({}, function(err, data) {
         if (err) res.json(err);
         else res.json(data);
     });
 });
-router.get("/hello", function(req, res) {
-    console.log("ayy");
-    res.json("ayyyy");
-});
+
+/**
+ * returns a nested array of items in a food order, given an order id.
+ * body[n] is seat number n, an array of orders
+ * body[n][k] is the k-th item the person on seat number n ordered
+ * body[0], or seat zero, is the "for table"/platter seat.
+ * if there are orders in seats 1,2 and 4, then the result will look like:
+ * [null, <orders_arr>, <orders_arr>, null, orders_arr>]
+ */
 router.get("/:id", function(req, res) {
     new Promise((resolve, reject)=> {
         Order.findById(req.params.id, function(err, order) {
@@ -33,26 +36,35 @@ router.get("/:id", function(req, res) {
                 else resolve(seats);
             })
         )
-    ).then(seats => seats.sort((a, b)=> Math.sign(a.seatNumber - b.seatNumber))
-    ).then(seats =>
-        Promise.all(seats.map(seat =>
-            new Promise((resolve, reject) =>
+    ).then(async seats => {
+        const max_seat = seats.reduce(
+            (max_seat, curr_seat) => max_seat > curr_seat.seatNumber ? max_seat : curr_seat.seatNumber,
+            seats[0].seatNumber
+        );
+        let ans = new Array(max_seat);
+        await Promise.all(seats.map(seat => {
+            return new Promise((resolve, reject) =>
                 ItemOrder.find({seat:seat._id}, (err, itemOrders) => {
                     if (err) reject(err);
-                    else resolve(itemOrders);
+                    else {
+                        ans[seat.seatNumber] = itemOrders;
+                        resolve();
+                    }
                 })
             )
-        ))
-    ).then(itemOrdersBySeat => {
+        }));
+        return ans;
+    }).then(itemOrdersBySeat => {
         res.json(itemOrdersBySeat);
     }).catch(err => {
         res.status(500).json(err);
     });
 });
 /**
- * TypeScript description of expected request body:
+ * Submits an array of new item orders to the given order
  * 
- * type ObjectId = String
+ * TypeScript description of expected request body:
+ * type ObjectId = String;
  * type request_body = {
  *     "item_orders": Array<{
  *         "item_id": ObjectId,
@@ -64,15 +76,13 @@ router.get("/:id", function(req, res) {
  *             "before": Boolean
  *         }>
  *     }>
- * }
+ * };
  */
 router.post("/:table", function(req, res) {
     Order.findOne({tableNumber:req.params.table, open: true}, (err, order)=>{
-        if (err) res.status(500).json(err);
-        else if (order && order.server != req.session.userId){
-            res.status(401).json({error:"this table is being served by another server"});
-        } else if (order) {
-
+        if (err) {res.status(500).json(err);}
+        else if (order) {
+            
         }
     });
 });

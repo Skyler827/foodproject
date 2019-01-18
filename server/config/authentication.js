@@ -30,6 +30,9 @@ function handleOrders(req, res, next) {
                 next();
             }
         });
+    } else {
+        next();
+        // res.status(403).json(errors.forbidden);
     }
 }
 function handleTables(req, res, next) {
