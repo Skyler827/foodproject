@@ -4,11 +4,11 @@
     "options":[
         {
             "name":"No Ice",
-            "price":0,
+            "priceCents":0,
             "ingredients":[]
         }, {
             "name":"Salt Rim",
-            "price":0,
+            "priceCents":0,
             "ingredients":[
                 {"name":"barsalt","quantity":2,"unit":"teaspoons"}
             ]

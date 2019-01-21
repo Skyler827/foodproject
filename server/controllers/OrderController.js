@@ -4,6 +4,10 @@ const router = express.Router();
 const Order = mongoose.model("order");
 const Seat = mongoose.model("seat");
 const ItemOrder = mongoose.model("item_order");
+const OptionItem = mongoose.model("option");
+const OptionMenu = mongoose.model("option_menu");
+const User = mongoose.model('user');
+const util = require('../config/util');
 
 /**
  * gets a list of all orders, but not the items in each order
@@ -14,7 +18,6 @@ router.get("/", function(req, res) {
         else res.json(data);
     });
 });
-
 /**
  * returns a nested array of items in a food order, given an order id.
  * body[n] is seat number n, an array of orders
@@ -68,7 +71,8 @@ router.get("/:id", function(req, res) {
  * type request_body = {
  *     "item_orders": Array<{
  *         "item_id": ObjectId,
- *         "seat": Number
+ *         "seat": Number,
+ *         "option_line": String,
  *         "options": Object<ObjectId, Array<ObjectId>>,
  *         "ingredient_mods": Array<{
  *             "ingredient_id": ObjectId,
@@ -78,12 +82,69 @@ router.get("/:id", function(req, res) {
  *     }>
  * };
  */
-router.post("/:table", function(req, res) {
-    Order.findOne({tableNumber:req.params.table, open: true}, (err, order)=>{
-        if (err) {res.status(500).json(err);}
-        else if (order) {
-            
+router.post("/:table", async function(req, res) {
+    const server = await User.findOne({name:'skyler'}).then();
+    new Promise((resolve, reject) => {
+        Order.findOne({tableNumber:req.params.table, open: true}, (err, order)=>{
+            if (err) reject(err);
+            else if (order) resolve(order);
+            else {
+                Order.create([{
+                    server:server._id,
+                    tableNumber: req.params.table,
+                    orderNumber: 1,
+                    open: true,
+                    openTime: new Date(),
+                }]).then(resolve).catch(reject);
+            }
+        });
+    }).then(async order => {
+        let seatNumbers = new Set();
+        for (let i=0; i<req.body.item_orders.length; i++) {
+            seatNumbers.add(req.body.item_orders[i]);
         }
+        return new Promise((resolve, reject)=>{
+            Seat.find({order:order._id}, (err, seats)=> {
+                if (err) reject(err);
+                else resolve(seats);
+            });
+        });
+    }).then(async (seats) => {
+        let maxSeatNumber = seats.reduce(
+            (x,s) => (s.seatNumber > s) ? s.seatNumber : x,
+            seats[0].seatNumber
+        );
+        let seat_arr = new Array(maxSeatNumber+1);
+        for (let i=0; i<seats.length; i++) {
+            let n = seats[i].seatNumber;
+            seat_arr[n] = seats[i];
+        }
+        let item_orders = await Promise.all(
+            req.body.item_orders.map(item_order => ( async () => {
+                const options = await Promise.all(
+                    Object.keys(item_order.options).map(menu_id => (async () => {
+                        const menu = await OptionMenu.findById(menu_id).then();
+                        return Promise.all(item_order.options[menu_id].map(()=>(async (option_id, idx)=>{
+                            const item = await OptionItem.findById(option_id).then();
+                            const isFree = menu.free_options >= idx;
+                            return {
+                                option_menu_name: menu.name,
+                                option_item_name: item.name,
+                                optionPriceCents: isFree? 0 : item.priceCents
+                            };
+                        })()));
+                    })().then(util.flatten))
+                );
+                item_order.options = options;
+                item_order.seat = seat_arr[item_order.seat];
+                return item_order;
+            })())
+        );
+        return ItemOrder.create(item_orders);
+    }).then(item_order_arr=> {
+        res.json(item_order_arr);
+    }).catch(err => {
+        res.status(500).json(err)
     });
 });
 

@@ -7,7 +7,7 @@ let option = new Schema({
         type:String,
         required:true
     },
-    price:{
+    priceCents:{
         type:Number,
         required:true
     },

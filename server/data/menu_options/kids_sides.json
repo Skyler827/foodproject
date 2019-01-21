@@ -4,7 +4,7 @@
     "options":[
         {
             "name":"Fries",
-            "price":0,
+            "priceCents":0,
             "ingredients":[{"name":"fries", "quantity":1,"unit":"side"}]
         }
     ]

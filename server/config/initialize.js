@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const util = require('./util');
 
 const Category = mongoose.model("category");
 const Ingredient = mongoose.model("ingredient");
@@ -24,13 +25,6 @@ const all_models = [
 ];
 // initially has enough ingredients to make this many of all the items on the menu 
 const initial_supply_factor = 3;
-
-// borrowed from https://stackoverflow.com/a/15030117
-function flatten(arr) {
-    return arr.reduce(function (flat, toFlatten) {
-          return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
-    }, []);
-}
 
 async function drop_everything() {
     process.stdout.write("dropping database...")
@@ -90,7 +84,7 @@ async function db_save_ingredients() {
                 });
             })
         )
-    ).then(flatten).then((data)=>{
+    ).then(util.flatten).then((data)=>{
         console.log("done");
         return data;
     })

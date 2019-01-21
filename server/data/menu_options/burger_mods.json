@@ -4,7 +4,7 @@
     "options":[
         {
             "name":"Well Done",
-            "price":0,
+            "priceCents":0,
             "ingredients":[]
         }
     ]

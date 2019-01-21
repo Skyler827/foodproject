@@ -5,25 +5,25 @@
     "options":[
         {
             "name":"Ranch",
-            "price":"60",
+            "priceCents":"60",
             "ingredients":[
                 {"name":"ranch","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Blue Cheese",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"bluecheese","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"FF Rach",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"ffranch","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Lemon Vinagarette",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"lemonvinagarette","quantity":2,"unit":"oz"}
             ]

@@ -5,31 +5,31 @@
     "options":[
         {
             "name":"Ranch",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"ranch","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Blue Cheese",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"bluecheese","quantity":2,"unit":"oz"}
             ]
         }, {
             "name":"Celery",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"celery","quantity":4,"unit":"sticks"}
             ]
         }, {
             "name":"Carrots",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"carrot","quantity":6,"unit":"sticks"}
             ]
         }, {
             "name":"CC",
-            "price":60,
+            "priceCents":60,
             "ingredients":[
                 {"name":"celery","quantity":2,"unit":"sticks"},
                 {"name":"carrot","quantity":3,"unit":"sticks"}
