@@ -83,30 +83,35 @@ router.get("/:id", function(req, res) {
  * };
  */
 router.post("/:table", async function(req, res) {
-    const server = await User.findOne({name:'skyler'}).then();
+    const server = await User.findOne({username:'skyler'}).then();
     new Promise((resolve, reject) => {
         Order.findOne({tableNumber:req.params.table, open: true}, (err, order)=>{
             if (err) reject(err);
             else if (order) resolve(order);
             else {
-                Order.create([{
+                const newOrder = {
                     server:server._id,
                     tableNumber: req.params.table,
                     orderNumber: 1,
                     open: true,
                     openTime: new Date(),
-                }]).then(resolve).catch(reject);
+                };
+                Order.create(newOrder).then(resolve).catch(reject);
             }
         });
     }).then(async order => {
         let seatNumbers = new Set();
         for (let i=0; i<req.body.item_orders.length; i++) {
-            seatNumbers.add(req.body.item_orders[i]);
+            seatNumbers.add(req.body.item_orders[i].seat);
         }
         return new Promise((resolve, reject)=>{
             Seat.find({order:order._id}, (err, seats)=> {
                 if (err) reject(err);
-                else resolve(seats);
+                else if (seats.length == 0) {
+                    Promise.all(Array.from(seatNumbers.values(), seatNumber =>
+                        Seat.create({seatNumber:seatNumber,order: order})
+                    )).then(resolve);
+                } else resolve(seats);
             });
         });
     }).then(async (seats) => {
@@ -124,17 +129,21 @@ router.post("/:table", async function(req, res) {
                 const options = await Promise.all(
                     Object.keys(item_order.options).map(menu_id => (async () => {
                         const menu = await OptionMenu.findById(menu_id).then();
-                        return Promise.all(item_order.options[menu_id].map(()=>(async (option_id, idx)=>{
+                        return Promise.all(item_order.options[menu_id].map((option_id, idx)=>(async ()=>{
                             const item = await OptionItem.findById(option_id).then();
+                            if (!item) {
+                                return Promise.reject("failed to find option with id: "+option_id);
+                            }
                             const isFree = menu.free_options >= idx;
-                            return {
+                            const result = {
                                 option_menu_name: menu.name,
                                 option_item_name: item.name,
                                 optionPriceCents: isFree? 0 : item.priceCents
                             };
+                            return Promise.resolve(result);
                         })()));
-                    })().then(util.flatten))
-                );
+                    })())
+                ).then(util.flatten);
                 item_order.options = options;
                 item_order.seat = seat_arr[item_order.seat];
                 return item_order;
@@ -144,6 +153,7 @@ router.post("/:table", async function(req, res) {
     }).then(item_order_arr=> {
         res.json(item_order_arr);
     }).catch(err => {
+        console.log(err);
         res.status(500).json(err)
     });
 });
