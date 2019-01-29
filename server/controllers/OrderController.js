@@ -146,6 +146,8 @@ router.post("/:table", async function(req, res) {
                 ).then(util.flatten);
                 item_order.options = options;
                 item_order.seat = seat_arr[item_order.seat];
+                item_order.item = item_order.item_id;
+                delete item_order.item_id;
                 return item_order;
             })())
         );
