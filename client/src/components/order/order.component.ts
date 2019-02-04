@@ -28,15 +28,5 @@ export class OrderComponent implements OnInit {
             });
         });
     }
-    SelectCategory(category_id:String) {
-        this.ms.getItems(category_id).then((itemRecords)=>{
-            this.menu_items = itemRecords.map(i=>({name:i.name,id:i._id}));
-        });
-    }
-    SelectItem(itemId:String) {
-        this.ms.getItemData(itemId).then(itemRecord=>{
-            if (itemRecord.options.length > 0) {}
-        });
-    }
 
 }

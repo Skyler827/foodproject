@@ -1,16 +1,14 @@
-<div class="menu-pane pane half-screen">
-  <div class="category-pane pane quarter-screen">
-    <ul>
-      <li *ngFor="let category of categories" (click)="SelectCategory(category.id)">
-        {{category.name}}
-      </li>
-    </ul>
-  </div>
-  <div class="item-pane pane quarter-screen">
-    <ul>
-      <li *ngFor="let item of menu_items">
-        {{item.name}}
-      </li>
-    </ul>
-  </div>
+<div class="category-pane pane quarter-screen">
+  <ul>
+    <li *ngFor="let category of categories" (click)="SelectCategory(category.id)">
+      {{category.name}}
+    </li>
+  </ul>
+</div>
+<div class="item-pane pane quarter-screen">
+  <ul>
+    <li *ngFor="let item of menu_items">
+      {{item.name}}
+    </li>
+  </ul>
 </div>

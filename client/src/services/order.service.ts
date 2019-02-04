@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
     providedIn: 'root'
@@ -43,5 +44,10 @@ export class OrderService {
     orderItem(itemId:String, seatNumber:Number){
         // add an item to the current order
     }
-    submitDineIn
+    takeOrders():Observable<number> {
+        return new Observable((subscriber)=>{
+            subscriber.next
+        });
+    }
+    submitDineIn()
 }

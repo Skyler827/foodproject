@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 type ObjectID = String;
 type ItemType = {_id:String, name:String};
@@ -37,7 +38,7 @@ export class MenuService {
             );
         });
     }
-    getItems(categoryID:String): Promise<ItemList> {
+    getItems(categoryID:string): Promise<ItemList> {
         return new Promise((resolve, reject)=>{
             this.http.get(
                 `/api/categories/${categoryID}/items/`,
@@ -48,7 +49,7 @@ export class MenuService {
             );
         });
     }
-    getItemData(itemId:String): Promise<FullMenuItemRecord> {
+    getItemData(itemId:string): Promise<FullMenuItemRecord> {
         return new Promise((resolve, reject) => {
             this.http.get(`/api/items/${itemId}`, {observe:"response"}
             ).subscribe(
