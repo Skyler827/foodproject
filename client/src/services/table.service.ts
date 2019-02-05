@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class TableService {
 
     constructor(private http:HttpClient) { }
-    getTables(diningRoom) {
+    getTables(diningRoom: number) {
         return new Promise((resolve, reject) => {
             let url = "/api/tables";
             if (diningRoom) url += "?diningroom="+diningRoom; 

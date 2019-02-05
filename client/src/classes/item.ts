@@ -4,5 +4,5 @@ export class Item {
     name: string;
     priceCents: number;
     ingredients: Array<objectId>;
-    options: Array<objectId>;
+    optionsMenus: Array<objectId>;
 }
