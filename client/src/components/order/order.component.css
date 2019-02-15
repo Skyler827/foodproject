@@ -7,10 +7,14 @@
     text-align: left;
     vertical-align: top;
 }
+.table-number {
+    margin: 10px 0;
+}
 .pane {
     height: 100%;
     display: inline-block;
     box-sizing: border-box;
+    position: relative;
 }
 .order-pane {
     width: 40%;
@@ -24,6 +28,9 @@
 .category-pane {
     width: 30%;
     overflow: auto;
+}
+.seat {
+    margin: 10px;
 }
 .category-pane > ul {
     list-style: none;
@@ -43,4 +50,11 @@
     background-color: lightblue;
     padding: 20px;
     outline: 2px solid black;
+}
+.footer {
+    position:absolute;
+    bottom: 5px;
+}
+.footer span {
+    margin: 0 20px;
 }

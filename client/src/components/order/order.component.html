@@ -1,10 +1,18 @@
-<div class="order-pane pane half-screen">
-  <p>Table {{tableNum}}</p>
-  <div *ngFor="let seat_list of ordered_items_by_seat; let i=index">
-    <h3 *ngIf="i==0">For Table</h3>
-    <h3 *ngIf="i>0">Seat {{i}}</h3>
-    <div *ngFor="let item of seat_list" style="border:2px solid black;">
-      <p>{{item.name}}<span style="float:right">{{item.priceCents}}</span></p>
+<div class="order-pane pane">
+  <p class="table-number">Table {{tableNum}}</p>
+  <div *ngIf="order_items.length == 0">
+    <p>(No items have been ordered yet)</p>
+  </div>
+  <div *ngIf="order_items.length > 0">
+    <div class="seat" *ngFor="let seat_list of order_items; let i=index">
+      <h3 *ngIf="i==0">For Table</h3>
+      <h3 *ngIf="i>0">Seat {{i}}</h3>
+      <div *ngIf="!seat_list || seat_list.length == 0">
+        <p>(nothing for this seat)</p>
+      </div>
+      <div *ngFor="let item of seat_list">
+        <p>{{item.item.name}}<span style="float:right">{{item.totalPriceCents/100}}</span></p>
+      </div>
     </div>
   </div>
   <div class="footer">
@@ -13,6 +21,6 @@
     <span>Repeat</span>
   </div>
 </div>
-<div class="pane half-screen">
+<div class="pane menu-pane">
   <app-menu></app-menu>
 </div>
