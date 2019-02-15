@@ -6,7 +6,18 @@ const Order = mongoose.model("order");
 const Seat = mongoose.model("seat");
 const ItemOrder = mongoose.model("item_order");
 router.get("/", function(req, res) {
-    res.send("ok");
+    Order.find({}, (err, orders)=>{
+        if (err) res.status(500).json(err);
+        else {
+            let tables = orders.filter(order=>order.open)
+            .map(order => ({
+                table: order.tableNumber,
+                order_id: order._id
+            }));
+            tables.sort((a,b)=> +a.table - (+b.table));
+            res.json(tables);
+        }
+    });
 });
 router.get("/:table", async function(req, res) {
     const server = await User.findOne({username:'skyler'}).then();

@@ -63,6 +63,45 @@ router.get("/:id", function(req, res) {
         res.status(500).json(err);
     });
 });
+router.get("/bytable/:table", async function(req, res) {
+    new Promise((resolve, reject) =>
+        Order.find({
+            tableNumber: req.params.table,
+            open: true
+        }, (err, orders) => {
+            if (err) reject(err);
+            else resolve(orders)
+        })
+    ).then(orders =>
+        Promise.all(
+            orders.map(order =>
+                new Promise((resolve, reject) =>
+                    Seat.find({order:order._id},(err,seats) => {
+                        if (err) reject(err);
+                        else resolve(seats);
+                    })
+                ).then(seats =>
+                    Promise.all(
+                        seats.map(seat =>
+                            new Promise((resolve, reject) =>
+                                ItemOrder.find({seat:seat})
+                                .populate("item", "name")
+                                .select("-seat")
+                                .exec((err, itemOrders) => {
+                                    if (err) reject(err);
+                                    else resolve(itemOrders);
+                                })
+                            ).then(itemOrders => ({
+                                seatNumber:seat.seatNumber,
+                                itemOrders:itemOrders
+                    }))))
+                ).then(listOfListsOfOrdersBySeat => ({
+                    order: order,
+                    orders: listOfListsOfOrdersBySeat
+        }))))
+    ).then(result => res.json(result))
+    .catch(err => res.status(500).json(err));
+});
 /**
  * Submits an array of new item orders to the given order
  * 
