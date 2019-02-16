@@ -1,11 +1,11 @@
-<div class="category-pane pane quarter-screen">
+<div id="category-pane" class="pane">
   <ul>
-    <li *ngFor="let category of categories" (click)="SelectCategory(category.id)">
+    <li *ngFor="let category of categories; index as i" (click)="SelectCategory(i)" class="{{category.selected ? 'selected' : ''}}">
       {{category.name}}
     </li>
   </ul>
 </div>
-<div class="item-pane pane quarter-screen">
+<div id="item-pane" class="pane">
   <ul>
     <li>test item one</li>
     <li *ngFor="let item of menu_items">

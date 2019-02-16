@@ -1,0 +1,32 @@
+.pane {
+    display: inline-block;
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    outline: 1px solid black;
+    outline-offset: -4px;
+}
+#category-pane {
+    width: 30%;
+}
+ul {
+    padding-left: 0;
+}
+#category-pane li {
+    text-align: center;
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px;
+    display: block;
+    background-color: #9f9fb6;
+    border: 1px solid black;
+}
+#category-pane li.selected {
+    background-color: #0a0a35;
+    color: #eee;
+    font-weight: bold;
+}
+#item-pane {
+    width: 70%;
+    padding: 10px;
+}

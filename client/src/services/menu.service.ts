@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Category } from 'src/classes/category';
 
 type ObjectID = String;
 type ItemType = {_id:String, name:String};
@@ -27,11 +27,11 @@ type FullMenuItemRecord = {
 export class MenuService {
 
     constructor(private http:HttpClient) { }
-    getCategories(): Promise<ItemList> {
+    getCategories(): Promise<Array<Category>> {
         return new Promise((resolve, reject) => {
             this.http.get("/api/categories", {observe:"response"}).subscribe(
-                (httpResponse: HttpResponse<ItemList>) => {
-                    resolve(httpResponse.body as ItemList);
+                (httpResponse: HttpResponse<Array<Category>>) => {
+                    resolve(httpResponse.body);
                 }, err => {
                     reject(err);
                 }

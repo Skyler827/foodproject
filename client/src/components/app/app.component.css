@@ -17,7 +17,7 @@ a {
 }
 .outlet-container {
     height: 450px;
-    overflow: auto;
+    overflow: hidden;
 }
 .footer {
     position: absolute;
