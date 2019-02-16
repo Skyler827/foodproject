@@ -18,7 +18,9 @@ export class OrderComponent implements OnInit {
     menu_items: Array<{name:String, id:String}> = [];
     order_items: Array<Array<OrderWithItem>> = [];
     //State variable initialization:
-    constructor(private ar: ActivatedRoute, private ms:MenuService, private os:OrderService) { }
+    constructor(private ar: ActivatedRoute, private ms:MenuService, private os:OrderService) {
+        
+    }
     ngOnInit() {
         this.tableNum = this.ar.params['_value'].n;
         this.os.setTable(this.tableNum).then(()=>{

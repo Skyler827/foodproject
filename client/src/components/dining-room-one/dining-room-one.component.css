@@ -1,6 +1,8 @@
 .diningrooom {
     background-color: brown;
     height: 100%;
+    display: flex;
+    justify-content: center;
 }
 .column {
     display: inline-block;

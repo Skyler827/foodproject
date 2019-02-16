@@ -4,3 +4,14 @@
     max-width: 200px;
     margin: 0 auto;
 }
+h1 {
+    text-align: center;
+}
+label {
+    display: inline-block;
+    width: 100px;
+}
+form {
+    margin: 0 auto;
+    width: 400px;
+}

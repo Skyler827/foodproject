@@ -1,16 +1,26 @@
 .diningroom {
     background-color: brown;
     height: 100%;
+    display: flex;
+    justify-content: center;
 }
 .column {
-    display: inline-block;
+    display: inline-flex;
     width: 100px;
-    vertical-align: top;
+    align-self: flex-start;
+    height: 350px;
+    flex-direction: column;
+    justify-content: space-around;
 }
 .bar-column {
     display: inline-block;
-    width: 400px;
-    vertical-align: bottom;
+    width: 350px;
+    margin-bottom: 100px;
+    align-self: flex-end;
+}
+div#c240s.column {
+    height: 300px;
+    margin-top: 50px;
 }
 .table {
     background-color: white;

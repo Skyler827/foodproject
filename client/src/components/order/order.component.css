@@ -54,7 +54,12 @@
 .footer {
     position:absolute;
     bottom: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
 }
-.footer span {
-    margin: 0 20px;
+.footer .item-button {
+    background-color: rgb(144, 160, 182);
+    padding: 10px;
+    border: 2px outset darkgrey;
 }
