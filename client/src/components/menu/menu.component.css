@@ -30,3 +30,19 @@ ul {
     width: 70%;
     padding: 10px;
 }
+#item-pane ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+#item-pane li {
+    list-style-type: none;
+    background-color: #9f9fb6;
+    margin: 10px;
+    width: 100px;
+    border: 1px solid black;
+}
+#category-pane li.selected {
+    background-color: #0a0a35;
+    color: #eee;
+    font-weight: bold;
+}

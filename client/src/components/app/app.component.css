@@ -3,7 +3,7 @@
 }
 .container {
     position: relative;
-    height: 529px;
+    height: calc(100vh - 20px);
     outline: 5px solid black;
 }
 a {
@@ -16,7 +16,7 @@ a {
     font-weight: bold;
 }
 .outlet-container {
-    height: 450px;
+    height: calc(100vh - 100px);
     overflow: hidden;
 }
 .footer {

@@ -17,7 +17,8 @@ export class OrderComponent implements OnInit {
     selected_category: Number = 0;
     menu_items: Array<{name:String, id:String}> = [];
     order_items: Array<Array<OrderWithItem>> = [];
-    //State variable initialization:
+    itemIdToBeModified: string = null;
+
     constructor(private ar: ActivatedRoute, private ms:MenuService, private os:OrderService) {
         
     }
