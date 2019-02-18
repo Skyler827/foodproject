@@ -25,7 +25,7 @@ export type Ingredient = {
 export type FullMenuItemRecord = {
     options: Array<objectId>,
     _id: objectId,
-    name: String,
+    name: string,
     priceCents: number,
     ingredients: Array<Ingredient>,
     category: objectId,

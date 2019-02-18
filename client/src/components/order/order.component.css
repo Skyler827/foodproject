@@ -45,6 +45,9 @@
     padding: 20px;
     outline: 2px solid black;
 }
+.seat.selected {
+    outline: 2px solid orange;
+}
 .order-item {
     border-bottom: 1px solid black;
 }
@@ -53,8 +56,11 @@
     color: #eee;
     font-weight: bold;
 }
+.unordered-item {
+    color: blue;
+}
 .footer {
-    position:absolute;
+    position: absolute;
     bottom: 5px;
     display: flex;
     width: 100%;

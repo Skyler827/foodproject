@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
 import { CategoryWithSelected } from '../../classes/category';
-import { FullMenuItemRecord } from 'src/classes/item';
 import { OrderService } from 'src/services/order.service';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -33,8 +33,6 @@ export class MenuComponent implements OnInit {
   }
   selectItem(itemId:string) {
     this.ms.getItemData(itemId).then(itemRecord=>{
-      console.log(itemRecord);
-      console.log("yay!");
       this.os.orderItem(itemRecord);
     });
   }

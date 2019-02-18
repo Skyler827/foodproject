@@ -23,11 +23,19 @@ export class OrderWithItem extends BaseOrder{
         name: string
     };
 }
+export class OrderWithItemUI extends OrderWithItem {
+    selected: boolean;
+}
 
 export class OrderWithoutItem extends BaseOrder{
     seat: objectId;
     item: objectId;
 }
 export class OutstandingOrder extends BaseOrder {
-    seat: number
+    seat: number;
+    itemName: string
+    item: objectId;
+}
+export class OutstandingOrderUI extends OutstandingOrder {
+    selected: boolean;
 }

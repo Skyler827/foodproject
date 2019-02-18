@@ -4,7 +4,7 @@
     <p>(No items have been ordered yet)</p>
   </div>
   <div *ngIf="order_items.length > 0" class="main">
-    <div class="seat" *ngFor="let seat_list of order_items; let i=index">
+    <div class="{{os.currentSeat==i?'selected seat':'seat'}}" *ngFor="let seat_list of order_items; let i=index" (click)="selectSeat(i)">
       <h3 *ngIf="i==0">For Table</h3>
       <h3 *ngIf="i>0">Seat {{i}}</h3>
       <div *ngIf="!seat_list || seat_list.length == 0">
@@ -13,8 +13,14 @@
       <div *ngFor="let item of seat_list" class="order-item">
         <p>{{item.item.name}}<span style="float:right">{{item.totalPriceCents/100}}</span></p>
       </div>
+      <div *ngIf="unordered_items[i]">
+        <div *ngFor="let unordered_item of unordered_items[i]" class="order-item unordered-item">
+          item: {{unordered_item.itemName}}
+        </div>
+      </div>
     </div>
   </div>
+  {{unordered_items | json }}
   <div class="footer">
     <button class="item-button">Delete</button>
     <button class="item-button">Modify</button>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuService } from '../../services/menu.service';
 import { OrderService } from 'src/services/order.service';
-import { OrderWithItem } from 'src/classes/order';
+import { OrderWithItem, OrderWithItemUI, OutstandingOrder, OutstandingOrderUI } from 'src/classes/order';
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
@@ -16,7 +16,8 @@ export class OrderComponent implements OnInit {
     categories: Array<{name:String, id:String}> = [];
     selected_category: Number = 0;
     menu_items: Array<{name:String, id:String}> = [];
-    order_items: Array<Array<OrderWithItem>> = [];
+    order_items: Array<Array<OrderWithItemUI>> = [];
+    unordered_items: Array<Array<OutstandingOrderUI>> = [];
     itemIdToBeModified: string = null;
 
     constructor(private ar: ActivatedRoute, private ms:MenuService, private os:OrderService) {
@@ -25,16 +26,61 @@ export class OrderComponent implements OnInit {
     ngOnInit() {
         this.tableNum = this.ar.params['_value'].n;
         this.os.setTable(this.tableNum).then(()=>{
-            this.order_items = this.os.ordered_items_by_seat;
-        });
-        this.ms.getCategories().then(category_data => {
-            category_data.forEach(category_obj => {
-                this.categories.push({
-                    name:category_obj.name,
-                    id:category_obj._id
-                });
+            this.os.ordered_items_by_seat.subscribe(next=>{
+                this.order_items = next;
+            });
+            this.os.unordered_items_by_seat.subscribe(next=>{
+                this.unordered_items = next;
             });
         });
     }
+    selectSeat(i: number): void {
+        this.os.currentSeat = i;
+    }
+    selectOrderedItem(seatNumber: number, itemIndex: number): void {
+        this.os.ordered_items_by_seat.next(((x) => {
+            x[seatNumber][itemIndex].selected = !x[seatNumber][itemIndex].selected;
+            return x;
+        })(this.os.ordered_items_by_seat.getValue()));
+    }
+    selectUnOrderedItem(seatNumber: number, itemIndex: number): void {
+        this.os.unordered_items_by_seat.next((x=>{
+            x[seatNumber][itemIndex].selected = !x[seatNumber][itemIndex].selected;
+            return x;
+        })(this.os.unordered_items_by_seat.getValue()));
+    }
+    repeatSelected(): void {
+        this.os.ordered_items_by_seat.next((x=>{
+            for (let seat of x) {
+                let additionalOrders: Array<OrderWithItemUI> = [];
+                for (let order of seat) {
+                    if (order.selected) {
+                        order.selected = false;
+                        additionalOrders.push(order);
+                    }
+                }
+                additionalOrders.forEach(order => seat.push(order));
+            }
+            return x;
+        })(this.os.ordered_items_by_seat.getValue()));
 
+        this.os.unordered_items_by_seat.next((x=>{
+            for (let seat of x) {
+                let additionalOrders:Array<OutstandingOrderUI> = [];
+                for (let order of seat) {
+                    if (order.selected) {
+                        order.selected = false;
+                        additionalOrders.push(order);
+                    }
+                }
+                additionalOrders.forEach(order => seat.push(order));
+            }
+            return x;
+        })(this.os.unordered_items_by_seat.getValue()));
+    }
+    deleteSelected(): void {
+        this.os.unordered_items_by_seat.next((x=>
+            x.map(seat => seat.filter(order => !order.selected))
+        )(this.os.unordered_items_by_seat.getValue()));
+    }
 }
