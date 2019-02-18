@@ -1,40 +1,53 @@
-<div class="order-pane pane">
-  <p class="table-number">Table {{tableNum}}</p>
-  <div *ngIf="order_items.length == 0">
-    <p>(No items have been ordered yet)</p>
+<div class="top-bar">
+  <h3>Table {{tableNum}}</h3>
+  <div class="order-buttons">
+    <button>Dine In</button>
+    <button>Single</button>
+    <button>Take Out</button>
+    <button>No Make</button>
   </div>
-  <div *ngIf="order_items.length > 0" class="main">
-    <div class="{{os.currentSeat==i?'selected seat':'seat'}}" *ngFor="let seat_list of order_items; let i=index" (click)="selectSeat(i)">
-      <h3 *ngIf="i==0">For Table</h3>
-      <h3 *ngIf="i>0">Seat {{i}}</h3>
-      <div *ngIf="!seat_list || seat_list.length == 0">
-        <p>(nothing for this seat)</p>
-      </div>
-      <div *ngFor="let item of seat_list" class="order-item">
-        <p>{{item.item.name}}<span style="float:right">{{item.totalPriceCents/100}}</span></p>
-      </div>
-      <div *ngIf="unordered_items[i]">
-        <div *ngFor="let unordered_item of unordered_items[i]" class="order-item unordered-item">
-          item: {{unordered_item.itemName}}
+</div>
+<div class="container">
+  <div class="order-pane pane">
+    <div *ngIf="order_items.length > 0" class="main">
+      <div class="{{os.currentSeat==i?'selected seat':'seat'}}" 
+      *ngFor="let seat_list of order_items; let i=index" (click)="selectSeat(i)">
+        <h3 *ngIf="i==0">For Table</h3>
+        <h3 *ngIf="i>0">Seat {{i}}</h3>
+        <div *ngIf="!seat_list || seat_list.length == 0">
+          <p>(nothing for this seat)</p>
+        </div>
+        <div *ngFor="let item of seat_list; let j=index"
+        class="{{item.selected?'selected ':''}}order-item"
+        tabindex="0" (click)="selectOrderedItem(i,j)">
+          <p>{{item.item.name}}</p>
+          <p>&#36;{{item.totalPriceCents/100}}</p>
+        </div>
+        <div *ngIf="unordered_items[i]">
+          <div *ngFor="let unordered_item of unordered_items[i]; let j=index" 
+          class="{{unordered_item.selected?'selected ':''}}order-item unordered-item"
+          tabindex="0" (click)="selectUnorderedItem(i,j)">
+            <p>{{unordered_item.itemName}}</p>
+            <p>&#36;{{unordered_item.totalPriceCents/100}}</p>
+          </div>
         </div>
       </div>
     </div>
+    <div class="footer">
+      <button class="item-button" (click)="deleteSelected()">Delete</button>
+      <button class="item-button">Modify</button>
+      <button class="item-button" (click)="repeatSelected()">Repeat</button>
+    </div>
   </div>
-  {{unordered_items | json }}
-  <div class="footer">
-    <button class="item-button">Delete</button>
-    <button class="item-button">Modify</button>
-    <button class="item-button">Repeat</button>
+  <div class="pane menu-pane">
+    <app-menu></app-menu>
   </div>
-</div>
-<div class="pane menu-pane">
-  <app-menu></app-menu>
-</div>
-<!-- TODO: handle item options with this (currently disabled) modal: -->
-<div class="modal" *ngIf="false">
-  <p>hello</p>
-  <p>hello</p>
-  <p>hello</p>
-  <button>Ok</button>
-  <button>Cancel</button>
+  <!-- TODO: handle item options with this (currently disabled) modal: -->
+  <div class="modal" *ngIf="false">
+    <p>hello</p>
+    <p>hello</p>
+    <p>hello</p>
+    <button>Ok</button>
+    <button>Cancel</button>
+  </div>
 </div>

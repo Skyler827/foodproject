@@ -34,25 +34,46 @@ export class OrderComponent implements OnInit {
             });
         });
     }
+    ngOnDestroy() {
+        this.os.ordered_items_by_seat.next([]);
+        this.os.unordered_items_by_seat.next([]);
+    }
+    empty() {
+        return (this.order_items.filter(seat_list => seat_list.length > 0).length == 0
+        ) && (this.unordered_items.filter(seat_list=>seat_list.length > 0).length == 0);
+    }
     selectSeat(i: number): void {
         this.os.currentSeat = i;
     }
     selectOrderedItem(seatNumber: number, itemIndex: number): void {
+        console.log("got here");
         this.os.ordered_items_by_seat.next(((x) => {
             x[seatNumber][itemIndex].selected = !x[seatNumber][itemIndex].selected;
             return x;
         })(this.os.ordered_items_by_seat.getValue()));
     }
-    selectUnOrderedItem(seatNumber: number, itemIndex: number): void {
+    selectUnorderedItem(seatNumber: number, itemIndex: number): void {
         this.os.unordered_items_by_seat.next((x=>{
             x[seatNumber][itemIndex].selected = !x[seatNumber][itemIndex].selected;
             return x;
         })(this.os.unordered_items_by_seat.getValue()));
     }
     repeatSelected(): void {
-        this.os.ordered_items_by_seat.next((x=>{
-            for (let seat of x) {
-                let additionalOrders: Array<OrderWithItemUI> = [];
+        this.os.unordered_items_by_seat.next(((ordered, unordered)=>{
+            for (let i=0; i<ordered.length; i++) {
+                let seat = ordered[i];
+                let additionalOrders: Array<OutstandingOrderUI> = [];
+                for (let order of seat) {
+                    if (order.selected) {
+                        additionalOrders.push(Object.assign({
+                            itemName:order.item.name, item:order.item._id,seat:i
+                        }, order));
+                    }
+                }
+                additionalOrders.forEach(order => unordered[i].push(order));
+            }
+            for (let seat of unordered) {
+                let additionalOrders: Array<OutstandingOrderUI> = [];
                 for (let order of seat) {
                     if (order.selected) {
                         order.selected = false;
@@ -61,22 +82,8 @@ export class OrderComponent implements OnInit {
                 }
                 additionalOrders.forEach(order => seat.push(order));
             }
-            return x;
-        })(this.os.ordered_items_by_seat.getValue()));
-
-        this.os.unordered_items_by_seat.next((x=>{
-            for (let seat of x) {
-                let additionalOrders:Array<OutstandingOrderUI> = [];
-                for (let order of seat) {
-                    if (order.selected) {
-                        order.selected = false;
-                        additionalOrders.push(order);
-                    }
-                }
-                additionalOrders.forEach(order => seat.push(order));
-            }
-            return x;
-        })(this.os.unordered_items_by_seat.getValue()));
+            return unordered;
+        })(this.os.ordered_items_by_seat.getValue(), this.os.unordered_items_by_seat.getValue()));
     }
     deleteSelected(): void {
         this.os.unordered_items_by_seat.next((x=>

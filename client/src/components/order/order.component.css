@@ -7,6 +7,21 @@
     text-align: left;
     vertical-align: top;
 }
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.top-bar > * {
+    display: block;
+}
+.top-bar .order-buttons button {
+    margin: 10px;
+}
+.container {
+    position: relative;
+    height: calc(100% - 46px);
+}
 .table-number {
     margin: 10px 0;
 }
@@ -26,7 +41,6 @@
     /* display: flex; */
 }
 .main {
-    height: calc(100% - 80px);
     background-color: #eee;
     margin: 10px;
     overflow: auto;
@@ -50,6 +64,8 @@
 }
 .order-item {
     border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
 }
 .order-item.selected {
     background-color: #0a0a35;
@@ -58,6 +74,11 @@
 }
 .unordered-item {
     color: blue;
+}
+.order-item.unordered-item.selected {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
 }
 .footer {
     position: absolute;

@@ -10,8 +10,8 @@ type allSubmittedOrders = Array<Array<OrderWithItemUI>>;
     providedIn: 'root'
 })
 export class OrderService {
-    public ordered_items_by_seat: BehaviorSubject<allSubmittedOrders> = BehaviorSubject.create();
-    public unordered_items_by_seat: BehaviorSubject<allOutstandingOrders> = BehaviorSubject.create();
+    public ordered_items_by_seat: BehaviorSubject<allSubmittedOrders> = new BehaviorSubject([]);
+    public unordered_items_by_seat: BehaviorSubject<allOutstandingOrders> = new BehaviorSubject([]);
     currentSeat: number = 0;
     constructor(private http:HttpClient) {}
     setTable(tableNumber:Number): Promise<void> {
@@ -39,6 +39,8 @@ export class OrderService {
             selected: false
         }
         let ibs = this.unordered_items_by_seat;
+        console.log(ibs);
+        console.log(typeof ibs);
         let x = ibs.getValue();
         if (ibs.value[this.currentSeat]) {
             x[this.currentSeat].push(newOrder)
