@@ -68,7 +68,7 @@ async function create_categories(filenames) {
 
 async function db_save_ingredients() {
     process.stdout.write("reading ingredient data...");
-    const ingredients_path = path.resolve("data","ingredients");
+    const ingredients_path = path.resolve("src", "data","ingredients");
     const ingredient_filenames = fs.readdirSync(ingredients_path);
     const ingredients_list = await Promise.all(
         ingredient_filenames.map(
@@ -98,7 +98,7 @@ async function db_save_ingredients() {
 
 async function create_option_menus_and_items() {
     process.stdout.write("saving option menus and items...")
-    const menu_options_dir = path.resolve("data","menu_options");
+    const menu_options_dir = path.resolve("src", "data","menu_options");
     const menu_options_filenames = fs.readdirSync(menu_options_dir);
     return Promise.all(menu_options_filenames.map(filename=>
         new Promise((resolve, reject)=>
@@ -304,7 +304,7 @@ async function insert_test_order() {
 
 async function main(cb) {
     await drop_everything();
-    const menu_item_dir = path.resolve("data","menu_items")
+    const menu_item_dir = path.resolve("src", "data","menu_items");
     const menu_item_filenames = fs.readdirSync(menu_item_dir);
     const categories_name_to_id = await create_categories(menu_item_filenames);
     await db_save_ingredients();
