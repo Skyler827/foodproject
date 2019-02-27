@@ -11,9 +11,10 @@
     display: flex;
     justify-content: space-between;
     align-content: center;
+    background-color: #b0c4de
 }
-.top-bar > * {
-    display: block;
+.top-bar > h3 {
+    margin: auto 10px;
 }
 .top-bar .order-buttons button {
     margin: 10px;
@@ -60,7 +61,7 @@
     outline: 2px solid black;
 }
 .seat.selected {
-    outline: 2px solid orange;
+    background-color: rgb(255, 230, 0);
 }
 .order-item {
     border-bottom: 1px solid black;

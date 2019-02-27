@@ -20,9 +20,7 @@ export class OrderComponent implements OnInit {
     unordered_items: Array<Array<OutstandingOrderUI>> = [];
     itemIdToBeModified: string = null;
 
-    constructor(private ar: ActivatedRoute, private ms:MenuService, private os:OrderService) {
-        
-    }
+    constructor(private ar: ActivatedRoute, private os:OrderService) {}
     ngOnInit() {
         this.tableNum = this.ar.params['_value'].n;
         this.os.setTable(this.tableNum).then(()=>{
@@ -65,9 +63,12 @@ export class OrderComponent implements OnInit {
                 let additionalOrders: Array<OutstandingOrderUI> = [];
                 for (let order of seat) {
                     if (order.selected) {
-                        additionalOrders.push(Object.assign({
-                            itemName:order.item.name, item:order.item._id,seat:i
-                        }, order));
+                        additionalOrders.push(Object.assign({}, order, {
+                            itemName: order.item.name,
+                            item: order.item._id,
+                            seat: i,
+                            selected: false
+                        }));
                     }
                 }
                 additionalOrders.forEach(order => unordered[i].push(order));
@@ -84,10 +85,16 @@ export class OrderComponent implements OnInit {
             }
             return unordered;
         })(this.os.ordered_items_by_seat.getValue(), this.os.unordered_items_by_seat.getValue()));
+        this.os.ordered_items_by_seat.next((allOrders=>
+            allOrders.map(seat=>
+                seat.map(order=>
+                    Object.assign(order,{selected:false})))
+        )(this.os.ordered_items_by_seat.getValue()));
     }
     deleteSelected(): void {
         this.os.unordered_items_by_seat.next((x=>
             x.map(seat => seat.filter(order => !order.selected))
         )(this.os.unordered_items_by_seat.getValue()));
     }
+    dineIn() {}
 }

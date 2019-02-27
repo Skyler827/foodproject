@@ -13,8 +13,10 @@ export class OrderService {
     public ordered_items_by_seat: BehaviorSubject<allSubmittedOrders> = new BehaviorSubject([]);
     public unordered_items_by_seat: BehaviorSubject<allOutstandingOrders> = new BehaviorSubject([]);
     currentSeat: number = 0;
+    currentTable: number = 0;
     constructor(private http:HttpClient) {}
-    setTable(tableNumber:Number): Promise<void> {
+    setTable(tableNumber:number): Promise<void> {
+        this.currentTable = tableNumber;
         return new Promise((resolve, reject)=>
             this.http.get(`/api/tables/${tableNumber}`, {observe:"body"}).subscribe((body) => {
                 this.ordered_items_by_seat.next((body as Array<Array<OrderWithItem>>)
@@ -50,6 +52,8 @@ export class OrderService {
         ibs.next(x);
     }
     placeOrder():Promise<void> {
+        let orders:request_body = this.unordered_items_by_seat.getValue().reduce((prev, next)=>prev,[])
+        this.http.post(`/api/orders/${this.currentTable}`,);
         return Promise.resolve();
     }
 }
