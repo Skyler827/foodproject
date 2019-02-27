@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outDir": "./out",
+        "allowJs": true,
+        "target":"es5",
+        "noImplicitReturns": true,
+        "types": ["node"]
+    }, 
+    "include":[
+        "./src/**/*"
+    ]
+}
