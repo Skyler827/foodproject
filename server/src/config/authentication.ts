@@ -1,13 +1,15 @@
-const errors = require("./errors");
-const mongoose = require("mongoose");
+import { Application, Request, Response, NextFunction } from "express";
+
+import errors = require("./errors");
+import mongoose = require("mongoose");
 const User = mongoose.model("user");
 const Order = mongoose.model("order");
 
-function handleCategories(req,res,next) {
+function handleCategories(req: Request, res: Response, next: NextFunction) {
     if (req.method == "GET") return next();
     else res.status(405).send(errors.methodNotAllowed(req.method));
 }
-function handleItems(req, res, next) {
+function handleItems(req: Request, res: Response, next: NextFunction) {
     if (req.method == "GET")
         next();
     else if (req.session.userType == "manager")
@@ -16,7 +18,7 @@ function handleItems(req, res, next) {
         next();    
     else res.status(403).send(errors.forbidden);
 }
-function handleOrders(req, res, next) {
+function handleOrders(req: Request, res: Response, next: NextFunction) {
     if (req.session.userType == "manager") {
         next();
     } else if (["bartender","server","cashier"].indexOf(req.session.userType) > -1) {
@@ -35,11 +37,11 @@ function handleOrders(req, res, next) {
         // res.status(403).json(errors.forbidden);
     }
 }
-function handleTables(req, res, next) {
+function handleTables(req: Request, res: Response, next: NextFunction) {
     next();
 }
-let handleRequests = function(app) {
-    app.use((req,res,next) => {
+let handleRequests = function(app: Application) {
+    app.use((req: Request, res: Response, next: NextFunction) => {
         if (["GET","POST","PUT","DELETE"].indexOf(req.method) == -1)
         return res.status(405).send(errors.methodNotAllowed(req.method))
         const urlPath = req.url.split("/");
