@@ -4,8 +4,9 @@
         "allowJs": true,
         "target":"es5",
         "noImplicitReturns": true,
-        "types": ["node"]
-    }, 
+        "types": ["node"],
+        "experimentalDecorators": true
+    },
     "include":[
         "./src/**/*"
     ]
