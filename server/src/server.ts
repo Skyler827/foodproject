@@ -6,6 +6,7 @@ import path = require("path");
 import urls from "./config/urls";
 
 import {createConnection, Connection} from "typeorm";
+import { initialize } from "./config/initialize";
 
 const app = express();
 const port = 3000;
@@ -24,7 +25,8 @@ const sessionOptions = {
     saveUninitialized: true,
     resave: true
 };
-createConnection().then((connection: Connection) => {
+createConnection().then(async (connection: Connection) => {
+    await initialize();
     app.use(function(req, res, next) {
         console.log("in server.js: "+req.method+": "+req.hostname+req.url);
         next();
@@ -33,7 +35,7 @@ createConnection().then((connection: Connection) => {
     authentication(app);
     urls(app, staticDir, connection);
     // start server
-    app.listen(port, function() {        
+    app.listen(port, function() {
         console.log(`Example app listening on port ${port}`)
     });
 });
