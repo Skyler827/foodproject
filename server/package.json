@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "out/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node src/server.js"
+    "start": "rm -rf out && tsc && node out/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "mongoose": "^5.4.4",
     "pg": "^7.8.1",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.0.2",
     "typeorm": "^0.2.14",
     "typescript": "^3.3.3333"
   },

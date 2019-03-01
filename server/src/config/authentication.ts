@@ -1,9 +1,6 @@
 import { Application, Request, Response, NextFunction } from "express";
 
 import errors = require("./errors");
-import mongoose = require("mongoose");
-const User = mongoose.model("user");
-const Order = mongoose.model("order");
 
 function handleCategories(req: Request, res: Response, next: NextFunction) {
     if (req.method == "GET") return next();
@@ -22,16 +19,7 @@ function handleOrders(req: Request, res: Response, next: NextFunction) {
     if (req.session.userType == "manager") {
         next();
     } else if (["bartender","server","cashier"].indexOf(req.session.userType) > -1) {
-        if (req.url == "/api/orders" && req.method == "GET") next();
-        else Order.findById(req.params.id,(err,data)=>{
-            if (err) {
-                console.log(err);
-                res.status(500).json(err);
-            } else {
-                console.log(data);
-                next();
-            }
-        });
+        return next();
     } else {
         next();
         // res.status(403).json(errors.forbidden);

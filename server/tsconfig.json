@@ -5,7 +5,8 @@
         "target":"es5",
         "noImplicitReturns": true,
         "types": ["node"],
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "include":[
         "./src/**/*"

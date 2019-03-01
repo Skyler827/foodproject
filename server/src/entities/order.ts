@@ -1,7 +1,7 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import { Seat } from "./seat";
 import { Table } from "./table";
-import { Employee } from "./employee";
+import { User } from "./user";
 
 @Entity()
 export class Order extends BaseEntity{
@@ -14,6 +14,6 @@ export class Order extends BaseEntity{
     @OneToMany(type => Table, table=> table.orders)
     table: Table;
 
-    @ManyToOne(type => Employee, e => e.orders)
-    server: Employee;
+    @ManyToOne(type => User, e => e.orders)
+    server: User;
 }
