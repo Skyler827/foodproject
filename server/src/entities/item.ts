@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToMany, ManyToMany, JoinTable } from "typeorm";
+import { menuItem } from "../config/initialize";
 import { Category } from "./category";
 import { ItemOrder } from "./item_order";
-
+import { OptionMenu } from "./option_menu";
 @Entity()
 export class Item extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -14,5 +15,16 @@ export class Item extends BaseEntity {
     category: Category;
     
     @OneToMany(type => ItemOrder, itemOrder => itemOrder.item)
-    orders: ItemOrder[];
+    orders: Promise<ItemOrder[]>;
+
+    @ManyToMany(type => OptionMenu)
+    @JoinTable()
+    options: OptionMenu[];
+
+    static factory(record: menuItem, category: Category): Item {
+        const item = new Item();
+        item.name = record.name;
+        item.category = category;
+        return item;
+    }
 }

@@ -26,11 +26,12 @@ export class User extends BaseEntity {
     @OneToMany(type => Order, o => o.server)
     orders: Order[];
 
-    constructor(name: string, type: UserType, password: string) {
-        super();
-        this.name = name;
-        this.type = type;
-        this.pass_hash = User.hash(password || 'skyler');
+    static userFactory(name: string, password: string, type: UserType): User {
+        const u = new User();
+        u.name = name;
+        u.type = type;
+        u.pass_hash = User.hash(password);
+        return u;
     }
     static hash(password: string): string {
         const salt = bcrypt.genSaltSync();
