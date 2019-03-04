@@ -1,29 +1,55 @@
-import { getManager, EntityManager, getConnection, getRepository} from "typeorm";
-import { User, UserType} from  "../entities/user";
 import { readFileSync, readdirSync, readdir } from "fs";
 import { join } from "path";
+import { getManager, EntityManager, getConnection, getRepository, Repository} from "typeorm";
+
+import { menuItem } from "./menuItem";
+import { User, UserType} from  "../entities/user";
 import { Item } from "../entities/item";
 import { Category } from "../entities/category";
-import { menuItem } from "./menuItem";
+import { Option } from "../entities/option";
 
+type repoType = {
+    'user': Repository<User>,
+    'category': Repository<Category>,
+    'item': Repository<Item>,
+    'option': Repository<Option>
+};
 export async function initialize() {
-    await createFirstUser();
-    await initializeMenuItemsAndCategories();
-    await initializeOptions();
+    const repositories: repoType = {
+        'user': getRepository(User),
+        'category': getRepository(Category),
+        'item': getRepository(Item),
+        'option': getRepository(Option)
+    }
+    await dropEverything(repositories);
+    await createFirstUser(repositories.user);
+    await initializeMenuItemsAndCategories(repositories);
+    await initializeOptions(repositories);
     return Promise.resolve();
-    
 }
-async function createFirstUser() {
-    const manager: EntityManager = getManager()
-    const users:User[] = await manager.find(User);
-    users.forEach(u => manager.delete(User, u.id));
+async function dropEverything(repos: repoType) {
+    console.log("1");
+    let m = getManager();
+    console.log("2");
+    // order of items to delete
+    // ie: delete the entities with nothing refering to them first
+    let entities = [["item_"],["item", "user"], ["category"]];
+    console.log(Category.name);
+    entities.reduce((prevPromise:Promise<any>, entitySubList:string[]) => 
+        prevPromise.then(() => 
+            Promise.all(entitySubList.map(entity=>
+                m.query(`DELETE FROM public.${entity}`)
+            ))    
+        )
+    ,Promise.resolve());
+}
+async function createFirstUser(r: Repository<User>) {
     const u: User = User.userFactory('skyler', 'skyler', UserType.Server);
-    manager.save(u);
+    r.create(u);
 }
-async function initializeMenuItemsAndCategories() {
-    const connection = getConnection();
-    const categoryRepo = getRepository(Category);
-    const itemRepo = getRepository(Item);
+async function initializeMenuItemsAndCategories(repos: repoType) {
+    const categoryRepo = repos.category;
+    const itemRepo = repos.item;
     const menuItemsDir = join(__dirname, "..", "..", "data", "menu_items");
     const files = readdirSync(menuItemsDir);
     return await Promise.all(files.map(f => new Promise(async (resolve, reject) => {
@@ -54,4 +80,6 @@ async function initializeMenuItemsAndCategories() {
         console.error(e_1);
     });
 }
-async function initializeOptions() {}
+async function initializeOptions(repo: repoType) {
+
+}
