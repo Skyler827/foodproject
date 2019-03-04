@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, OneToMany, ManyToMany, JoinTable } from "typeorm";
-import { menuItem } from "../config/initialize";
+import { menuItem } from "../config/menuItem";
 import { Category } from "./category";
 import { ItemOrder } from "./item_order";
 import { OptionMenu } from "./option_menu";

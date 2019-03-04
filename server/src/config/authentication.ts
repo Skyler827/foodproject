@@ -9,16 +9,16 @@ function handleCategories(req: Request, res: Response, next: NextFunction) {
 function handleItems(req: Request, res: Response, next: NextFunction) {
     if (req.method == "GET")
         next();
-    else if (req.session.userType == "manager")
+    else if (req.session? req.session.userType == "manager": false)
         next();
-    else if (req.session.userType == "cook" && req.method == "PUT") 
+    else if (req.session? req.session.userType == "cook" && req.method == "PUT": false) 
         next();    
     else res.status(403).send(errors.forbidden);
 }
 function handleOrders(req: Request, res: Response, next: NextFunction) {
-    if (req.session.userType == "manager") {
+    if (req.session? req.session.userType == "manager": false) {
         next();
-    } else if (["bartender","server","cashier"].indexOf(req.session.userType) > -1) {
+    } else if (req.session? ["bartender","server","cashier"].indexOf(req.session.userType) > -1: false) {
         return next();
     } else {
         next();

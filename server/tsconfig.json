@@ -2,11 +2,17 @@
     "compilerOptions": {
         "outDir": "./out",
         "allowJs": true,
-        "target":"es5",
+        "target":"es2017",
+        "module": "commonjs",
+        "checkJs": true,
         "noImplicitReturns": true,
         "types": ["node"],
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true
     },
     "include":[
         "./src/**/*"
