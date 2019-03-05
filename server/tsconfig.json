@@ -11,7 +11,6 @@
         "emitDecoratorMetadata": true,
         "sourceMap": true,
         "esModuleInterop": true,
-        "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true
     },
     "include":[

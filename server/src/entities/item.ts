@@ -25,6 +25,7 @@ export class Item extends BaseEntity {
         const item = new Item();
         item.name = record.name;
         item.category = category;
+        item.options = [];
         return item;
     }
 }

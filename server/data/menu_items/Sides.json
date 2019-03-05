@@ -1,0 +1,17 @@
+[
+    {
+        "name":"Sd fries",
+        "priceCents": "349",
+        "ingredients": [
+            {"name":"fries", "quantity":1,"unit":"side"}
+        ],
+        "options": ["fry_mods"]
+    }, {
+        "name": "Sd Cheese Curds",
+        "priceCents": 549,
+        "ingredients": [
+            {"name":"cheesecurds","quantity":1,"unit":"side"}
+        ],
+        "options": []
+    }
+]
