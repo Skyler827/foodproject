@@ -1,53 +1,46 @@
 import { readFileSync, readdirSync, readdir } from "fs";
 import { join } from "path";
-import { getManager, EntityManager, getConnection, getRepository, Repository} from "typeorm";
+import { getManager, EntityManager, getConnection, getRepository, Repository, BaseEntity} from "typeorm";
 
-import { menuItem } from "./menuItem";
-import { User, UserType} from  "../entities/user";
-import { Item } from "../entities/item";
+import { menuItem } from "../def/menuItem";
+import { entityName, entities } from "../def/entityName";
+import { camelCaseToSnakeCase } from "../def/util";
 import { Category } from "../entities/category";
+import { Ingredient } from "../entities/ingredient";
+import { Item } from "../entities/item";
 import { Option } from "../entities/option";
+import { User, UserType} from  "../entities/user";
 
-type repoType = {
+type repoMap = {
     'user': Repository<User>,
     'category': Repository<Category>,
     'item': Repository<Item>,
     'option': Repository<Option>
 };
+
 export async function initialize() {
-    const repositories: repoType = {
+    const repositories: repoMap = {
         'user': getRepository(User),
         'category': getRepository(Category),
         'item': getRepository(Item),
         'option': getRepository(Option)
     }
-    await dropEverything(repositories);
+    await dropEverything();
     await createFirstUser(repositories.user);
     await initializeMenuItemsAndCategories(repositories);
     await initializeOptions(repositories);
     return Promise.resolve();
 }
-async function dropEverything(repos: repoType) {
-    console.log("1");
+async function dropEverything() {
     let m = getManager();
-    console.log("2");
-    // order of items to delete
-    // ie: delete the entities with nothing refering to them first
-    let entities = [["item_"],["item", "user"], ["category"]];
-    console.log(Category.name);
-    entities.reduce((prevPromise:Promise<any>, entitySubList:string[]) => 
-        prevPromise.then(() => 
-            Promise.all(entitySubList.map(entity=>
-                m.query(`DELETE FROM public.${entity}`)
-            ))    
-        )
-    ,Promise.resolve());
+    Promise.all(entities.map(entity =>
+        m.query(`TRUNCATE public.${camelCaseToSnakeCase(entity)} CASCADE`)));
 }
 async function createFirstUser(r: Repository<User>) {
     const u: User = User.userFactory('skyler', 'skyler', UserType.Server);
-    r.create(u);
+    return r.insert(u);
 }
-async function initializeMenuItemsAndCategories(repos: repoType) {
+async function initializeMenuItemsAndCategories(repos: repoMap) {
     const categoryRepo = repos.category;
     const itemRepo = repos.item;
     const menuItemsDir = join(__dirname, "..", "..", "data", "menu_items");
@@ -80,6 +73,6 @@ async function initializeMenuItemsAndCategories(repos: repoType) {
         console.error(e_1);
     });
 }
-async function initializeOptions(repo: repoType) {
+async function initializeOptions(repo: repoMap) {
 
 }
