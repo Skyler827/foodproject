@@ -4,7 +4,7 @@ import { Order } from "./order";
 @Entity()
 export class Table extends BaseEntity {
     @PrimaryColumn()
-    id: number;
+    number: number;
 
     @OneToMany(type => Order, o => o.table)
     orders: Order[];

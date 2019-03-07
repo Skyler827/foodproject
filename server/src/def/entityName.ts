@@ -5,7 +5,8 @@ export type entityName =
     'Ingredient' |
     'ItemOrder' |
     'Item' |
-    'KitchenOrder' | 
+    'KitchenOrder' |
+    'OptionOrder' | 
     'OptionMenu' |
     'Option' |
     'Order' |
@@ -18,7 +19,8 @@ export const entities = [
     'Ingredient',
     'ItemOrder',
     'Item',
-    'KitchenOrder' ,
+    'KitchenOrder',
+    'OptionOrder',
     'OptionMenu',
     'Option',
     'Order',

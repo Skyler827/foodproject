@@ -5,7 +5,7 @@ import bodyParser = require("body-parser");
 import path = require("path");
 import urls from "./config/urls";
 
-import {createConnection, Connection} from "typeorm";
+import { createConnection, Connection } from "typeorm";
 import { initialize } from "./config/initialize";
 
 const app = express();

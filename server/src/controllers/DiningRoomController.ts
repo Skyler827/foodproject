@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", async function(req, res) {
     const tables = await Table.find();
-    const diningRooms = tables.map(t => Math.floor(t.id/100));
+    const diningRooms = tables.map(t => Math.floor(t.number/100));
     const uniqueDR = [...new Set(diningRooms)];
     res.json(uniqueDR);
 });
@@ -18,7 +18,7 @@ router.get("/:number", async function(req, res) {
         relations: ["orders"]
     });
     res.json(tables.map(table => ({
-        id: table.id,
+        id: table.number,
         orders: table.orders.filter(o=>o.open)
     })));
 });

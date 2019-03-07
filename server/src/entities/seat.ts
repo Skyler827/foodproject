@@ -7,7 +7,7 @@ export class Seat extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column("integer")
     seatNumber: number;
     
     @OneToMany(type => ItemOrder, itemOrder => itemOrder.seat)

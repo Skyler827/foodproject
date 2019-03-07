@@ -8,10 +8,10 @@
         "noImplicitReturns": true,
         "types": ["node"],
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
         "sourceMap": true,
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true
+        "emitDecoratorMetadata":true,
+        "forceConsistentCasingInFileNames": true,
     },
     "include":[
         "./src/**/*"
