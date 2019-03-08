@@ -1,6 +1,6 @@
 import { Application, Request, Response, NextFunction } from "express";
 
-import errors = require("./errors");
+import * as errors from "./errors" ;
 
 function handleCategories(req: Request, res: Response, next: NextFunction) {
     if (req.method == "GET") return next();

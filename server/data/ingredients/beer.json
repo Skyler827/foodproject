@@ -1,103 +1,103 @@
 [
     {
-        "name":"Angry Orchard",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Angry Orchard",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units":{"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Budweiser",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Budweiser",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Bud Light",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Bud Light",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Bud Light Lime",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Bud Light Lime",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Coors",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Coors",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Coors Light",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Coors Light",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Michelob Ultra",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Michelob Ultra",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Miller Lite",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Miller Lite",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Amstel Light",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Amstel Light",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Corona Extra",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Corona Extra",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Corona Light",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Corona Light",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Dos Equis",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Dos Equis",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Dos Equis Amber",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Dos Equis Amber",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Heineken",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Heineken",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Pacifico",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Pacifico",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Peroni",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Peroni",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Sam Adams",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Sam Adams",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"samglass":22,"keg":3960}
     }, {
-        "name":"Guiness Stout",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Guiness Stout",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Blue Moon",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Blue Moon",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }, {
-        "name":"Fat Tire",
-        "bulkCost":100,
-        "bulkCostUnit":"keg",
+        "id":"Fat Tire",
+        "bulkCostCents":10000,
+        "bulkUnit":"keg",
         "units": {"oz":1,"reg":16,"tall":20,"keg":3960}
     }
 ]

@@ -1,4 +1,4 @@
-function errorHTML(errorCode, errorTitle, errorMessage) {
+function errorHTML(errorCode: number, errorTitle: string, errorMessage: string) {
     return `<!DOCTYPE HTML>
     <html>
     <head>
@@ -11,21 +11,20 @@ function errorHTML(errorCode, errorTitle, errorMessage) {
         <p>${errorMessage}</p>
     </body></html>`;
 }
-function errorJSON(errorCode, errorTitle, errorMessage) {
+function errorJSON(errorCode:number, errorTitle:string, errorMessage:string) {
     return {
         "errorCode": errorCode,
         "errorTitle":errorTitle,
         "errorMessage":errorMessage,
     };
 }
-module.exports.static = errorHTML("500", "Could Not Find Static Files",
+export const staticError = errorHTML(500, "Could Not Find Static Files",
     `Make sure you ran <code>npm install</code> and <code>ng build</code>
     (or <code>npm run-script ng build</code>)
     in the <code>client</code> directory.`);
-
-module.exports.methodNotAllowed = function(prohibitedVerb) {
-    return errorJSON("405", "Method Not Allowed",
+export const methodNotAllowed = function(prohibitedVerb: string) {
+    return errorJSON(405, "Method Not Allowed",
     `${prohibitedVerb} is not allowed at that URL.`);
 }
-module.exports.forbidden = errorJSON("403","Forbidden",
+export const forbidden = errorJSON(403,"Forbidden",
     `You do not have the necessary permission to do that.`);

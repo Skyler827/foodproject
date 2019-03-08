@@ -1,24 +1,24 @@
 [
     {
-        "name":"ranch",
-        "bulkCost":10,
-        "bulkCostUnit":"box",
+        "id":"ranch",
+        "bulkCostCents":1000,
+        "bulkUnit":"box",
         "units":{"oz":1,"bag":100,"box":2000}
 
     }, {
-        "name":"bluecheese",
-        "bulkCost":10,
-        "bulkCostUnit":"box",
+        "id":"bluecheese",
+        "bulkCostCents":1000,
+        "bulkUnit":"box",
         "units":{"oz":1,"bag":100,"box":2000}
     }, {
-        "name": "lemonvinagarette",
-        "bulkCost":10,
-        "bulkCostUnit":"box",
+        "id": "lemonvinagarette",
+        "bulkCostCents":1000,
+        "bulkUnit":"box",
         "units":{"oz":1,"bag":100,"box":2000}
     }, {
-        "name": "ffranch",
-        "bulkCost":10,
-        "bulkCostUnit":"box",
+        "id": "ffranch",
+        "bulkCostCents":1000,
+        "bulkUnit":"box",
         "units":{"oz":1,"bag":100,"box":2000}
     }
 ]

@@ -1,13 +1,13 @@
 [
     {
-        "name":"celery",
-        "bulkCost":100,
-        "bulkCostUnit":"package",
-        "units":{"stick":1,"package":1000}
+        "id":"celery",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
+        "units":{"cut stick":1, "bag": 200, "box":2000}
     }, {
-        "name":"carrot",
-        "bulkCost":100,
-        "bulkCostUnit":"package",
-        "units":{}
+        "id":"carrot",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
+        "units":{"cut stick":1, "bag": 200, "box":2000}
     }
 ]

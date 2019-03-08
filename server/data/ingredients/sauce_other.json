@@ -1,8 +1,8 @@
 [
     {
-        "name":"swranch",
-        "bulkCost":1,
-        "bulkCostUnit":"bag",
+        "id":"swranch",
+        "bulkCostCents":100,
+        "bulkUnit":"bag",
         "units":{"oz":1,"bag":100,"box":2000}
     }
 ]

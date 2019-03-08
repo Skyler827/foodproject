@@ -1,25 +1,20 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
 import { Ingredient } from "./ingredient";
-
-export enum UnitKind {
-    Mass,
-    Volume,
-}
 
 @Entity()
 export class Unit extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @ManyToOne(type => Ingredient, i => i.units, {primary:true})
+    ingredient: Ingredient;
 
-    @Column({type: "enum", enum: UnitKind, default: UnitKind.Mass})
-    kind: UnitKind;
+    @Column({primary:true, type: "numeric", precision: 20, scale: 4})
+    magnitude: number;
 
     @Column()
     name: string;
 
-    @Column()
-    magnitude: number;
-
-    @OneToMany(type => Ingredient, i => i.bulkUnit)
-    ingredientsBulk: Promise<Ingredient[]>;
+    toJson() { return {
+        name:this.name,
+        magnitude: this.magnitude,
+        ingredient: this.ingredient.id   
+    }}
 }

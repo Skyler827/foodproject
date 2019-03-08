@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
         "outDir": "./out",
-        "allowJs": true,
+        "allowJs": false,
         "target":"es2017",
         "module": "commonjs",
-        "checkJs": true,
+        // "checkJs": true,
         "noImplicitReturns": true,
         "types": ["node"],
         "experimentalDecorators": true,

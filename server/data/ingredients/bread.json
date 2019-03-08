@@ -1,8 +1,8 @@
 [
     {
-        "name":"flourtortilla",
-        "bulkCost":7,
-        "bulkCostUnit":"box",
+        "id":"flourtortilla",
+        "bulkCostCents":700,
+        "bulkUnit":"box",
         "units": {"tortilla":1,"bag":10,"box":80}
     }
 ]

@@ -1,18 +1,18 @@
 [
     {
-        "name":"mandarinorange",
-        "bulkCost":5,
-        "bulkCostUnit":"box",
+        "id":"mandarinorange",
+        "bulkCostCents":500,
+        "bulkUnit":"box",
         "units":{"slice":1,"orange":8,"box":200}
     }, {
-        "name":"orange",
-        "bulkCost": 8,
-        "bulkCostUnit":"box",
+        "id":"orange",
+        "bulkCostCents": 800,
+        "bulkUnit":"box",
         "units":{"slice":1,"orange":8,"box":200}
     }, {
-        "name":"strawberry",
-        "bulkCost": 8,
-        "bulkCostUnit":"box",
+        "id":"strawberry",
+        "bulkCostCents": 800,
+        "bulkUnit":"box",
         "units":{"slice":1,"single":8,"box":200}
     }
 ]

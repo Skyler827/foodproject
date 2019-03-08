@@ -1,43 +1,43 @@
 [
     {
-        "name":"pepsi",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"pepsi",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }, {
-        "name":"dietpepsi",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"dietpepsi",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }, {
-        "name":"mountaindew",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"mountaindew",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }, {
-        "name":"drpepper",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"drpepper",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }, {
-        "name":"gingerale",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"gingerale",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }, {
-        "name":"sierramist",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"sierramist",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }, {
-        "name":"rootbeer",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"rootbeer",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }, {
-        "name":"dietmountaindew",
-        "bulkCost":100,
-        "bulkCostUnit":"box",
+        "id":"dietmountaindew",
+        "bulkCostCents":10000,
+        "bulkUnit":"box",
         "units":{"oz":1,"box":1000}
     }
 ]

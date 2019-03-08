@@ -1,8 +1,8 @@
 [
     {
-        "name":"barsalt",
-        "bulkCost":2,
-        "bulkCostUnit":"bottle",
+        "id":"barsalt",
+        "bulkCostCents":200,
+        "bulkUnit":"bottle",
         "units":{"oz":1,"bottle":32}
     }
 ]

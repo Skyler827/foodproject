@@ -1,8 +1,8 @@
 [
     {
-        "name":"parmesiancheese",
-        "bulkCost":12,
-        "bulkCostUnit":"package",
+        "id":"parmesiancheese",
+        "bulkCostCents":1200,
+        "bulkUnit":"package",
         "units":{"shaving":0.01,"bag":1, "package":30}
     }
 ]

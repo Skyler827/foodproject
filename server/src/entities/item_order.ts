@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, Column, ManyToMany, JoinTable, PrimaryColumn, CreateDateColumn } from "typeorm";
+import { BaseEntity, Entity, OneToMany, ManyToOne, Column, CreateDateColumn } from "typeorm";
 import { Item } from "./item";
 import { Seat } from "./seat";
 import { KitchenOrder } from "./kitchen_order";

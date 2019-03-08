@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { Unit } from "./unit";
 
 @Entity()
@@ -6,19 +6,19 @@ export class Ingredient extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({nullable:true})
     name: string;
 
-    @Column("real")
+    @Column({type:"real", default:0})
     supplyInBulkUnits: number;
 
-    @ManyToMany(type => Unit)
-    @JoinTable()
+    @OneToMany(type => Unit, u => u.ingredient)
     units: Unit[];
     
-    @ManyToOne(type => Unit)
+    @OneToOne(type => Unit, {nullable:true})
+    @JoinColumn()
     bulkUnit: Unit;
 
-    @Column()
+    @Column({nullable:true})
     bulkUnitCostCents: number;
 }
