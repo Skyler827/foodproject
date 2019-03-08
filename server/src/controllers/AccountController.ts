@@ -17,8 +17,12 @@ router.get("/all", async (req, res) => {
  * get info on self
  */
 router.get("/me", async (req, res) => {
-    const u = await User.findOne({where:{id:req.session.id}});
-    res.json(u);
+    if (req.session) {
+        const u = await User.findOne({where:{id:req.session.id}});
+        res.json(u);
+    } else {
+        res.status(500).json({"error":"req.session was undefined"});
+    }
 });
 
 /**
@@ -44,7 +48,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res)=>{
     const u = await User.findOne({where: {name:req.body.username}})
     if (!u) return res.json("invalid credentials");
-    
+    if (!req.session) return res.json({"error":"req.session was undefined"});
     if (u.check(req.body.password)) {
         req.session.id = u.id.toString();
         return res.json(u);
@@ -57,8 +61,12 @@ router.post("/login", async (req, res)=>{
  * logout
  */
 router.post("/logout", async (req, res) => {
-    delete req.session.id;
-    res.json("user logged out");
+    if (req.session) {
+        delete req.session.id;
+        res.json("user logged out");
+    } else {
+        res.status(500).json({"error":"req.session was undefined"});
+    }
 });
 
 export { router };
