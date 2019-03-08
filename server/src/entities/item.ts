@@ -3,6 +3,7 @@ import { menuItem } from "../def/menuItem";
 import { Category } from "./category";
 import { ItemOrder } from "./item_order";
 import { OptionMenu } from "./option_menu";
+import { Option } from "./option";
 @Entity()
 export class Item extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -21,11 +22,13 @@ export class Item extends BaseEntity {
     @JoinTable()
     options: OptionMenu[];
 
-    static factory(record: menuItem, category: Category): Item {
+    static async factory(record: menuItem, category: Category): Promise<Item> {
         const item = new Item();
         item.name = record.name;
         item.category = category;
-        item.options = [];
+        item.options = await Promise.all(record.options.map(optionName =>
+            OptionMenu.findOneOrFail({where:[{name:optionName}]})
+        ));
         return item;
     }
 }

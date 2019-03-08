@@ -3,7 +3,7 @@ import { join } from "path";
 import { getManager, EntityManager, getConnection, getRepository, Repository, BaseEntity} from "typeorm";
 import { initializeLogger as logger } from "../config/loggerConfig";
 import { menuItem } from "../def/menuItem";
-import { entityName, entities } from "../def/entityName";
+import { entities } from "../def/entityName";
 import { camelCaseToSnakeCase } from "../def/util";
 import { Category } from "../entities/category";
 import { Ingredient } from "../entities/ingredient";
@@ -18,26 +18,25 @@ import { User, UserType} from  "../entities/user";
 import { KitchenOrder } from "../entities/kitchen_order";
 import { OptionOrder } from "../entities/option_order";
 import { Unit } from "../entities/unit";
-import { json } from "body-parser";
-import { isNullOrUndefined } from "util";
 
 
 export async function initialize() {
     try {
-        await dropEverything();
+        await truncateEverything();
         await createFirstUser();
         await createIngredients();
-        await initializeMenuItemsAndCategories();
         await initializeOptions();
+        await initializeMenuItemsAndCategories();
         await enterInitialOrder();
+        logger.info("Database initialization complete");
     } catch (err) {
         logger.warn(err);
     }
     return Promise.resolve();
 }
-async function dropEverything() {
-    let m = getManager();
-    logger.info("Dropping data...");
+async function truncateEverything() {
+    const m = getManager();
+    logger.info("Truncating data...");
     return Promise.all(entities.map(entity =>
         m.query(`TRUNCATE public.${camelCaseToSnakeCase(entity)} CASCADE`)))
         .then(()=>logger.info("previous data dropped"));
@@ -54,12 +53,12 @@ async function createIngredients() {
         units: {[unitname: string]: number}[]
     }[];
     const ingredientsDir = join(__dirname, "..", "..", "data", "ingredients");
-    const ingredientFiles:string[] = await new Promise((resolve, reject) =>
+    const ingredientFiles: string[] = await new Promise((resolve, reject) =>
         readdir(ingredientsDir, (err, files)=> err? reject(err) : resolve(files)));
     return Promise.all(ingredientFiles.map(f => new Promise(async (resolve, reject) => {
         const fullFileName = join(ingredientsDir, f);
         const ingredientsData: ingredientFileData = 
-        JSON.parse(await new Promise((resolve2, reject2)=>
+        JSON.parse(await new Promise((resolve2, reject2) =>
         readFile(fullFileName,{encoding:'utf8'},(err, data)=>err?reject2(err):resolve2(data))));
         Promise.all(ingredientsData.map(jsonI => new Promise((resolve3, reject3) => {
             const dbI = new Ingredient();
@@ -67,7 +66,7 @@ async function createIngredients() {
             dbI.bulkUnitCostCents = jsonI.bulkCostCents;
             Ingredient.insert(dbI).then(resolve3).catch(reject3);
         }).then(() => new Promise(async (resolve3, reject3) => {
-            const dbI = await Ingredient.findOneOrFail({where:[{name:jsonI.id}]});
+            const dbI = await Ingredient.findOneOrFail({where: [{name: jsonI.id}]});
             const handleUnits = (unitName: string): Promise<Unit> => new Promise(async (resolve4, reject4)=> {
                 const u = new Unit();
                 u.name = unitName;
@@ -97,53 +96,19 @@ async function createIngredients() {
         logger.info("all ingredients saved!");
     });
 }
-async function initializeMenuItemsAndCategories(): Promise<void> {
-    logger.info("Initializing Menu Items and Categories");
-    const menuItemsDir = join(__dirname, "..", "..", "data", "menu_items");
-    const files = readdirSync(menuItemsDir);
-    return Promise.all(files.map(f => new Promise(async (resolve, reject) => {
-        const fullFileName = join(menuItemsDir, f);
-        const items: menuItem[] = JSON.parse(readFileSync(fullFileName, { encoding: 'utf8' }));
-        const c = new Category();
-        c.name = f.slice(0, f.length - 5);
-        await c.save();
-        try {
-            Promise.all(items.map(item => new Promise(async (resolve2, reject2) => {
-                try {
-                    const i = Item.factory(item, c);
-                    await i.save();
-                    resolve2();
-                }
-                catch (e) {
-                    reject2(e);
-                }
-            }))).then(()=>{
-                logger.info("saved items from "+f);
-                resolve();
-            });
-        }
-        catch (reason) {
-            reject(reason);
-        }
-    }))).then(()=>{
-        logger.info("initializeMenuItemsAndCategories() complete");
-    }).catch(e_1 => {
-        logger.info("\n");
-        logger.warn(e_1);
-    });
-}
+
 async function initializeOptions() {
     type menu_options = {
-        "min_options":number,
-        "free_options":number,
-        "max_options":number,
+        "min_options": number,
+        "free_options": number,
+        "max_options": number,
         "options": {
-            "name":string,
-            "priceCents":number,
+            "name": string,
+            "priceCents": number,
             "ingredients": {
-                "name":string,
+                "name": string,
                 "quantity": number,
-                "unit":string
+                "unit": string
             }[]
         }[]
     };
@@ -156,7 +121,7 @@ async function initializeOptions() {
         const om = new OptionMenu();
         om.name = option_filename.substring(0, option_filename.length-5);
         const menuData: menu_options = await new Promise((resolve2, reject2) =>{
-            readFile(fullFileName,(err, data) => 
+            readFile(fullFileName, (err, data) => 
                 err? reject2(err) : resolve2(data));
         }).then(JSON.parse)
         .catch(reject);
@@ -168,8 +133,37 @@ async function initializeOptions() {
             dbRecord.menu = om;
             return dbRecord.save();
         })).then(resolve).catch(reject);
-    }))).then(()=>logger.info("options initialized"))
+    }))).then(() => logger.info("options initialized"))
     .catch(err => logger.warn(err));
+}
+async function initializeMenuItemsAndCategories(): Promise<void> {
+    logger.info("Initializing Menu Items and Categories");
+    const menuItemsDir = join(__dirname, "..", "..", "data", "menu_items");
+    const files = readdirSync(menuItemsDir);
+    return Promise.all(files.map(f => new Promise(async (resolve, reject) => {
+        const fullFileName = join(menuItemsDir, f);
+        const items: menuItem[] = JSON.parse(readFileSync(fullFileName, { encoding: 'utf8' }));
+        const c = new Category();
+        c.name = f.slice(0, f.length - 5);
+        await c.save();
+        try {
+            Promise.all(items.map(jsonItem => new Promise(async (resolve2) => {
+                const dbItem = await Item.factory(jsonItem, c);
+                await dbItem.save();
+                resolve2();
+            }))).then(()=>{
+                logger.info("saved items from "+f);
+                resolve();
+            });
+        }
+        catch (reason) {
+            reject(reason);
+        }
+    }))).then(()=>{
+        logger.info("initializeMenuItemsAndCategories() complete");
+    }).catch(e_1 => {
+        logger.warn(e_1);
+    });
 }
 async function enterInitialOrder() {
     logger.info("entering initial order");
@@ -208,7 +202,7 @@ async function enterInitialOrder() {
         io.item = item;
         io.kitchenOrder = ko;
         io.seat = s;
-        logger.info("about to save item order "+itemName);
+        logger.info("about to save item order " + itemName);
         return io.save();
     }));
     logger.info("initial order successfully entered!");

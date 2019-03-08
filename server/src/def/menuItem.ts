@@ -1,6 +1,10 @@
 export type menuItem = {
     name: string;
-    bulkCost: number;
-    bulkCostUnit: string;
-    units: {};
+    priceCents: number;
+    ingredients: {
+        "name":string;
+        "quantity":number;
+        "unit":string;
+    }[];
+    options: string[];
 };

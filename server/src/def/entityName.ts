@@ -14,7 +14,7 @@ export type entityName =
     'Table' |
     'Unit' |
     'User';
-export const entities = [
+export const entities:entityName[] = [
     'Category',
     'Ingredient',
     'ItemOrder',
