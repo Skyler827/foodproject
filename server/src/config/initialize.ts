@@ -83,18 +83,16 @@ async function createIngredients() {
                 resolve4(u);
             });
             const units = await Promise.all(Object.keys(jsonI.units).map(handleUnits));
-            dbI.units = units;
             dbI.bulkUnit = units.filter(u=> u.name == jsonI.bulkUnit)[0];
             await dbI.save().catch((err) => {
                 logger.error("error saving "+JSON.stringify(dbI.name), err);
                 reject3();
             });
             resolve3();
-        })).then(() => {
+        })))).then(() => {
             logger.info(`${f} complete!`);
             resolve();
         })
-        ))
     }))).then(()=>{
         logger.info("all ingredients saved!");
     });
