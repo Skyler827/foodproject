@@ -4,6 +4,7 @@ import { Category } from "./category";
 import { ItemOrder } from "./item_order";
 import { OptionMenu } from "./option_menu";
 import { Option } from "./option";
+import { Ingredient } from "./ingredient";
 @Entity()
 export class Item extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -15,6 +16,10 @@ export class Item extends BaseEntity {
     @ManyToOne(type => Category, category => category.items)
     category: Category;
     
+    @ManyToMany(type => Ingredient, i => i.items)
+    @JoinTable()
+    ingredients: Ingredient[];
+
     @OneToMany(type => ItemOrder, itemOrder => itemOrder.item)
     orders: Promise<ItemOrder[]>;
 
