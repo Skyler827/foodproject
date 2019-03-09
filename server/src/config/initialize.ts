@@ -3,7 +3,7 @@ import { join } from "path";
 import { getManager, EntityManager, getConnection, getRepository, Repository, BaseEntity} from "typeorm";
 import { initializeLogger as logger } from "../config/loggerConfig";
 import { menuItem } from "../def/menuItem";
-import { entities } from "../def/entityName";
+import { entities, entityName } from "../def/entityName";
 import { camelCaseToSnakeCase } from "../def/util";
 import { Category } from "../entities/category";
 import { Ingredient } from "../entities/ingredient";
@@ -37,9 +37,10 @@ export async function initialize() {
 async function truncateEverything() {
     const m = getManager();
     logger.info("Truncating data...");
-    return Promise.all(entities.map(entity =>
-        m.query(`TRUNCATE public.${camelCaseToSnakeCase(entity)} CASCADE`)))
-        .then(()=>logger.info("previous data dropped"));
+    return entities.reduce((prev: Promise<any>, curr: entityName) => 
+        prev.then(() => 
+            m.query(`TRUNCATE public.${camelCaseToSnakeCase(curr)} CASCADE`))
+    , Promise.resolve());
 }
 async function createFirstUser(): Promise<User> {
     return User.userFactory('skyler', 'skyler', UserType.Server).save();
@@ -177,6 +178,7 @@ async function enterInitialOrder() {
     await o.save();
     s.seatNumber = 1;
     s.order = o;
+    s.table = t;
     await s.save();
 
     const ko = new KitchenOrder();
