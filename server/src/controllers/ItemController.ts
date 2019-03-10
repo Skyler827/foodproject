@@ -1,23 +1,20 @@
 import * as express from 'express';
 import { Item } from "../entities/item";
-import { getRepository } from "typeorm"; 
-import { Category } from '../entities/category';
 const router = express.Router();
 
 router.get("/", async function (req, res) {
-    res.json(await Item.find());
+    Item.find({relations: ["category"]})
+    .then(items => res.json(items))
+    .catch(err => res.status(500).json(err));
 });
+
 router.get("/:id", async function(req, res) {
-    try {
-        const i = await Item.findOneOrFail({
-            where:[{id:req.params.id}],
-            relations:["category", "options"]
-        });
-        res.json(i);
-    } catch (reason) {
-        console.log("error: "+reason);
-        res.json(reason);
-    }
+    Item.findOneOrFail({
+        where:[{id:req.params.id}],
+        relations: ["category", "options", "ingredients"]
+    })
+    .then(item => res.json(item))
+    .catch(err => res.status(500).json(err));
 });
 
 export { router }
