@@ -3,8 +3,7 @@ import { menuItem } from "../def/menuItem";
 import { Category } from "./category";
 import { ItemOrder } from "./item_order";
 import { OptionMenu } from "./option_menu";
-import { Option } from "./option";
-import { Ingredient } from "./ingredient";
+import { ItemIngredientAmount } from "./item_ingredient_amount";
 @Entity()
 export class Item extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -16,9 +15,8 @@ export class Item extends BaseEntity {
     @ManyToOne(type => Category, category => category.items)
     category: Category;
     
-    @ManyToMany(type => Ingredient, i => i.items)
-    @JoinTable()
-    ingredients: Ingredient[];
+    @OneToMany(type => ItemIngredientAmount, iia => iia.ingredient)
+    ingredientAmounts: ItemIngredientAmount[];
 
     @OneToMany(type => ItemOrder, itemOrder => itemOrder.item)
     orders: Promise<ItemOrder[]>;
@@ -27,13 +25,4 @@ export class Item extends BaseEntity {
     @JoinTable()
     options: OptionMenu[];
 
-    static async factory(record: menuItem, category: Category): Promise<Item> {
-        const item = new Item();
-        item.name = record.name;
-        item.category = category;
-        item.options = await Promise.all(record.options.map(optionName =>
-            OptionMenu.findOneOrFail({where:[{name:optionName}]})
-        ));
-        return item;
-    }
 }

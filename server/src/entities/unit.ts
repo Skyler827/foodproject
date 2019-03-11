@@ -3,7 +3,7 @@ import { Ingredient } from "./ingredient";
 
 @Entity()
 export class Unit extends BaseEntity {
-    @ManyToOne(type => Ingredient, i => i.units, {primary:true})
+    @ManyToOne(type => Ingredient, i => i.units, {primary: true})
     ingredient: Ingredient;
 
     @Column({primary:true, type: "numeric", precision: 20, scale: 4})

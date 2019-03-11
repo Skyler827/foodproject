@@ -3,6 +3,7 @@ import { join } from "path";
 import { getManager, EntityManager, getConnection, getRepository, Repository, BaseEntity} from "typeorm";
 import { initializeLogger as logger } from "../config/loggerConfig";
 import { menuItem } from "../def/menuItem";
+import { itemIngredient } from "../def/itemIngredient";
 import { entities, entityName } from "../def/entityName";
 import { camelCaseToSnakeCase } from "../def/util";
 import { Category } from "../entities/category";
@@ -18,6 +19,7 @@ import { User, UserType} from  "../entities/user";
 import { KitchenOrder } from "../entities/kitchen_order";
 import { OptionOrder } from "../entities/option_order";
 import { Unit } from "../entities/unit";
+import { ItemIngredientAmount } from "../entities/item_ingredient_amount";
 
 
 export async function initialize() {
@@ -147,19 +149,33 @@ async function initializeMenuItemsAndCategories(): Promise<void> {
         const c = new Category();
         c.name = f.slice(0, f.length - 5);
         await c.save();
-        try {
-            Promise.all(items.map(jsonItem => new Promise(async (resolve2) => {
-                const dbItem = await Item.factory(jsonItem, c);
-                await dbItem.save();
-                resolve2();
-            }))).then(()=>{
-                logger.info("saved items from "+f);
-                resolve();
-            });
-        }
-        catch (reason) {
-            reject(reason);
-        }
+        Promise.all(items.map(jsonItem => new Promise(async (resolve2, reject2) => {
+            const dbItem = new Item();
+            dbItem.name = jsonItem.name;
+            dbItem.category = c;
+            await dbItem.save();
+            const handleIngredient = async (prev: Promise<any>, jsonIngredient: itemIngredient): Promise<any> => {
+                const dbIngredient = await Ingredient.findOneOrFail({where: [{name: jsonIngredient.name}]});
+                const unit = await Unit.findOneOrFail({where: {name: jsonIngredient.unit, ingredient: dbIngredient}});
+                const amount = jsonIngredient.quantity * unit.magnitude;
+                const ingredientAmount = new ItemIngredientAmount();
+                ingredientAmount.item = dbItem;
+                ingredientAmount.ingredient = dbIngredient;
+                ingredientAmount.quantity = amount;
+                return prev.then(() => ingredientAmount.save());
+            };
+            await jsonItem.ingredients.reduce(handleIngredient, Promise.resolve())
+            .catch(err => reject2(err))
+            .then(() => resolve2());
+            const options = await Promise.all(jsonItem.options.map(async optionName =>
+                await OptionMenu.findOneOrFail({where: {name: optionName}})))
+            .catch(err => reject2("invalid option menu names in "+jsonItem.name));
+            if (options) dbItem.options = options;
+            await dbItem.save();
+        }))).then(()=>{
+            logger.info("saved items from "+f);
+            resolve();
+        }).catch(err => reject(err));
     }))).then(()=>{
         logger.info("initializeMenuItemsAndCategories() complete");
     }).catch(e_1 => {

@@ -1,7 +1,8 @@
 import { BaseEntity, Entity, Column, ManyToOne, OneToMany, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
 import { OptionMenu } from "./option_menu";
 import { OptionOrder } from "./option_order";
-import { Ingredient } from "./ingredient";
+import { OptionIngredientAmount } from "./option_ingredient_amount";
+
 @Entity()
 export class Option extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -13,9 +14,8 @@ export class Option extends BaseEntity {
     @OneToMany(type => OptionOrder, oo => oo.option)
     orders: OptionOrder[];
 
-    @ManyToMany(type => Ingredient, i => i.options)
-    @JoinTable()
-    ingredients: Ingredient[];
+    @OneToMany(type => OptionIngredientAmount, oia => oia.option)
+    ingredientAmounts: OptionIngredientAmount[]
 
     @Column()
     name: string;

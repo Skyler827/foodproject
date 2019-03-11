@@ -2,6 +2,8 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne
 import { Unit } from "./unit";
 import { Option } from "./option";
 import { Item } from "./item";
+import { ItemIngredientAmount } from "./item_ingredient_amount";
+import { OptionIngredientAmount } from "./option_ingredient_amount";
 
 @Entity()
 export class Ingredient extends BaseEntity {
@@ -24,9 +26,9 @@ export class Ingredient extends BaseEntity {
     @Column({nullable:true})
     bulkUnitCostCents: number;
 
-    @ManyToMany(type => Option, o=> o.ingredients)
-    options: Option[];
+    @OneToMany(type => ItemIngredientAmount, iia => iia.item)
+    itemAmounts: Item[];
 
-    @ManyToMany(type => Item, i => i.ingredients)
-    items: Item[];
+    @OneToMany(type => OptionIngredientAmount, oia => oia.ingredient)
+    optionAmounts: OptionIngredientAmount[]
 }
