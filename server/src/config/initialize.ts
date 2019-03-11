@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync, readdir, readFile } from "fs";
-import { join } from "path";
+import { join, isAbsolute } from "path";
 import { getManager, EntityManager, getConnection, getRepository, Repository, BaseEntity} from "typeorm";
 import { initializeLogger as logger } from "../config/loggerConfig";
 import { menuItem } from "../def/menuItem";
@@ -20,6 +20,7 @@ import { KitchenOrder } from "../entities/kitchen_order";
 import { OptionOrder } from "../entities/option_order";
 import { Unit } from "../entities/unit";
 import { ItemIngredientAmount } from "../entities/item_ingredient_amount";
+import { OptionIngredientAmount } from "../entities/option_ingredient_amount";
 
 
 export async function initialize() {
@@ -101,39 +102,50 @@ async function createIngredients() {
 }
 
 async function initializeOptions() {
-    type menu_options = {
+    type IngredientRecord = { "name":string,"quantity": number,"unit": string };
+    type MenuOptions = {
         "min_options": number,
         "free_options": number,
         "max_options": number,
         "options": {
             "name": string,
             "priceCents": number,
-            "ingredients": {
-                "name": string,
-                "quantity": number,
-                "unit": string
-            }[]
+            "ingredients": IngredientRecord[]
         }[]
     };
     
     logger.info("Initializing options...");
     const optionsDirectory = join(__dirname,"..","..","data","menu_options");
     const menu_filenames = readdirSync(optionsDirectory);
-    return await Promise.all(menu_filenames.map(option_filename => new Promise(async (resolve, reject)=>{
+    return await Promise.all(menu_filenames.map(option_filename => new Promise(async (resolve, reject) => {
         const fullFileName = join(optionsDirectory, option_filename);
         const om = new OptionMenu();
         om.name = option_filename.substring(0, option_filename.length-5);
-        const menuData: menu_options = await new Promise((resolve2, reject2) =>{
-            readFile(fullFileName, (err, data) => 
+        const menuData: MenuOptions = await new Promise((resolve2, reject2) => {
+            readFile(fullFileName, (err, data) =>
                 err? reject2(err) : resolve2(data));
         }).then(JSON.parse)
         .catch(reject);
         await OptionMenu.insert(om);
-        Promise.all(menuData.options.map(jsonOption => {
+        Promise.all(menuData.options.map(async jsonOption => {
             const dbOption = new Option();
             dbOption.name = jsonOption.name;
             dbOption.priceCents = jsonOption.priceCents;
             dbOption.menu = om;
+            await dbOption.save();
+            await Promise.all(jsonOption.ingredients.map(ingredientRecord => new Promise(async (resolve3, reject3) => {
+                const oia = new OptionIngredientAmount();
+                const ingredient = await Ingredient.findOneOrFail({where: {name:ingredientRecord.name}})
+                .catch(reject3);
+                const unit = await Unit.findOneOrFail({where: {name: ingredientRecord.unit, ingredient: ingredient}})
+                .catch(reject3);
+                if (!ingredient || !unit) return;
+                oia.ingredient = ingredient;
+                oia.option = dbOption;
+                oia.quantity = ingredientRecord.quantity * unit.magnitude;
+                await oia.save();
+                resolve3();
+            })));
             return dbOption.save();
         })).then(resolve).catch(reject);
     }))).then(() => logger.info("options initialized"))
