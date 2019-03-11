@@ -11,7 +11,7 @@ router.get("/", async function (req, res) {
 router.get("/:id", async function(req, res) {
     Item.findOneOrFail({
         where:[{id:req.params.id}],
-        relations: ["category", "options", "ingredients"]
+        relations: ["category", "options", "ingredientAmounts"]
     })
     .then(item => res.json(item))
     .catch(err => res.status(500).json(err));
