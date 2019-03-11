@@ -129,12 +129,12 @@ async function initializeOptions() {
         }).then(JSON.parse)
         .catch(reject);
         await OptionMenu.insert(om);
-        Promise.all(menuData.options.map(fileRecord => {
-            const dbRecord = new Option();
-            dbRecord.name = fileRecord.name;
-            dbRecord.priceCents = fileRecord.priceCents;
-            dbRecord.menu = om;
-            return dbRecord.save();
+        Promise.all(menuData.options.map(jsonOption => {
+            const dbOption = new Option();
+            dbOption.name = jsonOption.name;
+            dbOption.priceCents = jsonOption.priceCents;
+            dbOption.menu = om;
+            return dbOption.save();
         })).then(resolve).catch(reject);
     }))).then(() => logger.info("options initialized"))
     .catch(err => logger.warn(err));
