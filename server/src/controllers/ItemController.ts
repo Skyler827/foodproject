@@ -1,8 +1,6 @@
 import * as express from 'express';
-import { getManager} from "typeorm";
+import { getConnection } from "typeorm";
 import { Item } from "../entities/item";
-import { ItemIngredientAmount } from '../entities/item_ingredient_amount';
-import { Ingredient } from '../entities/ingredient';
 const router = express.Router();
 
 router.get("/", async function (req, res) {
@@ -17,20 +15,18 @@ router.get("/:id", async function(req, res) {
         relations: ["category", "options", "ingredientAmounts"]
     }).then(async item => {
         try {
-            const x = await getManager()
-            .createQueryBuilder()
-            .from(ItemIngredientAmount, "iaa")
-            .innerJoinAndSelect(Ingredient, "ig", `"ig"."id" = "iia"."ingredientId"`)
-            .where(`"iia"."itemId"=:id`, {id:item.id})
-            .getMany();
+            const x = await getConnection()
+            .query(`SELECT 
+            iia.quantity, iia."ingredientId", ig.name
+            FROM item_ingredient_amount iia
+            JOIN ingredient ig ON ig.id = iia."ingredientId"
+            WHERE iia."itemId"=$1`, [item.id]);
             console.log(x);
-            console.log(typeof x);
+            return Object.assign(item, {ingredientAmounts: x})
         } catch (e) {
             console.log(e);
-        } finally {
             return item;
         }
-        // return Object.assign(item, {ingredientAmounts: x});
     })
     .then(item => res.json(item))
     .catch(err => res.status(500).json(err));
