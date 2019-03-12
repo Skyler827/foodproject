@@ -14,7 +14,7 @@ export class Ingredient extends BaseEntity {
     name: string;
 
     @Column({type:"real", default:0})
-    supplyInBulkUnits: number;
+    supplyInBaseUnits: number;
 
     @OneToMany(type => Unit, u => u.ingredient)
     units: Unit[];

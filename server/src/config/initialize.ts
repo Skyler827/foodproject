@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync, readdir, readFile } from "fs";
 import { join } from "path";
-import { getManager } from "typeorm";
+import { getManager, getConnection } from "typeorm";
 import { initializeLogger as logger } from "../config/loggerConfig";
 import { menuItem } from "../def/menuItem";
 import { itemIngredient } from "../def/itemIngredient";
@@ -40,8 +40,8 @@ export async function initialize() {
 async function truncateEverything() {
     const m = getManager();
     logger.info("Truncating data...");
-    return entities.reduce((prev: Promise<any>, curr: entityName) => 
-        prev.then(() => 
+    return entities.reduce((prev: Promise<any>, curr: entityName) =>
+        prev.then(() =>
             m.query(`TRUNCATE public.${camelCaseToSnakeCase(curr)} CASCADE`))
     , Promise.resolve());
 }
@@ -167,7 +167,8 @@ async function initializeMenuItemsAndCategories(): Promise<void> {
             dbItem.category = c;
             await dbItem.save();
             const handleIngredient = async (prev: Promise<any>, jsonIngredient: itemIngredient): Promise<any> => {
-                const dbIngredient = await Ingredient.findOneOrFail({where: [{name: jsonIngredient.name}]});
+                const dbIngredient = await Ingredient.findOneOrFail({where: [{name: jsonIngredient.name}]}).catch(reject);
+                if (!dbIngredient) return Promise.reject();
                 const unit = await Unit.findOneOrFail({where: {name: jsonIngredient.unit, ingredient: dbIngredient}});
                 const amount = jsonIngredient.quantity * unit.magnitude;
                 const ingredientAmount = new ItemIngredientAmount();
