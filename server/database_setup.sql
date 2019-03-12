@@ -1,3 +1,6 @@
+--this file is not executed by this app
+--it exists for you to copy and run if you need to setup the project
+
 CREATE DATABASE foodproject;
 SET password_encryption TO 'scram-sha-256';
 CREATE ROLE foodproject;
