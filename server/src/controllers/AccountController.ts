@@ -50,10 +50,12 @@ router.post("/login", async (req, res)=>{
     if (!u) return res.json("invalid credentials");
     if (!req.session) return res.json({"error":"req.session was undefined"});
     if (u.check(req.body.password)) {
-        req.session.id = u.id.toString();
-        return res.json(u);
+        req.session.userId = u.id.toString();
+        req.session.userType = u.type;
+        req.session.userName = u.name;
+        return res.json({"user": u, "message": "login succesful"});
     } else {
-        return res.json("invalid credentials");
+        return res.json({"message":"invalid credentials"});
     }
 });
 
@@ -62,7 +64,9 @@ router.post("/login", async (req, res)=>{
  */
 router.post("/logout", async (req, res) => {
     if (req.session) {
-        delete req.session.id;
+        delete req.session.userId;
+        delete req.session.userType;
+        delete req.session.userName;
         res.json("user logged out");
     } else {
         res.status(500).json({"error":"req.session was undefined"});

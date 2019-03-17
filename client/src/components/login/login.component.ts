@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
     loginButtonClick() {
-        this.ls.login(this.username, this.password).then((success) => {
+        this.ls.login(this.username, this.password).then(() => {
+            console.log("login succesful")
             this.router.navigateByUrl("/dining-1");
         }, (err) => {
             this.error = err.toString();

@@ -7,10 +7,10 @@ import { router as ItemController } from "../controllers/ItemController";
 import { router as DiningRoomController } from "../controllers/DiningRoomController";
 export default function(app: Application, staticDir: string, connection: Connection) {
     const controllers = {
-        'accounts': AccountController,
-        'categories': CategoryController,
-        'items':      ItemController,
-        'diningrooms':DiningRoomController,
+        'accounts':    AccountController,
+        'categories':  CategoryController,
+        'items':       ItemController,
+        'diningrooms': DiningRoomController,
         // 'ingredients':require(join("..","controllers","IngredientController")),
         // 'options':    require(join("..","controllers","OptionController")),
         // 'orders':     require(join("..","controllers","OrderController")),

@@ -10,7 +10,7 @@ import { OrderService } from 'src/services/order.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private ms:MenuService, private os:OrderService) { }
+  constructor(private ms: MenuService, private os: OrderService) { }
   selectedCategory: number = 0;
   categories: Array<CategoryWithSelected> = [];
   menu_items = [];
@@ -18,14 +18,14 @@ export class MenuComponent implements OnInit {
     this.ms.getCategories().then(categories => {
       this.categories = categories.map(category =>
         Object.assign({}, category, {selected:false}));
-        this.selectCategory(0);
+      this.selectCategory(0);
     });
   }
-  selectCategory(newIndex:number) {
-    let newSelection = this.categories[newIndex];
-    newSelection.selected = true;
+  selectCategory(newIndex: number) {
     this.categories[this.selectedCategory].selected = false;
     this.selectedCategory = newIndex;
+    let newSelection = this.categories[newIndex];
+    newSelection.selected = true;
     this.ms.getItems(newSelection._id).then((itemRecords)=>{
         this.menu_items = itemRecords.map(i=>({name:i.name,id:i._id}));
         console.log(this.menu_items);

@@ -15,13 +15,16 @@ export class LoginService {
     constructor(private http:HttpClient) {
     }
     login(username: String, password: String) {
+        console.log(username);
+        console.log(password);
         return new Promise((resolve, reject) => {
-            this.http.post("/login", {
+            this.http.post("/api/accounts/login", {
                 "username":username, "password":password
             }, {
-                observe:'response',
+                observe: 'response',
                 withCredentials: true
             }).subscribe(httpResponse => {
+                console.log(httpResponse.body);
                 if (httpResponse.body["message"] == "login succesful") {
                     this.loggedin = true;
                     let u = httpResponse.body["user"];
@@ -30,24 +33,25 @@ export class LoginService {
                         username: u.username,
                         userType: u.userType
                     };
-                    resolve("Login Succesful");
+                    resolve();
                 } else {
                     reject("Invalid Credentials");
                 }
-            }, (_) => { // error
+            }, (err) => { // error
+                console.log(err);
                 reject("something went wrong... :/");
             });
         });
     }
     async register(username: String, password: String, userType:String) {
         return new Promise((resolve, reject) => 
-            this.http.post("/register", {"username": username, "password":password, "userType":userType})
+            this.http.post("/api/accounts/register", {"username": username, "password":password, "userType":userType})
             .subscribe(resolve, reject)
         );
     }
     logOut() {
         return new Promise((resolve, reject) => {
-            this.http.post("/logout", {},{observe:"response"}).subscribe((httpResponse) => {
+            this.http.post("/api/accounts/logout", {},{observe:"response"}).subscribe((httpResponse) => {
                 if (httpResponse.status == 200) {
                     this.loggedin = false;
                     resolve(true);

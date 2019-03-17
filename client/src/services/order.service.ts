@@ -51,9 +51,9 @@ export class OrderService {
         }
         ibs.next(x);
     }
-    placeOrder():Promise<void> {
-        let orders:request_body = this.unordered_items_by_seat.getValue().reduce((prev, next)=>prev,[])
-        this.http.post(`/api/orders/${this.currentTable}`,);
-        return Promise.resolve();
-    }
+    // placeOrder():Promise<void> {
+    //     let orders: request_body = this.unordered_items_by_seat.getValue().reduce((prev, next)=>prev,[])
+    //     this.http.post(`/api/orders/${this.currentTable}`,);
+    //     return Promise.resolve();
+    // }
 }
