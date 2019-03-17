@@ -2,7 +2,7 @@
 *A point of sale/restaraunt item ordering and management system*
 ## Setup
 This web application is currently in development, but is intended to work across all platforms.
-1. Ensure that Node, npm, bash, and PostgreSQL are all installed
+1. Ensure that Node, npm, bash, and PostgreSQL are all installed (uses git bash on Windows)
 2. If on Windows, run the following command: 
 
         npm config set script-shell "C:\\Program Files (x86)\\git\\bin\\bash.exe"
