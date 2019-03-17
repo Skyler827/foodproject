@@ -2,7 +2,8 @@
 --it exists for you to copy and run if you need to setup the project
 
 CREATE DATABASE foodproject;
-SET password_encryption TO 'scram-sha-256';
+-- SET password_encryption TO 'scram-sha-256';
+-- ^causes setup to fail on windows
 CREATE ROLE foodproject;
 ALTER ROLE foodproject WITH LOGIN;
 ALTER ROLE foodproject WITH PASSWORD 'elrvjbenlrij';
