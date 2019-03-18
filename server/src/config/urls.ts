@@ -5,16 +5,17 @@ import { router as AccountController } from "../controllers/AccountController";
 import { router as CategoryController } from "../controllers/CategoryController";
 import { router as ItemController } from "../controllers/ItemController";
 import { router as DiningRoomController } from "../controllers/DiningRoomController";
+import { router as TableController } from "../controllers/TableController";
 export default function(app: Application, staticDir: string, connection: Connection) {
     const controllers = {
         'accounts':    AccountController,
         'categories':  CategoryController,
         'items':       ItemController,
         'diningrooms': DiningRoomController,
+        'tables':      TableController,
         // 'ingredients':require(join("..","controllers","IngredientController")),
         // 'options':    require(join("..","controllers","OptionController")),
         // 'orders':     require(join("..","controllers","OrderController")),
-        // 'tables':     require(join("..","controllers","TableController")),
         // 'users':      require(join("..","controllers","UserController")),
     };
     

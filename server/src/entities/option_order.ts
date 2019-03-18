@@ -1,4 +1,4 @@
-import { BaseEntity, ManyToOne, Column, Entity, PrimaryColumn } from "typeorm";
+import { BaseEntity, ManyToOne, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Min } from "class-validator";
 import { Option } from "./option";
 import { ItemOrder } from "./item_order";
@@ -6,6 +6,8 @@ import { foodStatus } from "../def/foodstatus";
 
 @Entity()
 export class OptionOrder extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @ManyToOne(type => Option, o => o.orders, {primary: true})
     option: Option;
