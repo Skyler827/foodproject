@@ -9,7 +9,8 @@
 </div>
 <div class="container">
   <div class="order-pane pane">
-    <div *ngIf="order_items.length > 0" class="main">
+    <div class="main"> 
+      <!-- *ngIf="order_items.length > 0"> -->
       <div class="{{os.currentSeat==i?'selected seat':'seat'}}" 
       *ngFor="let seat_list of order_items; let i=index" (click)="selectSeat(i)">
         <h3 *ngIf="i==0">For Table</h3>

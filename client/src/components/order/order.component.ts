@@ -65,7 +65,7 @@ export class OrderComponent implements OnInit {
                     if (order.selected) {
                         additionalOrders.push(Object.assign({}, order, {
                             itemName: order.item.name,
-                            item: order.item._id,
+                            item: order.item.id,
                             seat: i,
                             selected: false
                         }));

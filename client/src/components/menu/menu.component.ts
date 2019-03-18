@@ -29,8 +29,8 @@ export class MenuComponent implements OnInit {
         this.selectedCategory = newIndex;
         let newSelection = this.categories[newIndex];
         newSelection.selected = true;
-        this.ms.getItems(newSelection.id).then((itemRecords)=>{
-            this.menu_items = itemRecords.map(i=>({name: i.name, id: i._id}));
+        this.ms.getItems(newSelection.id).then((itemRecords) => {
+            this.menu_items = itemRecords.map(i => ({name: i.name, id: i.id}));
             console.log(this.menu_items);
         }).catch(err => {
             console.log("error in requesting a category:");
@@ -38,6 +38,9 @@ export class MenuComponent implements OnInit {
         });
     }
     selectItem(itemId: number) {
+        if (!itemId) {
+            console.log("itemId is undefined! bad stuff is happening because you clicked this!");
+        }
         this.ms.getItemData(itemId).then(itemRecord=>{
             this.os.orderItem(itemRecord);
         });

@@ -1,8 +1,27 @@
+export class FullTableRecord {
+    number: number;
+    seats: Array<{
+        id: number;
+        seatNumber: number;
+        itemOrders: Array<{
+            id: number
+            optionLine: string;
+            orderTime: string;
+            status: number;
+            item: {
+                id: number;
+                name: string;
+                priceCents: number;
+            },
+        }>;
+    }>;
+}
+
 class BaseOrder {
-    _id: number;
+    id: number;
     option_line: string;
     options: Array<{
-        _id: number,
+        id: number,
         option_menu_name: string,
         option_item_name: string
     }>;
@@ -17,7 +36,7 @@ class BaseOrder {
 export class OrderWithItem extends BaseOrder{
     seat: number;
     item: {
-        _id: number,
+        id: number,
         name: string
     };
 }
