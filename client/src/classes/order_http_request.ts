@@ -1,12 +1,11 @@
-import {objectId as ObjectId} from 'src/classes/objectId';
 type request_body = {
     "item_orders": Array<{
-        "item_id": ObjectId,
+        "item_id": number,
         "seat": number,
         "option_line": String,
-        "options": Map<ObjectId, Array<ObjectId>>,
+        "options": Map<number, Array<number>>,
         "ingredient_mods": Array<{
-            "ingredient_id": ObjectId,
+            "ingredient_id": number,
             "modification": String,
             "before": Boolean
         }>

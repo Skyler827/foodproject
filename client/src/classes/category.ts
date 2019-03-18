@@ -1,7 +1,6 @@
-import { objectId } from "./objectId";
 
 export class Category {
-    _id: objectId;
+    id: number;
     name: string;
 }
 export class CategoryWithSelected extends Category {

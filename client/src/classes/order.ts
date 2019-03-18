@@ -1,15 +1,13 @@
-import { objectId } from './objectId';
-
 class BaseOrder {
-    _id: objectId;
+    _id: number;
     option_line: string;
     options: Array<{
-        _id: objectId,
+        _id: number,
         option_menu_name: string,
         option_item_name: string
     }>;
     ingredient_modifiers: Array<{
-        ingredient_id: objectId,
+        ingredient_id: number,
         modification: string,
         before: boolean,
     }>;
@@ -17,9 +15,9 @@ class BaseOrder {
     totalPriceCents: number;
 }
 export class OrderWithItem extends BaseOrder{
-    seat: objectId;
+    seat: number;
     item: {
-        _id:objectId,
+        _id: number,
         name: string
     };
 }
@@ -28,14 +26,14 @@ export class OrderWithItemUI extends OrderWithItem {
 }
 
 export class OrderWithoutItem extends BaseOrder{
-    seat: objectId;
-    item: objectId;
+    seat: number;
+    item: number;
 }
 export class OutstandingOrder extends BaseOrder {
     seat: number;
     itemName: string
-    item: objectId;
+    item: number;
 }
 export class OutstandingOrderUI extends OutstandingOrder {
-    selected: boolean;
+    selected: boolean = false;
 }

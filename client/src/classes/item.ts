@@ -1,33 +1,32 @@
-import { objectId } from './objectId';
 export class MenuItem {
-    _id: objectId;
+    _id: number;
     name: string;
     priceCents: number;
     ingredients: Array<{
-        _id: objectId,
-        id: objectId,
+        _id: number,
+        id: number,
         name:string,
         quantity: number,
         unit: string
     }>;
-    optionsMenus: Array<objectId>;
+    optionsMenus: Array<number>;
 }
 
 export type ItemType = {_id:String, name:String};
 export type ItemList = Array<ItemType>
 export type Ingredient = {
-    _id: objectId,
+    _id: number,
     name: string,
     quantity: number,
     unit: String,
-    id: objectId
+    id: number
 };
 export type FullMenuItemRecord = {
-    options: Array<objectId>,
-    _id: objectId,
+    options: Array<number>,
+    _id: number,
     name: string,
     priceCents: number,
     ingredients: Array<Ingredient>,
-    category: objectId,
+    category: number,
     __v: number
 };
