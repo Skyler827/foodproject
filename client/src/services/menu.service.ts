@@ -12,6 +12,8 @@ export class MenuService {
         return new Promise((resolve, reject) => {
             this.http.get("/api/categories", {observe:"response"}).subscribe(
                 (httpResponse: HttpResponse<Array<Category>>) => {
+                    console.log("categories:");
+                    console.log(httpResponse.body);
                     resolve(httpResponse.body);
                 }, err => {
                     reject(err);
@@ -19,7 +21,7 @@ export class MenuService {
             );
         });
     }
-    getItems(categoryID: string): Promise<ItemList> {
+    getItems(categoryID: number): Promise<ItemList> {
         return new Promise((resolve, reject)=>{
             this.http.get(
                 `/api/categories/${categoryID}/items/`,
@@ -30,7 +32,7 @@ export class MenuService {
             );
         });
     }
-    getItemData(itemId: string): Promise<FullMenuItemRecord> {
+    getItemData(itemId: number): Promise<FullMenuItemRecord> {
         return new Promise((resolve, reject) => {
             this.http.get(`/api/items/${itemId}`, {observe:"response"}
             ).subscribe(
