@@ -29,5 +29,10 @@
         "bulkCostCents": 10000,
         "bulkUnit":"box",
         "units": {"ring":1,"side":10,"basket":25,"package":200,"box":1000}
+    }, {
+        "id":"wedges",
+        "bulkCostCents": 10000,
+        "bulkUnit":"box",
+        "units": {"wedge":1,"side":20,"basket":40, "box":1000}
     }
 ]

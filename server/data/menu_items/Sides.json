@@ -13,5 +13,11 @@
             {"name":"cheesecurds","quantity":1,"unit":"side"}
         ],
         "options": []
+    }, {
+        "name": "Basket Wedges",
+        "priceCents":579,
+        "ingredients": [
+            {"name":"wedges", "quantity":1,"unit":"side"}
+        ]        
     }
 ]
