@@ -11,6 +11,9 @@ export class Item extends BaseEntity {
 
     @Column()
     name: string;
+
+    @Column()
+    priceCents: number;
     
     @ManyToOne(type => Category, category => category.items)
     category: Category;

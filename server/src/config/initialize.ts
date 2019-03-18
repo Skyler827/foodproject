@@ -164,6 +164,7 @@ async function initializeMenuItemsAndCategories(): Promise<void> {
         Promise.all(items.map(jsonItem => new Promise(async (resolve2, reject2) => {
             const dbItem = new Item();
             dbItem.name = jsonItem.name;
+            dbItem.priceCents = jsonItem.priceCents;
             dbItem.category = c;
             await dbItem.save();
             const handleIngredient = async (prev: Promise<any>, jsonIngredient: itemIngredient): Promise<any> => {
