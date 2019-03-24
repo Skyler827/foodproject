@@ -17,7 +17,6 @@ a {
 }
 .outlet-container {
     height: calc(100vh - 100px);
-    overflow: hidden;
 }
 .footer {
     position: absolute;
@@ -25,7 +24,27 @@ a {
     padding: 10px;
     display: flex;
     width: 100%;
+    overflow-x: auto;
     justify-content: center;
     background-color: grey;
     box-sizing: border-box;
+}
+@media screen and (max-width:800px) {
+    .footer {
+        font-size: 2vw;
+        padding: 5px;
+    }
+    a {
+        padding: 5px;
+        margin: 5px;
+    }
+    .outlet-container {
+        height: calc(100vh - 75px);
+    }
+}
+@media screen and (max-width: 605px) {
+    .outlet-container {
+        height: calc(100vh - 110px);
+    }
+
 }
