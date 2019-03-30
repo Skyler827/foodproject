@@ -32,4 +32,4 @@ router.get("/:id", async function(req, res) {
     .catch(err => res.status(500).json(err));
 });
 
-export { router }
+export { router as ItemController }

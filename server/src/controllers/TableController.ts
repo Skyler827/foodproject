@@ -33,4 +33,4 @@ router.get("/:number", async function(req, res) {
     }
 });
 
-export { router }
+export { router as TableController }

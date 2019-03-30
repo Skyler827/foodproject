@@ -73,4 +73,4 @@ router.post("/logout", async (req, res) => {
     }
 });
 
-export { router };
+export { router as AccountController };

@@ -22,4 +22,4 @@ router.get("/:number", async function(req, res) {
         orders: table.orders.filter(o=>o.open)
     })));
 });
-export { router }
+export { router as DiningRoomController }

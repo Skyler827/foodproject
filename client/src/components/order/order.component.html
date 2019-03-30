@@ -16,7 +16,7 @@
       *ngFor="let seat_list of order_items; let i=index" (click)="selectSeat(i)">
         <h3 *ngIf="i==0">For Table</h3>
         <h3 *ngIf="i>0">Seat {{i}}</h3>
-        <div *ngIf="!seat_list || seat_list.length == 0">
+        <div *ngIf="(!seat_list || seat_list.length==0) && (!unordered_items[i] || unordered_items[i].length==0)">
           <p>(nothing for this seat)</p>
         </div>
         <div *ngFor="let item of seat_list; let j=index"

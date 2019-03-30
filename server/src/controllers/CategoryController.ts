@@ -27,4 +27,4 @@ router.get("/:id/items", async function(req, res) {
     }
 });
 
-export { router }
+export { router as CategoryController }

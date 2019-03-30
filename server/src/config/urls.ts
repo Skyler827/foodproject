@@ -1,22 +1,24 @@
 import { join } from "path";
 import { Application } from "express";
 import { Connection } from "typeorm";
-import { router as AccountController } from "../controllers/AccountController";
-import { router as CategoryController } from "../controllers/CategoryController";
-import { router as ItemController } from "../controllers/ItemController";
-import { router as DiningRoomController } from "../controllers/DiningRoomController";
-import { router as TableController } from "../controllers/TableController";
-export default function(app: Application, staticDir: string, connection: Connection) {
+import { AccountController } from "../controllers/AccountController";
+import { CategoryController } from "../controllers/CategoryController";
+import { ItemController } from "../controllers/ItemController";
+import { DiningRoomController } from "../controllers/DiningRoomController";
+import { TableController } from "../controllers/TableController";
+import { OrderController } from "../controllers/OrderController";
+import { IngredientController } from "../controllers/IngredientController";
+
+export default function(app: Application, staticDir: string) {
     const controllers = {
         'accounts':    AccountController,
         'categories':  CategoryController,
         'items':       ItemController,
         'diningrooms': DiningRoomController,
         'tables':      TableController,
-        // 'ingredients':require(join("..","controllers","IngredientController")),
+        'orders':      OrderController,
+        'ingredients': IngredientController,
         // 'options':    require(join("..","controllers","OptionController")),
-        // 'orders':     require(join("..","controllers","OrderController")),
-        // 'users':      require(join("..","controllers","UserController")),
     };
     
     for (let key in controllers) {
