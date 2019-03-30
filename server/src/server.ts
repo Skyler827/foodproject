@@ -33,7 +33,7 @@ createConnection().then(async (connection: Connection) => {
     });
     app.use(session(sessionOptions));
     authentication(app);
-    urls(app, staticDir, connection);
+    urls(app, staticDir);
     // start server
     app.listen(port, function() {
         console.log(`Example app listening on port ${port}`)

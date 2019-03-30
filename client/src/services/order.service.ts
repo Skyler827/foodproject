@@ -70,8 +70,12 @@ export class OrderService {
         uibs.next(x);
     }
     async placeOrder():Promise<void> {
-        let orders: request_body = this.unordered_items_by_seat.getValue().reduce((prev, next)=>prev,[])
-        this.http.post(`/api/orders/${this.currentTable}`,);
+        console.log(this.unordered_items_by_seat.getValue());
+        this.http.post(`/api/orders/${this.currentTable}`,this.unordered_items_by_seat.getValue(),{
+            observe:"body"
+        }).subscribe(o=>{
+            console.log(o);
+        });
         return Promise.resolve();
     }
 }

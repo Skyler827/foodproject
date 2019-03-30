@@ -96,5 +96,16 @@ export class OrderComponent implements OnInit {
             x.map(seat => seat.filter(order => !order.selected))
         )(this.os.unordered_items_by_seat.getValue()));
     }
-    dineIn() {}
+    async dineIn(): Promise<void> {
+        this.os.placeOrder();
+    }
+    async singleApp(): Promise<void> {
+        this.os.placeOrder();
+    }
+    async takeOut(): Promise<void> {
+        this.os.placeOrder();
+    }
+    async noMake(): Promise<void> {
+        this.os.placeOrder();
+    }
 }
