@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MenuService } from '../../services/menu.service';
 import { OrderService } from 'src/services/order.service';
-import { OrderWithItem, OrderWithItemUI, OutstandingOrder, OutstandingOrderUI } from 'src/classes/order';
+import { OrderWithItemUI, OutstandingOrderUI } from 'src/classes/order';
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
@@ -44,10 +43,9 @@ export class OrderComponent implements OnInit {
         this.os.currentSeat = i;
     }
     selectOrderedItem(seatNumber: number, itemIndex: number): void {
-        console.log("got here");
-        this.os.ordered_items_by_seat.next(((x) => {
-            x[seatNumber][itemIndex].selected = !x[seatNumber][itemIndex].selected;
-            return x;
+        this.os.ordered_items_by_seat.next(((orders) => {
+            orders[seatNumber][itemIndex].selected = !orders[seatNumber][itemIndex].selected;
+            return orders;
         })(this.os.ordered_items_by_seat.getValue()));
     }
     selectUnorderedItem(seatNumber: number, itemIndex: number): void {
@@ -95,6 +93,9 @@ export class OrderComponent implements OnInit {
         this.os.unordered_items_by_seat.next((x=>
             x.map(seat => seat.filter(order => !order.selected))
         )(this.os.unordered_items_by_seat.getValue()));
+    }
+    async greenOk(): Promise<void> {
+        this.os.placeOrder();
     }
     async dineIn(): Promise<void> {
         this.os.placeOrder();

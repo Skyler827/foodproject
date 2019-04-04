@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OrderWithItem, OutstandingOrder, OrderWithItemUI, OutstandingOrderUI } from 'src/classes/order';
+import { OrderWithItemUI, OutstandingOrderUI, NewOrderResponse } from 'src/classes/order';
 import { FullMenuItemRecord } from 'src/classes/item';
 import { FullTableRecord } from "src/classes/order";
 import { BehaviorSubject } from 'rxjs';
@@ -40,12 +40,15 @@ export class OrderService {
                         }
                     }
                 }
+                for (let i=0; i<=maxSeatNumber; i++) {
+                    if (!submittedOrders[i]) submittedOrders[i] = [];
+                }
                 this.ordered_items_by_seat.next(submittedOrders);
                 resolve(null);
             }, error=> reject(error))
         );
     }
-    orderItem(item: FullMenuItemRecord):void {
+    orderItem(item: FullMenuItemRecord): void {
         let newOrder = {
             id: item.id,
             item: item.id,
@@ -58,24 +61,38 @@ export class OrderService {
             ingredient_modifiers: [],
             selected: false
         }
-        let uibs = this.unordered_items_by_seat;
-        console.log(uibs);
-        console.log(typeof uibs);
-        const x = uibs.getValue();
-        if (uibs.value[this.currentSeat]) {
-            x[this.currentSeat].push(newOrder)
+        const uibs = this.unordered_items_by_seat.getValue();
+        if (uibs[this.currentSeat]) {
+            uibs[this.currentSeat].push(newOrder)
         } else {
-            x[this.currentSeat] = [newOrder];            
+            uibs[this.currentSeat] = [newOrder];
         }
-        uibs.next(x);
+        this.unordered_items_by_seat.next(uibs);
     }
-    async placeOrder():Promise<void> {
+    async placeOrder() {
         console.log(this.unordered_items_by_seat.getValue());
-        this.http.post(`/api/orders/${this.currentTable}`,this.unordered_items_by_seat.getValue(),{
+        let newOrders: Array<Array<NewOrderResponse>> = await this.http.post(`/api/orders/${this.currentTable}`,this.unordered_items_by_seat.getValue(),{
             observe:"body"
-        }).subscribe(o=>{
-            console.log(o);
-        });
-        return Promise.resolve();
+        }).toPromise() as Array<Array<NewOrderResponse>>;
+        console.log(newOrders);
+        this.unordered_items_by_seat.next([]);
+        let orders = this.ordered_items_by_seat.getValue();
+        for (let seatList of newOrders) {
+            for (let o of seatList) {
+                orders[o.seat.seatNumber].push({
+                    selected:false,
+                    seat: o.seat.seatNumber,
+                    id: o.id,
+                    item: o.item,
+                    option_line: o.optionLine,
+                    options: [],
+                    ingredient_modifiers: [],
+                    basePriceCents: o.item.priceCents,
+                    totalPriceCents: o.item.priceCents
+                });
+            }
+        }
+        this.ordered_items_by_seat.next(orders);
+        return 0;
     }
 }

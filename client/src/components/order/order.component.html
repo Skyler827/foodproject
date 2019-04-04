@@ -1,6 +1,6 @@
 <div class="top-bar">
   <h3>Table {{tableNum}}</h3>
-  <button class="ok">OK</button>
+  <button (click)="greenOk()" class="ok">OK</button>
   <div class="order-buttons">
     <button (click)="dineIn()">Dine In</button>
     <button (click)="singleApp()">Single</button>
@@ -34,6 +34,7 @@
           </div>
         </div>
       </div>
+      <div *ngIf=""></div>
     </div>
     <div class="footer">
       <button class="item-button" (click)="deleteSelected()">Delete</button>

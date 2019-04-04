@@ -56,3 +56,19 @@ export class OutstandingOrder extends BaseOrder {
 export class OutstandingOrderUI extends OutstandingOrder {
     selected: boolean = false;
 }
+export class NewOrderResponse {
+    id: number;
+    item: {
+        id: number;
+        name: string;
+        priceCents: number;
+    };
+    kitchenOrder: {
+        id: number;
+        openTime: string;
+    }
+    optionLine: string;
+    orderTime: string;
+    seat: { id: number; seatNumber: number; };
+    status: number;
+}
