@@ -16,37 +16,45 @@ export class OrderService {
     currentSeat: number = 0;
     currentTable: number = 0;
     constructor(private http:HttpClient) {}
-    setTable(tableNumber:number): Promise<void> {
+    async setTable(tableNumber:number): Promise<void> {
         this.currentTable = tableNumber;
-        return new Promise((resolve, reject) =>
-            this.http.get(`/api/tables/${tableNumber}`, {observe:"body"}).subscribe((body: FullTableRecord) => {
-                const maxSeatNumber = body.seats.reduce(
-                    (max: number, curr) => curr.seatNumber > max? curr.seatNumber : max, 0);
-                const submittedOrders: Array<Array<OrderWithItemUI>> = new Array(maxSeatNumber + 1);
-                for (let seat of body.seats) {
-                    submittedOrders[seat.seatNumber] = new Array(seat.itemOrders.length);
-                    for (let i=0; i< seat.itemOrders.length; i++) {
-                        const order = seat.itemOrders[i];
-                        submittedOrders[seat.seatNumber][i] = {
-                            id: order.id,
-                            option_line: order.optionLine,
-                            selected: false,
-                            seat: seat.seatNumber,
-                            item: order.item,
-                            basePriceCents: order.item.priceCents,
-                            totalPriceCents: order.item.priceCents,
-                            options: [],
-                            ingredient_modifiers: []
-                        }
-                    }
+        let ordersBySeat: FullTableRecord = await new Promise<FullTableRecord>(async (resolve, reject) => {
+            console.log("no orders on table yet, carry on...");
+            this.http.get(`/api/tables/${tableNumber}`)
+            .subscribe(_body=>{resolve(null)}, err=>{
+                if (err instanceof TypeError) {
+                    console.log("type handled correctly");
+                } else {
+                    console.log(typeof err);
+                    console.log(err);
                 }
-                for (let i=0; i<=maxSeatNumber; i++) {
-                    if (!submittedOrders[i]) submittedOrders[i] = [];
-                }
-                this.ordered_items_by_seat.next(submittedOrders);
                 resolve(null);
-            }, error=> reject(error))
-        );
+            },() => console.log("http request cpomplete"));
+        });
+        const maxSeatNumber = ordersBySeat? ordersBySeat.seats.reduce(
+            (max: number, curr) => curr.seatNumber > max? curr.seatNumber : max, 0) : -1;
+        const submittedOrders: Array<Array<OrderWithItemUI>> = new Array(maxSeatNumber + 1);
+        for (let seatOrders of ordersBySeat ? ordersBySeat.seats : []) {
+            submittedOrders[seatOrders.seatNumber] = new Array(seatOrders.itemOrders.length);
+            for (let i=0; i< seatOrders.itemOrders.length; i++) {
+                const order = seatOrders.itemOrders[i];
+                submittedOrders[seatOrders.seatNumber][i] = {
+                    id: order.id,
+                    option_line: order.optionLine,
+                    selected: false,
+                    seat: seatOrders.seatNumber,
+                    item: order.item,
+                    basePriceCents: order.item.priceCents,
+                    totalPriceCents: order.item.priceCents,
+                    options: [],
+                    ingredient_modifiers: []
+                }
+            }
+        }
+        for (let i=0; i<=maxSeatNumber; i++) {
+            if (!submittedOrders[i]) submittedOrders[i] = [];
+        }
+        this.ordered_items_by_seat.next(submittedOrders);
     }
     orderItem(item: FullMenuItemRecord): void {
         let newOrder = {

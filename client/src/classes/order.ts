@@ -1,4 +1,4 @@
-export class FullTableRecord {
+export interface FullTableRecord {
     number: number;
     seats: Array<{
         id: number;
@@ -17,7 +17,7 @@ export class FullTableRecord {
     }>;
 }
 
-class BaseOrder {
+interface BaseOrder {
     id: number;
     option_line: string;
     options: Array<{
@@ -33,30 +33,39 @@ class BaseOrder {
     basePriceCents: number;
     totalPriceCents: number;
 }
-export class OrderWithItem extends BaseOrder{
+export interface OrderWithItem extends BaseOrder{
     seat: number;
     item: {
         id: number,
         name: string
     };
 }
-export class OrderWithItemUI extends OrderWithItem {
+export interface OrderWithItemUI extends OrderWithItem {
     selected: boolean;
 }
 
-export class OrderWithoutItem extends BaseOrder{
+export interface OrderWithoutItem extends BaseOrder{
     seat: number;
     item: number;
 }
-export class OutstandingOrder extends BaseOrder {
+export interface OutstandingOrder extends BaseOrder {
     seat: number;
     itemName: string
     item: number;
 }
-export class OutstandingOrderUI extends OutstandingOrder {
+export class OutstandingOrderUI implements OutstandingOrder {
+    seat: number;
+    itemName: string;
+    item: number;
+    id: number;
+    option_line: string;
+    options: { id: number; option_menu_name: string; option_item_name: string; }[];
+    ingredient_modifiers: { ingredient_id: number; modification: string; before: boolean; }[];
+    basePriceCents: number;
+    totalPriceCents: number;
     selected: boolean = false;
 }
-export class NewOrderResponse {
+export interface NewOrderResponse {
     id: number;
     item: {
         id: number;
