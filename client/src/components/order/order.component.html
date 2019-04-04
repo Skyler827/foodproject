@@ -35,6 +35,7 @@
         </div>
       </div>
       <div *ngIf="order_items.length == 0">there are no orders</div>
+      <button (click)="addSeat()">Add Seat</button>
     </div>
     <div class="footer">
       <button class="item-button" (click)="deleteSelected()">Delete</button>

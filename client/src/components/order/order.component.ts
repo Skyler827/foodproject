@@ -109,4 +109,10 @@ export class OrderComponent implements OnInit {
     async noMake(): Promise<void> {
         this.os.placeOrder();
     }
+    async addSeat(): Promise<void> {
+        this.os.ordered_items_by_seat.next(((orders) => {
+            orders.push([]);
+            return orders;
+        })(this.os.ordered_items_by_seat.getValue()));
+    }
 }
