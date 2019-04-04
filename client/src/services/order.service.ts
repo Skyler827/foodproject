@@ -21,7 +21,7 @@ export class OrderService {
         let ordersBySeat: FullTableRecord = await new Promise<FullTableRecord>(async (resolve, reject) => {
             console.log("no orders on table yet, carry on...");
             this.http.get(`/api/tables/${tableNumber}`)
-            .subscribe(_body=>{resolve(null)}, err=>{
+            .subscribe(body=>{resolve(body as FullTableRecord)}, err=>{
                 if (err instanceof TypeError) {
                     console.log("type handled correctly");
                 } else {
