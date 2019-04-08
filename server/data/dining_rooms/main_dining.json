@@ -1,0 +1,16 @@
+{
+    "rows": [
+        {
+            "startNumber": 111,
+            "endNumber": 114,
+            "width": "30px",
+            "height": "18px",
+            "margin": "5px",
+            "direction":"down",
+            "angleClockWise": 0,
+            "curvature": 0,
+            "shape": "square",
+            "border-radius": 0
+        }
+    ]
+}
