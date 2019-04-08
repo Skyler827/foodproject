@@ -12,21 +12,23 @@ router.post("/:tableNum", async function(req, res) {
     try {
         let table: Table;
         let order: Order;
-        let kitchenOrder = new KitchenOrder();
+        let kitchenOrder = await new KitchenOrder().save();
         let lookupTable = await Table.findOne({where:{number: req.params.tableNum}});
         let lookupOrder = lookupTable ? await Order.findOne({where:{table: lookupTable, open: true}}): undefined;
-        await kitchenOrder.save();
-        if (!lookupTable) {
-            table = new Table();
-            table.number = +req.params.tableNum;
-            await table.save();
-        } else {
+        if (lookupTable) {
             table = lookupTable;
-        }
-        if (!lookupOrder) {
-            order = new Order();
         } else {
+            let t = new Table();
+            t.number = +req.params.tableNum;
+            table = await t.save();
+        }
+        if (lookupOrder) {
             order = lookupOrder;
+        } else {
+            let o = new Order();
+            o.table = table;
+            o.open = true;
+            order = await o.save();
         }
         order.table = table;
 
