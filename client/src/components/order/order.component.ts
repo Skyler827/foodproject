@@ -29,6 +29,8 @@ export class OrderComponent implements OnInit {
             this.os.unordered_items_by_seat.subscribe(next=>{
                 this.unordered_items = next;
             });
+            this.os.ordered_items_by_seat.next([[],[]]);
+            this.selectSeat(1);
         });
     }
     ngOnDestroy() {
