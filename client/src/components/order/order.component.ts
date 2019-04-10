@@ -30,8 +30,8 @@ export class OrderComponent implements OnInit {
                 this.unordered_items = next;
             });
             this.selectSeat(1);
-            if (this.os.unordered_items_by_seat.getValue().length == 0) {
-                this.os.unordered_items_by_seat.next([[],[]]);
+            if (this.os.ordered_items_by_seat.getValue().length == 0) {
+                this.os.ordered_items_by_seat.next([[],[]]);
             }
         });
     }
