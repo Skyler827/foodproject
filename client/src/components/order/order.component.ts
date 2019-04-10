@@ -11,7 +11,6 @@ export class OrderComponent implements OnInit {
     
     //State variable declarations:
     tableNum: number = 0;
-    currentCategory = "Drinks";
     categories: Array<{name:String, id:String}> = [];
     selected_category: Number = 0;
     menu_items: Array<{name:String, id:String}> = [];

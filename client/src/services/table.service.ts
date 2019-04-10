@@ -6,27 +6,24 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class TableService {
 
+    tables = [];
     constructor(private http:HttpClient) { }
-    getTables(diningRoom: number) {
+    getDiningRoom(diningRoom: number) {
         return new Promise((resolve, reject) => {
-            let url = "/api/tables";
-            if (diningRoom) url += "?diningroom="+diningRoom; 
+            const url = diningRoom ? 
+                "/api/diningrooms/":
+                "/api/tables";
             this.http.get(url, {
                 observe:"response",
                 headers: new HttpHeaders({"Accept":"Application/JSON"})
             }).subscribe(response => {
-                if (response.status == 200) 
+                if (response.status == 200) {
+                    console.log(response.body);
                     resolve(response.body);
-                else reject(response.body);
+                } else reject(response.body);
             }, error => {
                 reject(error);
             });
         });
-    }
-    getDiningRoom1() {
-        return this.getTables(1);
-    }
-    getDiningRoom2() {
-        return this.getTables(2);
     }
 }
