@@ -1,12 +1,14 @@
 import { readFileSync, readdirSync, readdir, readFile } from "fs";
 import { join } from "path";
-import { getManager, getConnection } from "typeorm";
+import { getManager } from "typeorm";
 import { initializeLogger as logger } from "../config/loggerConfig";
 import { menuItem } from "../def/menuItem";
 import { itemIngredient } from "../def/itemIngredient";
+import { DiningRoomData, isDrData } from "../def/diningRoomData";
 import { entities, entityName } from "../def/entityName";
 import { camelCaseToSnakeCase } from "../def/util";
 import { Category } from "../entities/category";
+import { DiningRoom } from "../entities/dining_room";
 import { Ingredient } from "../entities/ingredient";
 import { ItemOrder } from "../entities/item_order";
 import { Item } from "../entities/item";
@@ -30,6 +32,7 @@ export async function initialize() {
         await createIngredients();
         await initializeOptions();
         await initializeMenuItemsAndCategories();
+        await initializeDiningRooms();
         await enterInitialOrder();
         logger.info("Database initialization complete");
     } catch (err) {
@@ -195,6 +198,37 @@ async function initializeMenuItemsAndCategories(): Promise<void> {
     }).catch(e_1 => {
         logger.warn(e_1);
     });
+}
+async function initializeDiningRooms() {
+    logger.info("initializing DiningRooms");
+    const diningRoomsDir = join(__dirname, "..", "..", "data", "dining_rooms");
+    const files = readdirSync(diningRoomsDir);
+    return Promise.all(files.map(fileName => new Promise<void>(async (resolve, reject) => {
+        const fullFileName = join(diningRoomsDir, fileName);
+        const drData: DiningRoomData = JSON.parse(readFileSync(fullFileName, {encoding: 'utf-8'}));
+        if (!isDrData(drData)) return reject({"msg":"invalid data","data":drData});
+        const sorted = drData.tables.sort((a,b) => a.number-b.number);
+        const newDR = new DiningRoom();
+        newDR.name = drData.name;
+        newDR.length = drData.length;
+        newDR.width = drData.width;
+        newDR.tables = await Promise.all(sorted.map(async t => {
+            const table = new Table();
+            table.number = t.number;
+            table.x = t.x;
+            table.y = t.y;
+            table.width = t.width;
+            table.height = t.height;
+            table.shape = t.shape;
+            table.points = t.points;
+            table.rotate = t.rotate;
+            table.rotateUnits = t.rotateUnits;
+            await table.save();
+            return await Table.findByIds([t.number])[0];
+        }));
+        await newDR.save();
+        resolve();
+    })));
 }
 async function enterInitialOrder() {
     logger.info("entering initial order");

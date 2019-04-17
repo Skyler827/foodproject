@@ -9,12 +9,13 @@ export class Table extends BaseEntity {
     number: number;
 
     shape: "rectangle" | "oval" | "polygon" = "rectangle";
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    points: Array<{x:number,y:number}>;
-
+    x: number = 0;
+    y: number = 0;
+    width: number = 0;
+    height: number = 0;
+    points: Array<{x:number,y:number}> = [];
+    rotate: number = 0;
+    rotateUnits: string | undefined;
     @ManyToOne(type => DiningRoom, dr => dr.tables)
     diningRoom: DiningRoom;
 

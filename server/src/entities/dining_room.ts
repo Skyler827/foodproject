@@ -6,6 +6,9 @@ export class DiningRoom extends BaseEntity{
     id: number;
 
     name: string;
+    width: number;
+    length: number;
+    units: string;
 
     @OneToMany(type => Table, t => t.diningRoom)
     tables: Table[];
