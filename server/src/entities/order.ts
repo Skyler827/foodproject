@@ -9,7 +9,7 @@ export class Order extends BaseEntity{
     id: number;
     
     @Column()
-    open:boolean
+    open: boolean
 
     @OneToMany(type => SeatOrder, seat => seat.order)
     seats: SeatOrder[];
