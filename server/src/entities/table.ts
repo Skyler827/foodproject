@@ -1,6 +1,6 @@
 import { Entity, BaseEntity, PrimaryColumn, OneToMany, Column } from "typeorm";
 import { Order } from "./order";
-import { Seat } from "./seat";
+import { SeatOrder } from "./seat_order";
 
 @Entity()
 export class Table extends BaseEntity {
@@ -10,6 +10,6 @@ export class Table extends BaseEntity {
     @OneToMany(type => Order, o => o.table)
     orders: Order[];
 
-    @OneToMany(type => Seat, s => s.table)
-    seats: Seat[];
+    @OneToMany(type => SeatOrder, s => s.table)
+    seats: SeatOrder[];
 }

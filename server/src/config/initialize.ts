@@ -13,7 +13,7 @@ import { Item } from "../entities/item";
 import { OptionMenu } from "../entities/option_menu";
 import { Option } from "../entities/option";
 import { Order } from "../entities/order";
-import { Seat } from "../entities/seat";
+import { SeatOrder } from "../entities/seat_order";
 import { Table } from "../entities/table";
 import { User, UserType} from  "../entities/user";
 import { KitchenOrder } from "../entities/kitchen_order";
@@ -200,7 +200,7 @@ async function enterInitialOrder() {
     logger.info("entering initial order");
     const t = new Table();
     const o = new Order();
-    const s = new Seat();
+    const s = new SeatOrder();
     t.number = 241;
     await t.save();
     o.table = t;

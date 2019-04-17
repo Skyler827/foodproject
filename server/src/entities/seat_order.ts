@@ -5,7 +5,7 @@ import { Table } from "./table";
 
 @Entity()
 @Index(["table", "seatNumber"], {unique:true})
-export class Seat extends BaseEntity {
+export class SeatOrder extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

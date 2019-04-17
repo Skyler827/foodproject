@@ -1,6 +1,6 @@
 import { BaseEntity, Entity, OneToMany, ManyToOne, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 import { Item } from "./item";
-import { Seat } from "./seat";
+import { SeatOrder } from "./seat_order";
 import { KitchenOrder } from "./kitchen_order";
 import { Option } from "./option";
 import { OptionOrder } from "./option_order";
@@ -17,8 +17,8 @@ export class ItemOrder extends BaseEntity {
     @OneToMany(type => OptionOrder, o => o.itemOrder)
     optionOrders: OptionOrder[];
 
-    @ManyToOne(type => Seat, seat => seat.itemOrders)
-    seat: Seat;
+    @ManyToOne(type => SeatOrder, seat => seat.itemOrders)
+    seat: SeatOrder;
 
     @ManyToOne(type => KitchenOrder, ko => ko.itemOrders)
     kitchenOrder: KitchenOrder;

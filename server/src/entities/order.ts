@@ -1,5 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, Column, CreateDateColumn } from "typeorm";
-import { Seat } from "./seat";
+import { SeatOrder } from "./seat_order";
 import { Table } from "./table";
 import { User } from "./user";
 
@@ -11,8 +11,8 @@ export class Order extends BaseEntity{
     @Column()
     open:boolean
 
-    @OneToMany(type => Seat, seat => seat.order)
-    seats: Seat[];
+    @OneToMany(type => SeatOrder, seat => seat.order)
+    seats: SeatOrder[];
 
     @ManyToOne(type => Table, table=> table.orders)
     table: Table;

@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Item } from "../entities/item";
 import { Table } from "../entities/table";
 import { Order } from "../entities/order";
-import { Seat } from "../entities/seat";
+import { SeatOrder } from "../entities/seat_order";
 import { ItemOrder } from "../entities/item_order";
 import { AllItemOrder } from '../def/newItemOrder';
 import { KitchenOrder } from '../entities/kitchen_order';
@@ -35,13 +35,13 @@ router.post("/:tableNum", async function(req, res) {
         const data: AllItemOrder = req.body;
         const created: Array<Array<ItemOrder>> = await Promise.all(data.map(async seatList => {
             if (!seatList || seatList.length == 0) return [];
-            let seat: Seat;
-            let lookUpSeat = await Seat.findOne({where:{
+            let seat: SeatOrder;
+            let lookUpSeat = await SeatOrder.findOne({where:{
                 seatNumber: seatList[0].seat,
                 table: table
             }});
             if (!lookUpSeat) {
-                seat = new Seat();
+                seat = new SeatOrder();
                 seat.seatNumber = seatList[0].seat;
                 seat.table = table;
                 seat.order = order;
