@@ -1,6 +1,7 @@
 {
+    "units": "meters",
     "width": 100,
-    "height": 100,
+    "length": 100,
     "tables": [
         {
             "number": 111,
@@ -8,16 +9,16 @@
             "y": 0,
             "width": 10,
             "height": 5,
-            "shape":"square",
-            "rotate":"0"
+            "shape": "rectangle",
+            "rotate": 0
         }, {
             "number": 112,
             "x": 90,
             "y": 20,
             "width":10,
             "height": 5,
-            "shape":"square",
-            "rotate":"0"
+            "shape": "rectangle",
+            "rotate": 0
         }
     ]
 }
