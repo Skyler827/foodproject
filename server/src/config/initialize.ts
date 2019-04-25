@@ -35,10 +35,11 @@ export async function initialize() {
         await initializeDiningRooms();
         await enterInitialOrder();
         logger.info("Database initialization complete");
+        return Promise.resolve();
     } catch (err) {
         logger.warn(err);
+        return Promise.reject();
     }
-    return Promise.resolve();
 }
 async function truncateEverything() {
     const m = getManager();
@@ -184,9 +185,14 @@ async function initializeMenuItemsAndCategories(): Promise<void> {
             await jsonItem.ingredients.reduce(handleIngredient, Promise.resolve())
             .catch(err => reject2(err))
             .then(() => resolve2());
+            if (!jsonItem.options) {
+                console.log("no options for item:");
+                console.log(jsonItem);
+                reject2(jsonItem);
+            }
             const options = await Promise.all(jsonItem.options.map(async optionName =>
                 await OptionMenu.findOneOrFail({where: {name: optionName}})))
-            .catch(err => reject2("invalid option menu names in "+jsonItem.name));
+            .catch(_ => reject2("invalid option menu names in "+jsonItem.name));
             if (options) dbItem.options = options;
             await dbItem.save();
         }))).then(()=>{
@@ -206,7 +212,11 @@ async function initializeDiningRooms() {
     return Promise.all(files.map(fileName => new Promise<void>(async (resolve, reject) => {
         const fullFileName = join(diningRoomsDir, fileName);
         const drData: DiningRoomData = JSON.parse(readFileSync(fullFileName, {encoding: 'utf-8'}));
-        if (!isDrData(drData)) return reject({"msg":"invalid data","data":drData});
+        if (!isDrData(drData)) {
+            console.log("is not `DiningRoomData`:");
+            console.log(drData);
+            return reject({"msg":"invalid data","data":drData});
+        }
         const sorted = drData.tables.sort((a,b) => a.number-b.number);
         const newDR = new DiningRoom();
         newDR.name = drData.name;
