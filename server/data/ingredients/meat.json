@@ -13,6 +13,6 @@
         "id":"grilledchicken",
         "bulkCostCents":1500,
         "bulkUnit":"package",
-        "units": {"dice":0.1,"breast":1,"package":100}
+        "units": {"dice":0.1,"oz":1,"breast":3,"package":100}
     }
 ]

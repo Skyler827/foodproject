@@ -18,6 +18,7 @@
         "priceCents":579,
         "ingredients": [
             {"name":"wedges", "quantity":1,"unit":"side"}
-        ]        
+        ],
+        "options": []
     }
 ]

@@ -1,1 +1,25 @@
-{}
+{
+    "name": "Takeout Counter",
+    "units": "meters",
+    "width": 100,
+    "length": 100,
+    "tables": [
+        {
+            "number": 511,
+            "x": 90,
+            "y": 0,
+            "width": 10,
+            "height": 5,
+            "shape": "rectangle",
+            "rotate": 0
+        }, {
+            "number": 512,
+            "x": 90,
+            "y": 20,
+            "width":10,
+            "height": 5,
+            "shape": "rectangle",
+            "rotate": 0
+        }
+    ]
+}

@@ -1,1 +1,25 @@
-{}
+{
+    "name": "Bar Dining",
+    "units": "meters",
+    "width": 100,
+    "length": 100,
+    "tables": [
+        {
+            "number": 211,
+            "x": 90,
+            "y": 0,
+            "width": 10,
+            "height": 5,
+            "shape": "rectangle",
+            "rotate": 0
+        }, {
+            "number": 212,
+            "x": 90,
+            "y": 20,
+            "width":10,
+            "height": 5,
+            "shape": "rectangle",
+            "rotate": 0
+        }
+    ]
+}

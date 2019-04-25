@@ -3,16 +3,16 @@
         "id":"lemonsour",
         "bulkCostCents":1000,
         "bulkUnit":"bottle",
-        "units":{"serving":1,"bottle":100}
+        "units":{"oz":1,"serving":3,"bottle":100}
     }, {
         "id":"blackcherrysour",
         "bulkCostCents":1000,
         "bulkUnit":"bottle",
-        "units":{"serving":1,"bottle":100}
+        "units":{"oz":1,"serving":3,"bottle":100}
     }, {
         "id":"blueberrysour",
         "bulkCostCents":1000,
         "bulkUnit":"bottle",
-        "units":{"serving":1,"bottle":100}
+        "units":{"oz":1,"serving":3,"bottle":100}
     }
 ]
