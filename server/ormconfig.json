@@ -6,7 +6,7 @@
     "password": "elrvjbenlrij",
     "database": "foodproject",
     "schema": "public",
-    "logging": true,
+    "logging": false,
     "dropschema": true,
     "synchronize": true,
     "entities":["out/entities/*.js"]
