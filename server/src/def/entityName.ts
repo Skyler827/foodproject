@@ -10,11 +10,11 @@ export type entityName =
     'OptionMenu' |
     'Option' |
     'Order' |
-    'Seat' |
+    'SeatOrder' |
     'Table' |
     'Unit' |
     'User';
-export const entities:entityName[] = [
+export const entities: entityName[] = [
     'Category',
     'Ingredient',
     'ItemOrder',
@@ -24,7 +24,7 @@ export const entities:entityName[] = [
     'OptionMenu',
     'Option',
     'Order',
-    'Seat',
+    'SeatOrder',
     'Table',
     'Unit',
     'User',

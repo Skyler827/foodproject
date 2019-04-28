@@ -219,24 +219,15 @@ async function initializeDiningRooms() {
         }
         const sorted = drData.tables.sort((a,b) => a.number-b.number);
         const newDR = new DiningRoom();
-        newDR.name = drData.name;
-        newDR.length = drData.length;
-        newDR.width = drData.width;
-        newDR.tables = await Promise.all(sorted.map(async t => {
+        Object.assign(newDR, drData, {tables: undefined});
+        let newDR2 = await newDR.save();
+        newDR2.tables = await Promise.all(sorted.map(async t => {
             const table = new Table();
-            table.number = t.number;
-            table.x = t.x;
-            table.y = t.y;
-            table.width = t.width;
-            table.height = t.height;
-            table.shape = t.shape;
-            table.points = t.points;
-            table.rotate = t.rotate;
-            table.rotateUnits = t.rotateUnits;
+            Object.assign(table, t);
             await table.save();
             return await Table.findByIds([t.number])[0];
         }));
-        await newDR.save();
+        await newDR2.save();
         resolve();
     })));
 }

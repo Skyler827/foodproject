@@ -4,10 +4,13 @@ import { Table } from "./table";
 export class DiningRoom extends BaseEntity{
     @PrimaryColumn()
     id: number;
-
+    @Column()
     name: string;
+    @Column()
     width: number;
+    @Column()
     length: number;
+    @Column()
     units: string;
 
     @OneToMany(type => Table, t => t.diningRoom)

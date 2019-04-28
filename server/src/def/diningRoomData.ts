@@ -23,6 +23,7 @@ class TableData {
 }
 
 export class DiningRoomData {
+    id: number;
     name: string;
     units: string;
     width: number;
