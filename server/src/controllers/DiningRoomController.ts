@@ -12,17 +12,20 @@ router.get("/", async function(req, res) {
     }
 });
 router.get("/:number", async function(req, res) {
-    // Note:
-    // I tried using a typeORM `where` argument to the `find` method here
-    // but was having problems; If you can figure out how to replace the
-    // filter statement with a typeORM expression, please do so!
-    const tables: Table[] = (await Table.find({
-        relations: ["orders", "seats", "diningRoom"]
-    })).filter(t => {
-        console.log(`${t.number}: ${t.diningRoom.id} ${req.params.number}`);
-        return t.diningRoom.id == req.params.number
-    }).sort((t1, t2) => t1.number - t2.number);
-    console.log(tables);
-    res.json(tables);
+    const n: number = req.params.number;
+    const results: DiningRoom[] = await DiningRoom.find({
+        where: {id: n},
+        relations: ["tables"]
+    });
+    if (results.length == 1) {
+        res.json(results[0]);
+    }
+    else if (results.length == 0){
+        res.status(404).json({"message":`no such dining room with id ${n}`});
+    } else {
+        console.log(`there should not be more than one dining room with the same id (${n})`);
+        console.log(results);
+        process.exit(1);
+    }
 });
 export { router as DiningRoomController }
