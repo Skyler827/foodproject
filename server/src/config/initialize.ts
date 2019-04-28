@@ -221,13 +221,12 @@ async function initializeDiningRooms() {
         const newDR = new DiningRoom();
         Object.assign(newDR, drData, {tables: undefined});
         let newDR2 = await newDR.save();
-        newDR2.tables = await Promise.all(sorted.map(async t => {
+        await Promise.all(sorted.map(async t => {
             const table = new Table();
             Object.assign(table, t);
+            table.diningRoom = newDR2;
             await table.save();
-            return await Table.findByIds([t.number])[0];
         }));
-        await newDR2.save();
         resolve();
     })));
 }
@@ -236,7 +235,14 @@ async function enterInitialOrder() {
     const t = new Table();
     const o = new Order();
     const s = new SeatOrder();
+    const DR2 = (await DiningRoom.find()).filter(x => x.id == 2)[0];
+    if (!DR2) {
+        console.log("no dining room found");
+        process.exit(1);
+    }
+    console.log(JSON.stringify(DR2));
     t.number = 241;
+    t.diningRoom = DR2;
     await t.save();
     o.table = t;
     o.open = true;

@@ -1,25 +1,28 @@
-import { MoreThanOrEqual, LessThan } from "typeorm";
 import { Table } from "../entities/table";
 import * as express from "express";
+import { DiningRoom } from "../entities/dining_room";
 const router = express.Router();
 
 router.get("/", async function(req, res) {
-    const tables = await Table.find();
-    const diningRooms = tables.map(t => Math.floor(t.number/100));
-    const uniqueDR = [...new Set(diningRooms)];
-    res.json(uniqueDR);
+    try {
+        const diningRooms = await DiningRoom.find();
+        res.json(diningRooms);
+    } catch (e) {
+        res.status(500).json(e);
+    }
 });
 router.get("/:number", async function(req, res) {
-    const tables = await Table.find({
-        where: [
-            MoreThanOrEqual(100*req.params.number),
-            LessThan(100*(req.params.number)+1),
-        ],
-        relations: ["orders"]
-    });
-    res.json(tables.map(table => ({
-        id: table.number,
-        orders: table.orders.filter(o=>o.open)
-    })));
+    // Note:
+    // I tried using a typeORM `where` argument to the `find` method here
+    // but was having problems; If you can figure out how to replace the
+    // filter statement with a typeORM expression, please do so!
+    const tables: Table[] = (await Table.find({
+        relations: ["orders", "seats", "diningRoom"]
+    })).filter(t => {
+        console.log(`${t.number}: ${t.diningRoom.id} ${req.params.number}`);
+        return t.diningRoom.id == req.params.number
+    }).sort((t1, t2) => t1.number - t2.number);
+    console.log(tables);
+    res.json(tables);
 });
 export { router as DiningRoomController }
