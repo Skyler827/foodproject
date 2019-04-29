@@ -1,6 +1,7 @@
 {
     "id": 4,
     "name": "Patio",
+    "shortName":"patio",
     "units": "meters",
     "width": 100,
     "length": 100,

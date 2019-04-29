@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { TableService } from '../../services/table.service';
+import { DiningRoom } from 'src/classes/diningroom';
 @Component({
     selector: 'app-dining-room',
     templateUrl: './dining-room.component.html',
     styleUrls: ['./dining-room.component.css']
 })
 export class DiningRoomComponent implements OnInit {
-
-    constructor(private ar: ActivatedRoute) { }
-    diningRoomName: string = "";
-    test: string;
-    ngOnInit() {        
+    diningRoom: DiningRoom;
+    constructor(private ar: ActivatedRoute, private ts: TableService) {
+    }
+    ngOnInit() {
         this.ar.params.subscribe(params => {
-            this.test = JSON.stringify(params);
-            let n = params.name as string;
-            this.diningRoomName = n[0].toUpperCase() + n.substring(1) + " Dining";
+            let name = params.name as string;
+            this.diningRoom = this.ts.diningRooms.filter(dr => dr.shortName == name)[0];
+            this.ts.getDiningRoom(this.diningRoom.id);
         })
     }
 }

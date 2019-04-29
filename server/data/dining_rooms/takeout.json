@@ -1,6 +1,7 @@
 {
     "id": 5,
     "name": "Takeout Counter",
+    "shortName": "takeout",
     "units": "meters",
     "width": 100,
     "length": 100,

@@ -1,6 +1,7 @@
 {
     "id": 2,
     "name": "Bar Dining",
+    "shortName": "bar",
     "units": "meters",
     "width": 100,
     "length": 100,

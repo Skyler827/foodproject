@@ -1,2 +1,7 @@
-<h2>{{ diningRoomName }}</h2>
-<p>JSON.stringify(params): {{ test }}</p>
+<h2>{{ diningRoom.name }}</h2>
+<p>Tables:</p>
+<ul>
+    <li *ngFor="let table of ts.tables"></li>
+</ul>
+<p>Test:</p>
+<p>{{ts.test}}</p>

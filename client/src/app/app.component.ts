@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { TableService } from '../services/table.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -7,7 +8,11 @@ import { LoginService } from '../services/login.service';
 })
 export class AppComponent {
     loggedIn: boolean = false;
-    constructor(private ls:LoginService) {}
+    test: string;
+    constructor(private ls:LoginService, private ts:TableService) {}
+    ngOnInit() {
+        this.test = JSON.stringify(this.ts.diningRooms);
+    }
     logOut() {
         this.ls.logOut();
     }

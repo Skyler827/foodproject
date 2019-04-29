@@ -1,6 +1,7 @@
 {
     "id": 3,
     "name": "Bar Rail",
+    "shortName": "rail",
     "units": "meters",
     "width": 100,
     "length": 100,

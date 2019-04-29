@@ -1,6 +1,7 @@
 {
     "id": 1,
     "name": "Main Dining",
+    "shortName": "main",
     "units": "meters",
     "width": 100,
     "length": 100,

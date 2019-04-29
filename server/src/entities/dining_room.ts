@@ -7,6 +7,8 @@ export class DiningRoom extends BaseEntity{
     @Column()
     name: string;
     @Column()
+    shortName: string;
+    @Column()
     width: number;
     @Column()
     length: number;

@@ -2,13 +2,15 @@
   <div class="outlet-container">
     <router-outlet></router-outlet>
   </div>
-  <div class="footer">
+  <div class="footer" *ngIf="!ls.loggedin">
     <a routerLink="/login" *ngIf="!ls.loggedin" routerLinkActive="active">Login</a>
     <a routerLink="/register" *ngIf="!ls.loggedin" routerLinkActive="active">Register</a>
-    <a routerLink="/dining/bar" *ngIf="ls.loggedin" routerLinkActive="active">Dining Room 2</a>
-    <a routerLink="/dining/main" *ngIf="ls.loggedin" routerLinkActive="active">Dining Room 1</a>
-    <a routerLink="/functions" *ngIf="ls.loggedin" routerLinkActive="active">Functions</a>
     <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
-    <a routerLink="/logout" (click)="ls.logOut()" *ngIf="ls.loggedin" routerLinkActive="active">Log Out</a>
+  </div>
+  <div class="footer" *ngIf="ls.loggedin">
+    <a *ngFor="let dr of ts.diningRooms" routerLink="/dining/{{dr.shortName}}" routerLinkActive="active">{{dr.name}}</a>
+    <a routerLink="/functions" routerLinkActive="active">Functions</a>
+    <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
+    <a routerLink="/logout" (click)="ls.logOut()" routerLinkActive="active">Log Out</a>
   </div>
 </div>
