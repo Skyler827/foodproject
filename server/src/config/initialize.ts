@@ -232,15 +232,10 @@ async function initializeDiningRooms() {
 }
 async function enterInitialOrder() {
     logger.info("entering initial order");
-    const t = new Table();
+    const t: Table = await Table.findOneOrFail({number:241});
     const o = new Order();
     const s = new SeatOrder();
-    const DR2 = (await DiningRoom.find()).filter(x => x.id == 2)[0];
-    if (!DR2) {
-        console.log("no dining room found");
-        process.exit(1);
-    }
-    console.log(JSON.stringify(DR2));
+    const DR2 = await DiningRoom.findOneOrFail({id:2});
     t.number = 241;
     t.diningRoom = DR2;
     await t.save();

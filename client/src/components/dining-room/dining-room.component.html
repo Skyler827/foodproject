@@ -1,5 +1,8 @@
-<h2>{{ diningRoom.name }}</h2>
-<p>Tables:</p>
-<ul *ngIf="diningRoom.tables">
-    <li *ngFor="let table of diningRoom.tables">{{table.number}}: {{table.width}}x{{table.height}}@({{table.x}},{{table.y}})</li>
-</ul>
+<h2 class="title">{{ diningRoom.name }}</h2>
+<div *ngIf="tableDims.length > 0" class="tables" [ngStyle]="{
+    'top.px':drTop,'left.px':drLeft, 'height.px':drHeight, 'width.px':drWidth
+}">
+    <div class="table" *ngFor="let table of tableDims" [ngStyle]="{
+        'top.px':table.y, 'left.px':table.x, 'width.px': table.width, 'height.px':table.height
+    }">{{table.number}}</div>
+</div>

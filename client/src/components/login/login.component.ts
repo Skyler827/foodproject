@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     loginButtonClick() {
         this.ls.login(this.username, this.password).then(() => {
             console.log("login succesful")
-            this.router.navigateByUrl("/dining-1");
+            this.router.navigateByUrl("/dining/main");
         }, (err) => {
             this.error = err.toString();
         });
