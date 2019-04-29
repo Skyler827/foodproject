@@ -29,6 +29,8 @@ export class DiningRoomData {
     units: string;
     width: number;
     length: number;
+    x: number;
+    y: number;
     tables: Array<TableData>;
 };
 export function isDrData(obj: any): obj is DiningRoomData {

@@ -1,7 +1,5 @@
 <h2>{{ diningRoom.name }}</h2>
 <p>Tables:</p>
-<ul>
-    <li *ngFor="let table of ts.tables"></li>
+<ul *ngIf="diningRoom.tables">
+    <li *ngFor="let table of diningRoom.tables">{{table.number}}: {{table.width}}x{{table.height}}@({{table.x}},{{table.y}})</li>
 </ul>
-<p>Test:</p>
-<p>{{ts.test}}</p>

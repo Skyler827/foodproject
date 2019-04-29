@@ -8,11 +8,9 @@ import { TableService } from '../services/table.service';
 })
 export class AppComponent {
     loggedIn: boolean = false;
-    test: string;
     constructor(private ls:LoginService, private ts:TableService) {}
-    ngOnInit() {
-        this.test = JSON.stringify(this.ts.diningRooms);
-    }
+    ngOnInit() {}
+    
     logOut() {
         this.ls.logOut();
     }

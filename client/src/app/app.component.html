@@ -8,7 +8,7 @@
     <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
   </div>
   <div class="footer" *ngIf="ls.loggedin">
-    <a *ngFor="let dr of ts.diningRooms" routerLink="/dining/{{dr.shortName}}" routerLinkActive="active">{{dr.name}}</a>
+    <a *ngFor="let dr of ts.diningRoomsWithoutTables" routerLink="/dining/{{dr.shortName}}" routerLinkActive="active">{{dr.name}}</a>
     <a routerLink="/functions" routerLinkActive="active">Functions</a>
     <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
     <a routerLink="/logout" (click)="ls.logOut()" routerLinkActive="active">Log Out</a>

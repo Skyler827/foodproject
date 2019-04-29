@@ -15,7 +15,6 @@ export class DiningRoomComponent implements OnInit {
         this.ar.params.subscribe(params => {
             let name = params.name as string;
             this.diningRoom = this.ts.diningRooms.filter(dr => dr.shortName == name)[0];
-            this.ts.getDiningRoom(this.diningRoom.id);
         })
     }
 }
