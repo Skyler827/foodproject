@@ -15,7 +15,7 @@ router.get("/:number", async function(req, res) {
     const n: number = req.params.number;
     const results: DiningRoom[] = await DiningRoom.find({
         where: {id: n},
-        relations: ["tables"]
+        relations: ["tables", "tables.orders", "tables.orders.server"]
     });
     if (results.length == 1) {
         res.json(results[0]);

@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TableService } from '../../services/table.service';
-import { DiningRoomWithTables } from 'src/classes/diningroom';
+import { DiningRoomWithOrders } from 'src/classes/diningroom';
 
 const verticalMarginPixels = 100; //about right but probablly a bit off
 
@@ -11,8 +11,9 @@ const verticalMarginPixels = 100; //about right but probablly a bit off
     styleUrls: ['./dining-room.component.css']
 })
 export class DiningRoomComponent implements OnInit {
-    diningRoom: DiningRoomWithTables;
-    tableDims: Array<{x:number,y:number, width:number, height: number, number: number, showDialog:boolean}> = [];
+    diningRoom: DiningRoomWithOrders;
+    tableDims: Array<{x:number,y:number,width:number,height:number,number:number,showDialog:boolean,
+    color:string,backgroundColor:string}> = [];
     hmargin: number = 50;
     vmargin: number = 50;
     drHeight: number = 100;
@@ -23,6 +24,7 @@ export class DiningRoomComponent implements OnInit {
     ngOnInit() {
         this.ar.params.subscribe(params => {
             let name = params.name as string;
+            this.ts.reload(name);
             this.diningRoom = this.ts.diningRooms.filter(dr => dr.shortName == name)[0];
             this.size();
         });
@@ -53,7 +55,9 @@ export class DiningRoomComponent implements OnInit {
             width: scale * t.width,
             height: scale * t.height,
             number: t.number,
-            showDialog: false
+            showDialog: false,
+            color: t.orders.length > 0 ? 'white' : 'black',
+            backgroundColor: t.orders.length > 0 ? 'green' : 'white'
         }));
         this.drTop = y0;
         this.drLeft = x0;
