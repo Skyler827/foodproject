@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from 'src/services/order.service';
 import { OrderWithItemUI, OutstandingOrderUI } from 'src/classes/order';
+import { TableService } from 'src/services/table.service';
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
@@ -18,7 +19,7 @@ export class OrderComponent implements OnInit {
     unordered_items: Array<Array<OutstandingOrderUI>> = [];
     itemIdToBeModified: string = null;
 
-    constructor(private ar: ActivatedRoute, private os:OrderService) {}
+    constructor(private ar: ActivatedRoute, private os: OrderService, private ts: TableService, private router: Router) {}
     ngOnInit() {
         this.tableNum = this.ar.params['_value'].n;
         this.os.setTable(this.tableNum).then(()=>{
@@ -99,6 +100,7 @@ export class OrderComponent implements OnInit {
     }
     async greenOk(): Promise<void> {
         this.os.placeOrder();
+        this.router.navigate(['/dining', this.ts.getDiningRoomShortName(this.tableNum)]);
     }
     async dineIn(): Promise<void> {
         this.os.placeOrder();
