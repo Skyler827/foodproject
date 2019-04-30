@@ -12,7 +12,7 @@ const verticalMarginPixels = 100; //about right but probablly a bit off
 })
 export class DiningRoomComponent implements OnInit {
     diningRoom: DiningRoomWithTables;
-    tableDims: Array<{x:number,y:number, width:number, height: number, number: number}> = [];
+    tableDims: Array<{x:number,y:number, width:number, height: number, number: number, showDialog:boolean}> = [];
     hmargin: number = 50;
     vmargin: number = 50;
     drHeight: number = 100;
@@ -52,7 +52,8 @@ export class DiningRoomComponent implements OnInit {
             y: scale * t.y,
             width: scale * t.width,
             height: scale * t.height,
-            number: t.number
+            number: t.number,
+            showDialog: false
         }));
         this.drTop = y0;
         this.drLeft = x0;

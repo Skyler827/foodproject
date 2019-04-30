@@ -10,3 +10,6 @@
     position: absolute;
     text-align: center;
 }
+.table:hover {
+    cursor: pointer;
+}

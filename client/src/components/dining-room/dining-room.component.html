@@ -2,7 +2,8 @@
 <div *ngIf="tableDims.length > 0" class="tables" [ngStyle]="{
     'top.px':drTop,'left.px':drLeft, 'height.px':drHeight, 'width.px':drWidth
 }">
-    <div class="table" *ngFor="let table of tableDims" [ngStyle]="{
+    <div class="table" *ngFor="let table of tableDims" routerLink="/tables/{{table.number}}"
+    tabindex="0" [ngStyle]="{
         'top.px':table.y, 'left.px':table.x, 'width.px': table.width, 'height.px':table.height
     }">{{table.number}}</div>
 </div>
