@@ -3,12 +3,12 @@
         "id":"tradwings",
         "bulkCostCents": 100,
         "bulkUnit": "bucket",
-        "units": {"wing":1, "bucket":200}
+        "units": {"wings":1, "bucket":200}
     }, {
         "id":"bonlesswings",
         "bulkCostCents": 100,
         "bulkUnit": "bucket",
-        "units": {"wing":1,"bucket":300}
+        "units": {"wings":1,"bucket":300}
     }, {
         "id":"grilledchicken",
         "bulkCostCents":1500,

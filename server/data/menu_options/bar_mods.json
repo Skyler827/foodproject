@@ -10,7 +10,7 @@
             "name":"Salt Rim",
             "priceCents":0,
             "ingredients":[
-                {"name":"barsalt","quantity":2,"unit":"teaspoons"}
+                {"name":"barsalt","quantity":2,"unit":"teaspoon"}
             ]
         }
     ]

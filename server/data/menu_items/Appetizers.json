@@ -3,7 +3,7 @@
         "name":"Trad Sampler",
         "priceCents":1249,
         "ingredients": [
-            {"name":"tradwings","quantity":5,"unit":"wing"},
+            {"name":"tradwings","quantity":5,"unit":"wings"},
             {"name":"tortillachips","quantity":1,"unit":"serving"},
             {"name":"chilli","quantity":1,"unit":"serving"},
             {"name":"picodegaillo","quantity":3,"unit":"oz"},
@@ -16,7 +16,7 @@
         "name":"Bonless Sampler",
         "priceCents":1199,
         "ingredients": [
-            {"name":"bonlesswings","quantity":5,"unit":"wing"},
+            {"name":"bonlesswings","quantity":5,"unit":"wings"},
             {"name":"tortillachips","quantity":1,"unit":"serving"},
             {"name":"chilli","quantity":1,"unit":"serving"},
             {"name":"picodegaillo","quantity":2,"unit":"oz"},

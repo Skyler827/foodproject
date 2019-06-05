@@ -14,5 +14,10 @@
         "bulkCostCents":1000,
         "bulkUnit":"bottle",
         "units":{"oz":1,"serving":3,"bottle":100}
+    }, {
+        "id":"barsalt",
+        "builkCostCents": 1000,
+        "bulkUnit":"box",
+        "units":{"teaspoon":1, "oz":16,"box":200}
     }
 ]

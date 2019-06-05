@@ -3,11 +3,11 @@
         "id":"celery",
         "bulkCostCents":10000,
         "bulkUnit":"box",
-        "units":{"cut stick":1, "bag": 200, "box":2000}
+        "units":{"sticks":1, "bag": 200, "box":2000}
     }, {
         "id":"carrot",
         "bulkCostCents":10000,
         "bulkUnit":"box",
-        "units":{"cut stick":1, "bag": 200, "box":2000}
+        "units":{"sticks":1, "bag": 200, "box":2000}
     }
 ]

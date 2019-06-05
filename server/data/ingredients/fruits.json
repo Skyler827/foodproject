@@ -13,6 +13,6 @@
         "id":"strawberry",
         "bulkCostCents": 800,
         "bulkUnit":"box",
-        "units":{"slice":1,"single":8,"box":200}
+        "units":{"slice":1,"strawberry":4,"box":200}
     }
 ]

@@ -24,6 +24,7 @@ import { Unit } from "../entities/unit";
 import { ItemIngredientAmount } from "../entities/item_ingredient_amount";
 import { OptionIngredientAmount } from "../entities/option_ingredient_amount";
 
+const supplyMultiplier = 100;
 
 export async function initialize() {
     try {
@@ -37,6 +38,7 @@ export async function initialize() {
         logger.info("Database initialization complete");
         return Promise.resolve();
     } catch (err) {
+        console.log("line 40:");
         logger.warn(err);
         return Promise.reject();
     }
@@ -80,8 +82,8 @@ async function createIngredients() {
                 u.name = unitName;
                 u.magnitude = jsonI.units[unitName];
                 u.ingredient = dbI;
-                logger.info("saving unit:");
-                logger.info(JSON.stringify(u.toJson()));
+                // logger.info("saving unit:");
+                // logger.info(JSON.stringify(u.toJson()));
                 if (dbI.id == null) {
                     logger.error(`id for dbI: ${dbI.name}  is null!!`, new Error("crap"));
                     process.exit(1);
@@ -91,6 +93,7 @@ async function createIngredients() {
             });
             const units = await Promise.all(Object.keys(jsonI.units).map(handleUnits));
             dbI.bulkUnit = units.filter(u=> u.name == jsonI.bulkUnit)[0];
+            dbI.supplyInBaseUnits = 0;
             await dbI.save().catch((err) => {
                 logger.error("error saving "+JSON.stringify(dbI.name), err);
                 reject3();
@@ -139,21 +142,23 @@ async function initializeOptions() {
             await dbOption.save();
             await Promise.all(jsonOption.ingredients.map(ingredientRecord => new Promise(async (resolve3, reject3) => {
                 const oia = new OptionIngredientAmount();
-                const ingredient = await Ingredient.findOneOrFail({where: {name:ingredientRecord.name}})
-                .catch(reject3);
-                const unit = await Unit.findOneOrFail({where: {name: ingredientRecord.unit, ingredient: ingredient}})
-                .catch(reject3);
-                if (!ingredient || !unit) return;
+                const ingredient = await Ingredient.findOneOrFail({name: ingredientRecord.name})
+                const unit = await Unit.findOneOrFail({where:{name: ingredientRecord.unit, ingredient: ingredient}})
                 oia.ingredient = ingredient;
                 oia.option = dbOption;
                 oia.quantity = ingredientRecord.quantity * unit.magnitude;
-                await oia.save();
-                resolve3();
+                ingredient.supplyInBaseUnits += supplyMultiplier * ingredientRecord.quantity;
+                Promise.all([oia.save(), ingredient.save()])
+                .then(resolve3).catch(reject3);
             })));
             return dbOption.save();
         })).then(resolve).catch(reject);
     }))).then(() => logger.info("options initialized"))
-    .catch(err => logger.warn(err));
+    .catch(err => {
+        console.log("line 159:");
+        logger.warn(err);
+        process.exit(1);
+    });
 }
 async function initializeMenuItemsAndCategories(): Promise<void> {
     logger.info("Initializing Menu Items and Categories");
@@ -172,24 +177,34 @@ async function initializeMenuItemsAndCategories(): Promise<void> {
             dbItem.category = c;
             await dbItem.save();
             const handleIngredient = async (prev: Promise<any>, jsonIngredient: itemIngredient): Promise<any> => {
-                const dbIngredient = await Ingredient.findOneOrFail({where: [{name: jsonIngredient.name}]}).catch(reject);
-                if (!dbIngredient) return Promise.reject();
+                const dbIngredient = await Ingredient.findOne({name: jsonIngredient.name});
+                if (!dbIngredient) return Promise.reject("no database ingredient: "+jsonIngredient.name);
                 const unit = await Unit.findOneOrFail({where: {name: jsonIngredient.unit, ingredient: dbIngredient}});
                 const amount = jsonIngredient.quantity * unit.magnitude;
+                if (jsonIngredient.quantity == 0) {
+                    console.log(JSON.stringify(dbIngredient));
+                    console.log("jsonIngredient.quantity == 0");
+                    process.exit(1);
+                }
+                if (unit.magnitude == 0) {
+                    console.log(JSON.stringify(unit));
+                    console.log("unit.magnitude == 0");
+                    process.exit(1);
+                }
                 const ingredientAmount = new ItemIngredientAmount();
                 ingredientAmount.item = dbItem;
                 ingredientAmount.ingredient = dbIngredient;
                 ingredientAmount.quantity = amount;
-                return prev.then(() => ingredientAmount.save());
+                dbIngredient.supplyInBaseUnits += supplyMultiplier * amount;
+                console.log(dbIngredient.supplyInBaseUnits);
+                return prev.then(()=>Promise.all([ingredientAmount.save(), dbIngredient.save()]));
             };
-            await jsonItem.ingredients.reduce(handleIngredient, Promise.resolve())
-            .catch(err => reject2(err))
-            .then(() => resolve2());
             if (!jsonItem.options) {
                 console.log("no options for item:");
                 console.log(jsonItem);
                 reject2(jsonItem);
             }
+            await jsonItem.ingredients.reduce(handleIngredient, Promise.resolve()).then(() => resolve2());
             const options = await Promise.all(jsonItem.options.map(async optionName =>
                 await OptionMenu.findOneOrFail({where: {name: optionName}})))
             .catch(_ => reject2("invalid option menu names in "+jsonItem.name));
@@ -198,11 +213,16 @@ async function initializeMenuItemsAndCategories(): Promise<void> {
         }))).then(()=>{
             logger.info("saved items from "+f);
             resolve();
-        }).catch(err => reject(err));
+        }).catch(err => {
+            console.log("line 217");
+            reject(err);
+        });
     }))).then(()=>{
         logger.info("initializeMenuItemsAndCategories() complete");
     }).catch(e_1 => {
+        console.log("line 223:");
         logger.warn(e_1);
+        process.exit(1);
     });
 }
 async function initializeDiningRooms() {
