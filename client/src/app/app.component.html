@@ -1,16 +1,14 @@
-<div class="container">
-  <div class="outlet-container">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="footer" *ngIf="!ls.loggedin">
-    <a routerLink="/login" *ngIf="!ls.loggedin" routerLinkActive="active">Login</a>
-    <a routerLink="/register" *ngIf="!ls.loggedin" routerLinkActive="active">Register</a>
-    <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
-  </div>
-  <div class="footer" *ngIf="ls.loggedin">
-    <a *ngFor="let dr of ts.diningRooms" routerLink="/dining/{{dr.shortName}}" routerLinkActive="active">{{dr.name}}</a>
-    <a routerLink="/functions" routerLinkActive="active">Functions</a>
-    <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
-    <a routerLink="/logout" (click)="ls.logOut()" routerLinkActive="active">Log Out</a>
-  </div>
+<div class="outlet-container">
+  <router-outlet></router-outlet>
+</div>
+<div class="footer" *ngIf="!ls.loggedin">
+  <a routerLink="/login" *ngIf="!ls.loggedin" routerLinkActive="active">Login</a>
+  <a routerLink="/register" *ngIf="!ls.loggedin" routerLinkActive="active">Register</a>
+  <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
+</div>
+<div class="footer" *ngIf="ls.loggedin">
+  <a *ngFor="let dr of ts.diningRooms" routerLink="/dining/{{dr.shortName}}" routerLinkActive="active">{{dr.name}}</a>
+  <a routerLink="/functions" routerLinkActive="active">Functions</a>
+  <a routerLink="/roadmap" routerLinkActive="active">Planned Feature List</a>
+  <a routerLink="/logout" (click)="ls.logOut()" routerLinkActive="active">Log Out</a>
 </div>

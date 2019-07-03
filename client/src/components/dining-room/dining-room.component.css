@@ -3,7 +3,7 @@
 }
 .tables {
     background-color: lightblue;
-    position: absolute;
+    position: relative;
 }
 .table {
     border: 2px solid black;
